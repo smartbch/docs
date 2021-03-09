@@ -2,9 +2,9 @@
 
 ### 概述
 
-比特币现金致力于提供去中心化、高通量、低成本、易用的加密货币基础设施，对其主网的任何修改，都需要达到很高的共识，这阻碍了它进行试错、创新的进程。
+比特币现金致力于提供去中心化、高通量、低成本、且易用的加密货币基础设施，对其主网的任何修改，都需要达到很高的共识，这阻碍了它进行试错、创新的进程。
 
-因此，我们开发了Moeing链——一条比特币现金的侧链，其目的是探索新的想法，解锁新的可能性。它将会同以太坊的EVM和Web3 API相兼容，因为它们已经是区块链DApp行业中的事实标准了。
+因此，我们开发了Moeing链——一条比特币现金的侧链，其目的是探索新的想法、解锁新的可能性。它将会同以太坊的EVM和Web3 API相兼容，因为它们已经是区块链DApp行业中的事实标准了。
 
 以太坊通过逐步过渡到ETH2.0，正在解决其低通量、高成本的问题，但众所周知这个过程仍然需要若干年才能最终完成。Moeing链尝试以一种不同的路径来解决这些问题：优化EVM和Web3的底层实现，以便充分利用硬件的能力，特别是其固有的高度并行的能力。我们相信Moeing链能在更短的时间内实现ETH2.0的承诺：高通量、低成本。
 
@@ -14,11 +14,11 @@
 
 比特币现金仍然坚持10分钟的区块间隔，相对于其他区块链的秒级出块，这显得太长了。尽管比特币现金支持安全的零确认交易，但是一些复杂的、支付以外的场景，仍然需要较短的确认时间才能达到好的用户体验，DeFi就是这样一种场景。
 
-比特币现金有一个受限、非图灵完备的脚本系统。这使得它相对于以太坊的EVM，更加难以使用。另外，毫无疑问，EVM和Solidity提供了最佳的生态系统并且拥有最多的开发者，足以傲视其他智能合约开发平台。比特币现金的生态中无法使用EVM是非常遗憾之事。
+比特币现金有一个受限、非图灵完备的脚本系统。这使得它相对于以太坊的EVM更加难以使用。另外，毫无疑问，EVM和Solidity提供了最佳的生态系统并且拥有最多的开发者，足以傲视其他智能合约开发平台。比特币现金的生态中无法使用EVM是非常遗憾之事。
 
-迄今为止，比特币现金已经证明其区块大小可以[达到14MB](https://news.bitcoin.com/new-bitcoin-cash-stress-test-sees-700000-transactions-in-one-day/). 尽管现在它的区块大小基本在0.8MB左右，但增长的速度非常快：自2021年开始以来，已经增长了3倍。如果它继续保持这样的增长率，在不远的将来，它的区块就会稳定地超过14MB。由于大于14MB的区块仍然有很多未知问题，并没有在实践中检验过，最好现在就能提前为进一步的扩容进行一些准备和探索。
+迄今为止，比特币现金已经证明其区块大小可以[达到14MB](https://news.bitcoin.com/new-bitcoin-cash-stress-test-sees-700000-transactions-in-one-day/)。尽管现在它的区块大小基本在0.8MB左右，但增长的速度非常快，自2021年开始以来，已经增长了3倍。如果它继续保持这样的增长率，在不远的将来，它的区块大小就会稳定地超过14MB。由于大于14MB的区块仍然有很多未知问题，并没有在实践中检验过，最好现在就能提前为进一步的扩容进行一些准备和探索。
 
-Moeing链对比特币现金的贡献是什么呢？它为新的功能提供了试验场：它拥有更短的确认时间，它不但支持EVM和Web3，而且支持得比现有方案更好（通量更高）。它提供了一个新的渠道，邀请更多的开发者和用户加入到比特币现金的生态系统当中来。
+Moeing链对比特币现金的贡献是什么呢？它为新的功能提供了试验场，它拥有更短的确认时间，它不但支持EVM和Web3，而且支持得比现有方案更好（通量更高）。它提供了一个新的渠道从而邀请更多的开发者和用户加入到比特币现金的生态系统当中来。
 
 随着Moeing链变得越来越成熟，为它所开发的库，以及从它身上学到的经验教训，也能帮助比特币现金主网的发展。
 
@@ -26,15 +26,15 @@ Moeing链对比特币现金的贡献是什么呢？它为新的功能提供了�
 
 Vitalik Buterin于2013年首次提出以太坊，迄今已有八年。八年间，智能合约诞生、发展，逐步繁荣。如今以太坊已是最为成功的智能合约平台。对它的生态系统进行调研之后，我们有如下的一些观察：
 
-**单链的用户体验，是sharding和Layer2方案所难以匹敌的**。零延迟和原子性的智能合约互操作，只有在单链的场景下才能实现。跨Shard或者Layer1和Layer1之间的交互必须经过链间通讯的过程，这一过程将引入类似于在中心化交易所充值和提币的延迟。一些著名的机制，例如[flash loan](https://wwz.unibas.ch/fileadmin/user_upload/wwz/00_Professuren/Schaer_DLTFintech/Lehre/MA_Florian_Gronde_Flashloans-ohne_Appendix.pdf) 和[flash swap](https://uniswap.org/docs/v2/core-concepts/flash-swaps/)，在跨链时无法工作。
+**单链的用户体验，是Sharding和Layer2方案所难以匹敌的**。零延迟和原子性的智能合约互操作，只有在单链的场景下才能实现。跨Shard或者Layer1和Layer1之间的交互必须经过链间通讯的过程，这一过程将引入类似于在中心化交易所充值和提币的延迟。一些著名的机制，例如[flash loan](https://wwz.unibas.ch/fileadmin/user_upload/wwz/00_Professuren/Schaer_DLTFintech/Lehre/MA_Florian_Gronde_Flashloans-ohne_Appendix.pdf) 和[flash swap](https://uniswap.org/docs/v2/core-concepts/flash-swaps/)，在跨链时无法工作。
 
 **低通量阻碍了普通用户同DApp直接交互**。每个区块的Gas上限是固定的，矿池会优先打包那些Gas Price较高的交易。同时，低Gas Price的交易需要等待很长时间才会被打包，甚至永远都不会被打包。自然，只有那些高价值的交易才值得高Gas Price。因此普通用户在无法承受高Gas Price的情况下，只能将自己的资金存入中心化的机构，委托它们代替自己操作这些资金。在DeFi世界中，只有少数的账户在发送交易。这些账户拥有大笔资金，或者因为自己拥有很多，或者因为收集了委托者的资金。这是蛮讽刺的一件事，如今的去中心化金融并没有那么地去中心化。
 
-**相对于执行智能合约所进行的计算，存储消耗了更多的资源**。在以太坊的历史上，存储操作的Gas已经被两个EIP增加过：[EIP-1884](https://eips.ethereum.org/EIPS/eip-1884)和[EIP-2200](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2200.md)。但这仍然不够，有[研究](https://arxiv.org/pdf/1909.07220.pdf)表明以太坊仍然低估了某些存储操作，使得它容易受到DoS攻击。因此，另一个[EIP-2929](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2929.md)即将在下一次的柏林硬分叉升级中，进一步升高存储操作的Gas。与此同时，EVM当中的256位长整数的算术运算，在由[Martin Holst Swende](https://github.com/holiman/uint256)和[Paweł Bylica](https://github.com/chfast/intx)所开发的库当中，得到了显著的提速。
+**相对于执行智能合约所进行的计算，存储消耗了更多的资源**。在以太坊的历史上，存储操作的Gas已经被两个EIP增加过：[EIP-1884](https://eips.ethereum.org/EIPS/eip-1884)和[EIP-2200](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2200.md)。但这仍然不够，有[研究](https://arxiv.org/pdf/1909.07220.pdf)表明以太坊仍然低估了某些存储操作，使得它容易受到DoS攻击。因此，另一个[EIP-2929](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2929.md)即将在下一次的柏林硬分叉升级中，进一步升高存储操作的Gas。与此同时，EVM当中的256位长整数算术运算，在由[Martin Holst Swende](https://github.com/holiman/uint256)和[Paweł Bylica](https://github.com/chfast/intx)所开发的库当中，得到了显著的提速。
 
-**链外的QPS（query per second）同链上的TPS（transaction per second）同等重要**。一个DApp工作时，不仅要发送交易，而且要查询链的最新状态及其历史事件。交易只执行一次，但与之对应的事件和状态更新可能会被查询很多次。因此对QPS的总需求远高于TPS。在以太坊的生态中，查询操作通过Web3 API来完成。而Infura是Web3的最大提供商。Infura维护着一份Web3的[优化实现](https://blog.infura.io/faster-logs-and-events-e43e2fa13773/)，它比标准的全节点客户端（例如[go-ethereum](https://github.com/ethereum/go-ethereum)）更强，因此并没有开源。很多开发者都选择使用Infura的低成本服务，而不是自己运行全节点。这导致了，当Infura出现了[严重的服务中断](https://blog.infura.io/infura-mainnet-outage-post-mortem-2020-11-11/)时，很多DApp和交易所就不能工作了。
+**链外的QPS（Query Per Second）同链上的TPS（Transaction Per Second）同等重要**。一个DApp工作时，不仅要发送交易，而且要查询链的最新状态及其历史事件。交易只执行一次，但与之对应的事件和状态更新可能会被查询很多次。因此对QPS的总需求远高于TPS。在以太坊的生态中，查询操作通过Web3 API来完成。而Infura是Web3的最大提供商。Infura维护着一份Web3的[优化实现](https://blog.infura.io/faster-logs-and-events-e43e2fa13773/)，它比标准的全节点客户端（例如[go-ethereum](https://github.com/ethereum/go-ethereum)）更强，因此并没有开源。很多开发者都选择使用Infura的低成本服务，而不是自己运行全节点。这导致了，当Infura出现了[严重的服务中断](https://blog.infura.io/infura-mainnet-outage-post-mortem-2020-11-11/)时，很多DApp和交易所就不能工作了。
 
-**用户对于交易延迟容忍度较高，同时并不十分关心交易的具体排序**。通常，我们使用像MetaMask这样的钱包来签署交易，选择合适的Gas Price，然后广播交易。为了节省Gas费，我们经常会选择一个较低的Gas Price，然后等待数分钟甚至数小时，直到交易最终被确认，而不是选择极高的Gas Price，让它下个块就被确认。有时候，其他人的交易会比你的交易更早确认，从而带来一些损失，例如更大的滑点。但大多数用户可以容忍。
+**用户对于交易延迟容忍度较高，同时并不十分关心交易的具体排序**。通常，我们使用像MetaMask这样的钱包来签署交易，选择合适的Gas Price，然后广播交易。为了节省Gas费，我们经常会选择一个较低的Gas Price，然后等待数分钟甚至数小时直到交易最终被确认，而不是选择极高的Gas Price让它下个块就被确认。有时候其他人的交易会比你的交易更早确认，从而带来一些损失，例如更大的滑点。但大多数用户可以容忍。
 
 我们还观察到自从2013年以来，计算机发展的最重要的趋势是：**CPU在多核的方向上走得更远了**。让我们来比较一下2013年和2021年的MacBook，同时预测一下2029年的MacBook。
 
@@ -44,7 +44,7 @@ Vitalik Buterin于2013年首次提出以太坊，迄今已有八年。八年间�
 | CPU最高主频 | 2.9GHz              | 3.1GHz              | 3.3GHz              |
 | CPU制造工艺 | 22nm                | 5nm                 | 1nm                 |
 
-集成电路工艺在28nm之后，已经很难继续大幅度提升频率，但是它的每一代升级，仍然提供了更高的晶体管密度。设计者利用这些晶体管，实现了越来越多的CPU和。在过去的10年里，新创的编程语言都在宣传自己能够非常容易地开发多核CPU的潜力：Go语言的 [channels and goroutines](https://medium.com/hootsuite-engineering/golang-routines-and-channels-dff7336eb457)，Dart语言的[isolates](https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a)，以及Rust语言的[fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)。
+集成电路工艺在28nm之后，已经很难继续大幅度提升频率，但是它的每一代升级，仍然提供了更高的晶体管密度。设计者利用这些晶体管，实现了越来越多的CPU核心。在过去的10年里，新创的编程语言都在宣传自己能够非常容易地开发多核CPU的潜力：Go语言的 [channels and goroutines](https://medium.com/hootsuite-engineering/golang-routines-and-channels-dff7336eb457)，Dart语言的[isolates](https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a)，以及Rust语言的[fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)。
 
 以上这些观察指导了Moeing链的设计和实现。
 
@@ -56,13 +56,13 @@ Moeing链的创新表现在若干程序库当中。它并没有发明很炫的�
 
 #### MoeingEVM
 
-MoeingEVM是一个并行执行引擎，它并发地管理多个EVM的上下文，同时执行多个交易。它的底层基于来自[evmone](https://github.com/ethereum/evmone)的优化实现，同时它还发明了若干新技术以便使交易的并发度最大化。
+MoeingEVM是一个并行执行引擎，它并发地管理多个EVM的上下文，同时执行多个交易。它的底层基于来自[evmone](https://github.com/ethereum/evmone)的优化实现，同时还发明了若干新技术以便使交易的并发度最大化。
 
 随着多核CPU变得越来越流行，以太坊风格的单线程执行引擎成为了可扩展性的障碍。如果我们切换到多线程的执行语义，那么多核CPU的开发将更加容易、方便和直接，最终获得更优的可扩展性。
 
 因此，MoengEVM是按照多线程执行语义来开发的。
 
-为了充分利用现代硬件中固有的并发度，我们尝试从两个方便来利用并行性：
+为了充分利用现代硬件中固有的并发度，我们尝试从两个方面来利用并行性：
 
 1. 共识引擎和交易执行引擎可以同时运行
 2. 不同的交易可以同时执行
@@ -75,15 +75,15 @@ MoeingEVM是一个并行执行引擎，它并发地管理多个EVM的上下文�
 
 为什么存储操作如此昂贵呢？以太坊的存储引擎MPT是根本原因。
 
-MPT是不可或缺的吗？未必，很多区块链（包括比特币现金）不使用它也能工作得很好。但是，作为一个可验证数据结构（authenticated data structure），它可以证明状态的存在性和不存在性，这对于实现去信任化（Trustless）非常重要，轻客户端和跨链都以此为基石。
+MPT是不可或缺的吗？未必，很多区块链（包括比特币现金）不使用它也能工作得很好。但是，作为一个可验证数据结构（Authenticated Data Structure），它可以证明状态的存在性和不存在性，这对于实现去信任化（Trustless）非常重要，轻客户端和跨链都以此为基石。
 
 因此我们开发了MoeingADS，一个可以替代MPT的可验证数据结构。
 
-以太坊的存储引擎采用了双层架构。第一层是LevelDB，第二层是MPT。而其他的一些区块链，例如比特币和比特币现金，使用单层的存储架构：它们直接使用LevelDB来存储UTXO结合。MPT在LevelDB提供的功能之上，实现可验证数据结构，其付出的代价是更低的读写通量。每次EVM读写世界状态，MPT需要对LevelDB执行若干次操作，而每个LevelDB的操作都需要访问若干次SSD。这样整体的性能就降下来了。
+以太坊的存储引擎采用了双层架构。第一层是LevelDB，第二层是MPT。而其他的一些区块链，例如比特币和比特币现金，使用单层的存储架构：它们直接使用LevelDB来存储UTXO结合。MPT在LevelDB提供的功能之上，实现可验证数据结构，其付出的代价是更低的读写通量。每次EVM读写世界状态，MPT需要对LevelDB执行若干次操作，而每个LevelDB的操作都需要访问若干次磁盘。这样整体的性能就降下来了。
 
-MoeingADS使用单层架构，它直接访问底层的文件系统，不依赖于其他数据库。它是一个可以直接提供存在性和不存在性的KV数据库。使用MoeingADS，读取KV对只需要读一次磁盘，覆盖已有的KV对需要一次读和一次写，插入新的KV对需要两次读和两次写，删除KV对需要两次读和一次写。而且，这里所有的写操作都是在文件末尾追加，这对于SSD而言非常友好。
+MoeingADS使用单层架构，它直接访问底层的文件系统，不依赖于其他数据库。它是一个可以直接提供存在性和不存在性的键值数据库。使用MoeingADS，读取键值对只需要读一次磁盘，覆盖已有的键值对需要一次读和一次写，插入新的键值对需要两次读和两次写，删除键值对需要两次读和一次写。而且，这里所有的写操作都是在文件末尾追加，这对于磁盘而言非常友好。
 
-实验表明，MoeingADS比LevelDB还要快。它为此付出的代价是更多的DRAM消耗：每个KV对需要16个字节。
+实验表明，MoeingADS比LevelDB还要快。它为此付出的代价是更多的RAM消耗：每个键值对需要16个字节。
 
 #### MoeingDB
 
@@ -99,7 +99,7 @@ MoeingDB是一个领域定制的数据库，专门用来存储区块链的历史
 
 #### MoeingKV
 
-MoeingKV是一个比LevelDB更快的KV存储，为了提升速度，它只支持读写操作，不支持迭代。
+MoeingKV是一个比LevelDB更快的键值数据库，为了提升速度，它只支持读写操作，不支持迭代。
 
 为了支持迭代功能，LevelDB进行了很多折衷设计和专门的优化。但是在绝大多数情况下，区块链存储引擎并不是一定要依赖迭代功能，例如以太坊的MPT和比特币现金的UTXO存储。
 
@@ -111,7 +111,7 @@ MoeingKV的一些关键思想来自于MoeingADS和MoeingDB，但它并没有被�
 
 #### MoeingAOT
 
-MoeingAOT是EVM的AOT（ahead-of-time）编译器。
+MoeingAOT是EVM的AOT（Ahead-Of-Time）编译器。
 
 在区块链领域，EVM相对于所有其他的虚拟机（例如WebAssembly）都要更加流行，已经是智能合约事实上的标准了。
 
@@ -134,8 +134,8 @@ Rollup是一种“去负载”（offload）的方法学，用来提升区块链�
 MoeingRollup使用原生代码来实现这种证明任务。智能合约中利用它所提供的原语，可以简单且高效地完成证明任务。证明数据中，至少包含如下三个部分：
 
 1. 区块中的交易集合
-2. 这些交易读取的KV对，以及它们的存在性证明
-3. 这些交易输出的KV对，以及一些辅助数据，可以利用它们来生成新状态的状态根
+2. 这些交易读取的键值对，以及它们的存在性证明
+3. 这些交易输出的键值对，以及一些辅助数据，可以利用它们来生成新状态的状态根
 
 MoeingRollup还提供了一些工具用来方便定序人的工作，例如生成证明数据等。
 
@@ -169,7 +169,7 @@ Moeing链不会引入新的代币，它的原生代币就是BCH，而且使用BC
 
 交易的Gas费被收集之后，其中一半会在验证人集合卸任之时奖励给他们，另外一半则会被燃烧掉。这一设计使得BCH成为一种通缩的货币。验证人必须有足够的BCH作为抵押才能获得Gas费奖励，这些奖励在可以被验证人花掉之前，要经历一段锁定期。
 
-[回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Moeing链也会采用。
+[回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分Gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Moeing链也会采用。
 
 BCH可以在比特币现金主网和Moeing链之间双向互转。我们可以在主网上锁定若干BCH，同时在Moeing链上解锁对应数额的BCH，反之亦然。为了能启动Moeing链，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Moeing链，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。
 
