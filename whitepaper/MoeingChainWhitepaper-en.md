@@ -26,7 +26,7 @@ As Moeing chain grows more mature, the developed libraries and the learned lesso
 
 It has been 8 years since Vitalik Buterin proposed Ethereum in 2013. Smart contracts were born, bred, and have been blooming ever since. Ethereum is now the most successful smart contract platform, and we may examine its ecosystem as well as make observations from it:
 
-**The single chain's user experience is hard to approach through sharding or layer-2 solutions**. Zero latency and atomic interoperation between smart contracts is only possible within the same chain. The cross-shard or layer-2-to-layer-1 interoperation must undergo an interchain communication process, which prompts latencies similar to depositing and withdrawing at centralized exchanges. Some popular mechanisms, such as [flash loan](https://wwz.unibas.ch/fileadmin/user_upload/wwz/00_Professuren/Schaer_DLTFintech/Lehre/MA_Florian_Gronde_Flashloans-ohne_Appendix.pdf) and [flash swap](https://uniswap.org/docs/v2/core-concepts/flash-swaps/), would not work crosschain.
+**The single chain's user experience is hard to approach through sharding or layer-2 solutions**. Zero latency and atomic interoperation between smart contracts is only possible within the same chain. The cross-shard or layer-2-to-layer-1 interoperation must undergo an interchain communication process, which prompts latencies similar to depositing and withdrawing at centralized exchanges. Some popular mechanisms, such as [flash loan](https://wwz.unibas.ch/fileadmin/user_upload/wwz/00_Professuren/Schaer_DLTFintech/Lehre/MA_Florian_Gronde_Flashloans-ohne_Appendix.pdf) and [flash swap](https://uniswap.org/docs/v2/core-concepts/flash-swaps/), would not work cross-chain.
 
 **Low-throughput deters ordinary users from interacting directly with DApps**.  The gas upper bound is fixed for each block, and miners pack the transactions with high gas fees first. Meanwhile, transactions with low gas fees must wait a long time to be packed into a block or never get packed at all. Naturally, only high-value transactions are worth a high gas fee. So, ordinary users who cannot afford high gas fees can only deposit their funds into centralized organizations, then delegate them to operate their funds. In the DeFi world, only a small number of accounts are sending transactions. These accounts have a lot of funds, either because they own a lot, or because they gather a lot from ordinary users. Ironically, today's decentralized finance is not so decentralized. 
 
@@ -150,7 +150,7 @@ MoeingLink is a protocol enabling different shards to interact directly without 
 
 Currently, all major sharding solutions require an intermediate chain. In ETH2.0, it's the beacon chain, and in Polkadot, it's the relay chain. As more and more shards are created, the inter-shard transactions will produce a huge pressure on the crowded layer-1.
 
-To avoid that, MoeingLink allows shards to prove self-state to others, utilizing MoeingADS's state roots committed on layer-1. Once they have acknowledged with each other’s state, they can interact directly without the help of layer-1.
+To avoid that, MoeingLink allows shards to prove self-state to others, utilizing MoeingADS's state roots committed on layer-1. Once they have acknowledged each other’s state, they can interact directly without the help of layer-1.
 
 
 ### Moeing's Consensus Algorithm
@@ -175,7 +175,7 @@ The [buyback-and-burn](https://medium.com/invao/buyback-and-burn-how-it-works-an
 
 BCH can be transferred bidirectionally between Bitcoin Cash's mainnet and Moeing chain, which means we can lock certain coins on the mainnet, and unlock the same amount of coins on Moeing chain, and vice versa. To bootstrap Moeing chain, we are inviting the major players in Bitcoin Cash's ecosystem to run a federated two-way pegged gateway, which bridges the mainnet and Moeing chain to transfer BCH bidirectionally, just like how [RSK and Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/) work. 
 
-We are aware that BCH's scripting language is capable of implementing a non-custodial trustless gateway by using a lock script to trace the voting process carried out inside coinbase transactions. However, this scheme has not been field-proven. We will write up dedicated proposals to describe this scheme and it will be implemented in [CashScript](https://cashscript.org/) upon passing. Afterwards, Moeing chain will switch to this new scheme in a hard fork.
+We are aware that Bitcoin Cash's scripting language is capable of implementing a non-custodial trustless gateway by using a lock script to trace the voting process carried out inside coinbase transactions. However, this scheme has not been field-proven. We will write up dedicated proposals to describe this scheme and it will be implemented in [CashScript](https://cashscript.org/) upon passing. Afterwards, Moeing chain will switch to this new scheme in a hard fork.
 
 
 
