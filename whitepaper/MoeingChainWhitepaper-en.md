@@ -58,7 +58,7 @@ With these powerful components, Moeing chain aims to enlarge the gas consumption
 
 MoeingEVM is a parallelized execution engine that currently manages multiple EVM contexts and executes multiple transactions. Based on an optimized EVM implementation from [evmone](https://github.com/ethereum/evmone), it can be observed that there are several novel techniques adopted to maximize transaction parallelism.
 
-As multi-core CPUs become more and more popular, scalability would be hindered in the context of Ethereum's single-thread execution semantics, under the constraint that speeding it up is very hard. But if we switch to multi-thread execution semantics, a better overall result would be achieved as multi-core CPUs can be utilized more easily and in a more straightforward manner.
+As multi-core CPUs become more and more popular, scalability would be hindered in the context of Ethereum's single-thread execution semantics, because under its constraint speeding up is very hard. But if we switch to multi-thread execution semantics, a better overall result would be achieved as multi-core CPUs can be utilized more easily and in a more straightforward manner.
 
 So MoeingEVM is developed following the multi-thread execution semantics.
 
@@ -97,7 +97,7 @@ Besides supporting MPT, LevelDB is also commonly used to store historical data s
 4. Poor spatial locality for efficient caching, which results from most keys being Hash IDs.
 5. Susceptible to DDoS attack, unless cold data’s read latency has a reasonable upper bound.
 
-MoeingDB is an application-specific database that stores blockchain history, and developed with the above characteristics in mind, enables it to suit blockchain's workload best. Based on its features, an open-source high QPS Web3 API can be built, benefiting both Moeing chain and Ethereum. We hope that it will facilitate the Web3 API provider market to be more decentralized.
+MoeingDB is an application-specific database that stores blockchain history, and we developed it with the above characteristics in mind to suit blockchain's workload best. Based on its features, an open-source high QPS Web3 API can be built, benefiting both Moeing chain and Ethereum. We hope that it will facilitate the Web3 API provider market to be more decentralized.
 
 #### MoeingKV
 
