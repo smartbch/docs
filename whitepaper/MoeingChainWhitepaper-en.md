@@ -20,7 +20,8 @@ Currently, Bitcoin Cash's capability has been proven to [reach 14MB](https://new
 
 What can Moeing contribute to the Bitcoin Cash ecosystem? Well, it builds a new playground for testing new features: It has a short confirmation time, supports EVM and Web3 with novel optimizations to provide higher throughput, and also provides new channels for one to invite more users to join Bitcoin Cash's ecosystem.
 
-As Moeing chain grows more mature, the developed libraries and the learned lessons will help improve Bitcoin Cash's mainnet, too.
+
+As the Moeing chain grows more mature, the developed libraries and the learned lessons will help improve Bitcoin Cash's mainnet, too.
 
 ### Background
 
