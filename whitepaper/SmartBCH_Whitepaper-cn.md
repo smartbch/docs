@@ -50,7 +50,7 @@ Vitalik Buterin于2013年首次提出以太坊，迄今已有八年。八年间�
 
 ### Smart Bitcoin Cash的核心组件
 
-Smart Bitcoin Cash的创新表现在若干程序库当中。它并没有发明很炫的共识算法或者密码学算法，而是采用了另外一种方法学：开发底层的程序库，以便充分地发挥硬件的潜力，尤其是其内在的并行性。普通的用户和开发者在一个支持EVM和Web3的兼容层之上操作，底层贴近硬件的优化被这个兼容层完全隐藏了起来。
+Smart Bitcoin Cash的创新表现在若干程序库当中。它并没有发明很炫的共识算法或者密码学算法，而是采用了另外一种方法学：开发底层的程序库，以便充分地发挥硬件的潜力，尤其是其内在的并行性。普通的用户和开发者在一个支持EVM和Web3的兼容层之上操作，底层贴近硬件的优化被这个兼容层完全隐藏了起来。在编码实现中，我们使用了开发代号Moeing，它被附加到各个程序库的名称上作为前缀。
 
 利用这些强大的程序库，Smart Bitcoin Cash中期的目标是将区块的Gas上限提升到十亿。长期的目标是通过Sharding和Rollup等技术进一步提升其通量。
 
@@ -142,7 +142,7 @@ MoeingRollup还提供了一些工具用来方便定序人的工作，例如生�
 
 #### MoeingLink
 
-Moeing链以单Shard的方式启动，但长期来看，它在未来有可能包含更多的Shard，从而成为一条多Shard的区块链。
+Smart Bitcoin Cash以单Shard的方式启动，但长期来看，它在未来有可能包含更多的Shard，从而成为一条多Shard的区块链。
 
 MoeingLink是一个协议，它允许多个Shard可以直接互操作，而不必在比特币现金的主网上执行交易。
 
@@ -172,6 +172,8 @@ Smart Bitcoin Cash不会引入新的代币，它的原生代币就是BCH，而�
 [回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分Gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Smart Bitcoin Cash也会采用。
 
 BCH可以在比特币现金主网和Smart Bitcoin Cash之间双向互转。我们可以在主网上锁定若干BCH，同时在Smart Bitcoin Cash上解锁对应数额的BCH，反之亦然。为了能启动Smart Bitcoin Cash，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Smart Bitcoin Cash，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。
+
+如今的加密社区已经非常适应“同一代币存在于多条链”的范式。例如，当提到USDT的时候，它可以指比特币的Omni协议上的代币、比特币现金SLP协议上的代币、以太坊上的代币，或者波场上的代币，等等。因此，我们不会使用另外的符号来表示Smart Bitcoin Cash上的BCH，以免引发误解。
 
 我们明确知道BCH的脚本语言足以实现非托管的、去信任的网关，通过由一段锁定脚本来追踪在coinbase交易当中进行的投票进程。然而这一技术路线并未在实践中被验证。我们将会撰写专门的文档来描述这一技术，当它通过社区的评审之后，再使用[CashScript](https://cashscript.org/)来实现它。接下来，Smart Bitcoin Cash将会通过一次硬分叉来切换网关。
 
