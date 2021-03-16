@@ -1,12 +1,12 @@
-## Moeing链：兼容EVM和Web3 API的比特币现金侧链
+## Smart Bitcoin Cash：兼容EVM和Web3 API的比特币现金侧链
 
 ### 概述
 
 比特币现金致力于提供去中心化、高通量、低成本、且易用的加密货币基础设施，对其主网的任何修改，都需要达到很高的共识，这阻碍了它进行试错、创新的进程。
 
-因此，我们开发了Moeing链——一条比特币现金的侧链，其目的是探索新的想法、解锁新的可能性。它将会同以太坊的EVM和Web3 API相兼容，因为它们已经是区块链DApp行业中的事实标准了。
+因此，我们开发了Smart Bitcoin Cash——一条比特币现金的侧链，其目的是探索新的想法、解锁新的可能性。它将会同以太坊的EVM和Web3 API相兼容，因为它们已经是区块链DApp行业中的事实标准了。
 
-以太坊通过逐步过渡到ETH2.0，正在解决其低通量、高成本的问题，但众所周知这个过程仍然需要若干年才能最终完成。Moeing链尝试以一种不同的路径来解决这些问题：优化EVM和Web3的底层实现，以便充分利用硬件的能力，特别是其固有的高度并行的能力。我们相信Moeing链能在更短的时间内实现ETH2.0的承诺：高通量、低成本。
+以太坊通过逐步过渡到ETH2.0，正在解决其低通量、高成本的问题，但众所周知这个过程仍然需要若干年才能最终完成。Smart Bitcoin Cash尝试以一种不同的路径来解决这些问题：优化EVM和Web3的底层实现，以便充分利用硬件的能力，特别是其固有的高度并行的能力。我们相信Smart Bitcoin Cash能在更短的时间内实现ETH2.0的承诺：高通量、低成本。
 
 ### 动机
 
@@ -18,9 +18,9 @@
 
 迄今为止，比特币现金已经证明其区块大小可以[达到14MB](https://news.bitcoin.com/new-bitcoin-cash-stress-test-sees-700000-transactions-in-one-day/)。尽管现在它的区块大小基本在0.8MB左右，但增长的速度非常快，自2021年开始以来，已经增长了3倍。如果它继续保持这样的增长率，在不远的将来，它的区块大小就会稳定地超过14MB。由于大于14MB的区块仍然有很多未知问题，并没有在实践中检验过，最好现在就能提前为进一步的扩容进行一些准备和探索。
 
-Moeing链对比特币现金的贡献是什么呢？它为新的功能提供了试验场，它拥有更短的确认时间，它不但支持EVM和Web3，而且支持得比现有方案更好（通量更高）。它提供了一个新的渠道从而邀请更多的开发者和用户加入到比特币现金的生态系统当中来。
+Smart Bitcoin Cash对比特币现金的贡献是什么呢？它为新的功能提供了试验场，它拥有更短的确认时间，它不但支持EVM和Web3，而且支持得比现有方案更好（通量更高）。它提供了一个新的渠道从而邀请更多的开发者和用户加入到比特币现金的生态系统当中来。
 
-随着Moeing链变得越来越成熟，为它所开发的库，以及从它身上学到的经验教训，也能帮助比特币现金主网的发展。
+随着Smart Bitcoin Cash变得越来越成熟，为它所开发的库，以及从它身上学到的经验教训，也能帮助比特币现金主网的发展。
 
 ### 背景
 
@@ -46,13 +46,13 @@ Vitalik Buterin于2013年首次提出以太坊，迄今已有八年。八年间�
 
 集成电路工艺在28nm之后，已经很难继续大幅度提升频率，但是它的每一代升级，仍然提供了更高的晶体管密度。设计者利用这些晶体管，实现了越来越多的CPU核心。在过去的10年里，新创的编程语言都在宣传自己能够非常容易地开发多核CPU的潜力：Go语言的 [channels and goroutines](https://medium.com/hootsuite-engineering/golang-routines-and-channels-dff7336eb457)，Dart语言的[isolates](https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a)，以及Rust语言的[fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)。
 
-以上这些观察指导了Moeing链的设计和实现。
+以上这些观察指导了Smart Bitcoin Cash的设计和实现。
 
-### Moeing链的核心组件
+### Smart Bitcoin Cash的核心组件
 
-Moeing链的创新表现在若干程序库当中。它并没有发明很炫的共识算法或者密码学算法，而是采用了另外一种方法学：开发底层的程序库，以便充分地发挥硬件的潜力，尤其是其内在的并行性。普通的用户和开发者在一个支持EVM和Web3的兼容层之上操作，底层贴近硬件的优化被这个兼容层完全隐藏了起来。
+Smart Bitcoin Cash的创新表现在若干程序库当中。它并没有发明很炫的共识算法或者密码学算法，而是采用了另外一种方法学：开发底层的程序库，以便充分地发挥硬件的潜力，尤其是其内在的并行性。普通的用户和开发者在一个支持EVM和Web3的兼容层之上操作，底层贴近硬件的优化被这个兼容层完全隐藏了起来。
 
-利用这些强大的程序库，Moeing链中期的目标是将区块的Gas上限提升到十亿。长期的目标是通过Sharding和Rollup等技术进一步提升其通量。
+利用这些强大的程序库，Smart Bitcoin Cash中期的目标是将区块的Gas上限提升到十亿。长期的目标是通过Sharding和Rollup等技术进一步提升其通量。
 
 #### MoeingEVM
 
@@ -95,7 +95,7 @@ MoeingADS使用单层架构，它直接访问底层的文件系统，不依赖�
 4. 由于大多数键都是Hash ID，空间局部性不好，导致很难实现有效的缓存
 5. 容易被DDoS攻击，除非冷数据的读延迟具有合理的上限
 
-MoeingDB是一个领域定制的数据库，专门用来存储区块链的历史，它专门针对上面的负载特征而开发。基于它的能力，可以开发出一个完全开源的、高QPS的Web3 API，这对于Moeing链和以太坊都有正面意义。我们希望它可以使得Web3 API供应市场变得更加去中心化。
+MoeingDB是一个领域定制的数据库，专门用来存储区块链的历史，它专门针对上面的负载特征而开发。基于它的能力，可以开发出一个完全开源的、高QPS的Web3 API，这对于Smart Bitcoin Cash和以太坊都有正面意义。我们希望它可以使得Web3 API供应市场变得更加去中心化。
 
 #### MoeingKV
 
@@ -107,7 +107,7 @@ MoeingKV是一个比LevelDB更快的键值数据库，为了提升速度，它�
 
 在某些场合下，由于兼容性的原因，MPT不能被MoeingADS所代替，这时可以使用MoeingKV来支持MPT。以MoeingKV为底层的MPT比MoeingADS要慢，但它比以LevelDB为底层的MPT还是快多了。
 
-MoeingKV的一些关键思想来自于MoeingADS和MoeingDB，但它并没有被用于Moeing链。我们开发它，主要是希望其他项目可以从中获益。
+MoeingKV的一些关键思想来自于MoeingADS和MoeingDB，但它并没有被用于Smart Bitcoin Cash。我们开发它，主要是希望其他项目可以从中获益。
 
 #### MoeingAOT
 
@@ -151,46 +151,46 @@ MoeingLink是一个协议，它允许多个Shard可以直接互操作，而不�
 为了避免这些情况，MoeingLink允许各个Shard向其它Shard证明自己的状态，方法是将MoeingADS中生成的世界状态的Merkle Root提交到Layer1之上。各个Shard能获知彼此的状态之后，它们即可在没有Layer1协助的情况下进行交互。
 
 
-### Moeing链的共识算法
+### 共识算法
 
-Moeing链使用[tendermint](https://github.com/tendermint/tendermint)作为共识引擎。矿工和BCH持币人共同来选举验证者集合。在时间上，验证者集合按照epoch来进行选举和履行职责。
+Smart Bitcoin Cash使用[tendermint](https://github.com/tendermint/tendermint)作为共识引擎。矿工和BCH持币人共同来选举验证者集合。在时间上，验证者集合按照epoch来进行选举和履行职责。
 
 一个epoch持续1000个块（大约一周时间）。在一个epoch内，BCH的持币人通过施加时间锁的UTXO来证明自己的拥有权，并且使用其拥有的数额来为验证者投票；而矿池则使用coinbase交易来投票。这是一种混合的共识模型：算力和币混合投票。
 
 一个epoch的结束时间是其中区块的最大时间戳，它的持续时间是相邻两个epoch的结束时间之差。在一个epoch期间被选举出的验证者集合，会在一个"候任状态"中保持一段时间，其长度等于epoch的持续时间的5%。之后，它们才会开始履行职责，等到下一个验证者集合的“候任状态”结束之时，它们停止履行职责。
 
-每个验证者都必须在Moeing Chain上锁定一些BCH作为抵押物。如果它在履职期间有不当的行为，这些抵押物将被罚没。
+每个验证者都必须在Smart Bitcoin Cash侧链上锁定一些BCH作为抵押物。如果它在履职期间有不当的行为，这些抵押物将被罚没。
 
-Moeing链启动后的第一个阶段，只有算力可以用来选举验证者集合。在主网上锁定BCH来选举验证者的功能会在之后开发，并且通过一次硬分叉升级来生效。
+Smart Bitcoin Cash启动后的第一个阶段，只有算力可以用来选举验证者集合。在主网上锁定BCH来选举验证者的功能会在之后开发，并且通过一次硬分叉升级来生效。
 
 ### 代币和燃料
 
-Moeing链不会引入新的代币，它的原生代币就是BCH，而且使用BCH来支付Gas费。
+Smart Bitcoin Cash不会引入新的代币，它的原生代币就是BCH，而且使用BCH来支付Gas费。
 
 交易的Gas费被收集之后，其中一半会在验证人集合卸任之时奖励给他们，另外一半则会被燃烧掉。这一设计使得BCH成为一种通缩的货币。验证人必须有足够的BCH作为抵押才能获得Gas费奖励，这些奖励在可以被验证人花掉之前，要经历一段锁定期。
 
-[回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分Gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Moeing链也会采用。
+[回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分Gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Smart Bitcoin Cash也会采用。
 
-BCH可以在比特币现金主网和Moeing链之间双向互转。我们可以在主网上锁定若干BCH，同时在Moeing链上解锁对应数额的BCH，反之亦然。为了能启动Moeing链，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Moeing链，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。
+BCH可以在比特币现金主网和Smart Bitcoin Cash之间双向互转。我们可以在主网上锁定若干BCH，同时在Smart Bitcoin Cash上解锁对应数额的BCH，反之亦然。为了能启动Smart Bitcoin Cash，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Smart Bitcoin Cash，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。
 
-我们明确知道BCH的脚本语言足以实现非托管的、去信任的网关，通过由一段锁定脚本来追踪在coinbase交易当中进行的投票进程。然而这一技术路线并未在实践中被验证。我们将会撰写专门的文档来描述这一技术，当它通过社区的评审之后，再使用[CashScript](https://cashscript.org/)来实现它。接下来，Moeing链将会通过一次硬分叉来切换网关。
+我们明确知道BCH的脚本语言足以实现非托管的、去信任的网关，通过由一段锁定脚本来追踪在coinbase交易当中进行的投票进程。然而这一技术路线并未在实践中被验证。我们将会撰写专门的文档来描述这一技术，当它通过社区的评审之后，再使用[CashScript](https://cashscript.org/)来实现它。接下来，Smart Bitcoin Cash将会通过一次硬分叉来切换网关。
 
 ### 同比特币现金上Layer-2方案的互操作
 
-再比特币现金生态中，已经有若干中layer2扩展，支持发行同质化和异质化的代币。在这些扩展中，最为成功和重要的是[Simple Ledger Protocol](https://simpleledger.cash/)。发行者在代币的生态中起到最为关键的作用，他可以帮助进行代币在SLP和Moeing链间的互转。
+再比特币现金生态中，已经有若干中layer2扩展，支持发行同质化和异质化的代币。在这些扩展中，最为成功和重要的是[Simple Ledger Protocol](https://simpleledger.cash/)。发行者在代币的生态中起到最为关键的作用，他可以帮助进行代币在SLP和Smart Bitcoin Cash间的互转。
 
-例如，如果Alice希望把10个XYZ代币从SLP转移到Moeing链，她可以先将这些代币在主网上发送给XYZ的发行者，然后发行者再在Moeing链上把10个XYZ发送给她，反之亦然。为了让这个过程更加安全，Alice可以使用原子交换来保证两处的代币转移要么都发生，要么都不发生。
+例如，如果Alice希望把10个XYZ代币从SLP转移到Smart Bitcoin Cash，她可以先将这些代币在主网上发送给XYZ的发行者，然后发行者再在Smart Bitcoin Cash上把10个XYZ发送给她，反之亦然。为了让这个过程更加安全，Alice可以使用原子交换来保证两处的代币转移要么都发生，要么都不发生。
 
 ### 路线图
 
-MoeingADS、MoeingEVM和MoeingDB已经基本开发完毕，在Moeing链正式启动之前，它们还要经过详尽的测试。
+MoeingADS、MoeingEVM和MoeingDB已经基本开发完毕，在Smart Bitcoin Cash正式启动之前，它们还要经过详尽的测试。
 
 MoeingAOT会在2021年底之前开发完毕，并且通过一次硬分叉升级来生效。MoeingKV同样会在2021年开发，希望它能为比特币现金主网的扩容贡献一些力量。
 
-MoeingRollup和MoeingLink将会在2022年开发。如果那时Moeing链出现了拥堵的情况，它们会被实施，以实现进一步的扩容。
+MoeingRollup和MoeingLink将会在2022年开发。如果那时Smart Bitcoin Cash出现了拥堵的情况，它们会被实施，以实现进一步的扩容。
 
 ### 结论
 
-Moeing链是一条兼容EVM和Web3的比特币现金的侧链。比特币现金的算力和持币人为它选举验证者集合，它使用BCH作为燃料。它使用若干对硬件友好的程序库来实现扩容。我们相信它能够在更短的时间内提供和ETH2.0相同的好处，使得单区块的Gas上限达到十亿。
+Smart Bitcoin Cash是一条兼容EVM和Web3的比特币现金的侧链。比特币现金的算力和持币人为它选举验证者集合，它使用BCH作为燃料。它使用若干对硬件友好的程序库来实现扩容。我们相信它能够在更短的时间内提供和ETH2.0相同的好处，使得单区块的Gas上限达到十亿。
 
-我们开发了激进的技术来优化存储和执行引擎。Moeing链，在很大程度上可以被视为这些新的激进技术的实验场。同其他开源项目一样，它的设计和实现可能会有缺陷和漏洞。因此，当您将资产（包括BCH）转移到Moeing链上之时，需要自行承担风险，保证您能够承受可能的损失。
+我们开发了激进的技术来优化存储和执行引擎。Smart Bitcoin Cash，在很大程度上可以被视为这些新的激进技术的实验场。同其他开源项目一样，它的设计和实现可能会有缺陷和漏洞。因此，当您将资产（包括BCH）转移到Smart Bitcoin Cash侧链上之时，需要自行承担风险，保证您能够承受可能的损失。

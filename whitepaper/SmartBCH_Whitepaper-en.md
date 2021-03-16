@@ -1,12 +1,12 @@
-## Moeing Chain: a Bitcoin Cash Sidechain with EVM & Web3 Compatibility
+## Smart Bitcoin Cash: a Bitcoin Cash Sidechain with EVM & Web3 Compatibility
 
 ### Abstract
 
 While Bitcoin Cash aims to provide a decentralized, high-throughput, low-cost, and easy-to-use infrastructure for cryptocurrency; any changes to the mainnet require a high level of consensus, which hinders the trial-and-error process.
 
-So, we decided to develop Moeing chain - a sidechain for Bitcoin Cash with an aim to explore new ideas and unlock possibilities. It will be compatible with Ethereum's EVM and Web3 API, for they are the de facto standards for blockchain DApps nowadays.
+So, we decided to develop Smart Bitcoin Cash - a sidechain for Bitcoin Cash with an aim to explore new ideas and unlock possibilities. It will be compatible with Ethereum's EVM and Web3 API, for they are the de facto standards for blockchain DApps nowadays.
 
-Ethereum is solving the issues related to low-throughput and high-cost by switching to ETH2.0, which, as we all know, still requires years of development to finish. Moeing chain attempts to tackle these issues differently, by optimizing the implementation of EVM and Web3 at a low-level in order to fully leverage the potential of hardware, especially its inherent parallelism. We believe that Moeing chain will provide the same benefits of ETH2.0 in a much shorter time.
+Ethereum is solving the issues related to low-throughput and high-cost by switching to ETH2.0, which, as we all know, still requires years of development to finish. Smart Bitcoin Cash attempts to tackle these issues differently, by optimizing the implementation of EVM and Web3 at a low-level in order to fully leverage the potential of hardware, especially its inherent parallelism. We believe that Smart Bitcoin Cash will provide the same benefits of ETH2.0 in a much shorter time.
 
 ### Motivation
 
@@ -18,9 +18,9 @@ Bitcoin Cash has a limited script system which is not Turing-complete, making it
 
 Currently, Bitcoin Cash's capability has been proven to [reach 14MB](https://news.bitcoin.com/new-bitcoin-cash-stress-test-sees-700000-transactions-in-one-day/). Although at this moment its block size is only 0.8 MB on average, it is growing fast: more than three times since the beginning of 2021. If it keeps growing at such a rate, 14MB would not be enough in the near future. Since issues surrounding block size larger than 14MB remain unknown and have not been field-tested, it would be best to begin getting prepared for further scaling of Bitcoin Cash's throughput.
 
-What can Moeing contribute to the Bitcoin Cash ecosystem? Well, it builds a new playground for testing new features: It has a short confirmation time, supports EVM and Web3 with novel optimizations to provide higher throughput, and also provides new channels for one to invite more users to join Bitcoin Cash's ecosystem.
+What can Smart Bitcoin Cash contribute to the Bitcoin Cash ecosystem? Well, it builds a new playground for testing new features: It has a short confirmation time, supports EVM and Web3 with novel optimizations to provide higher throughput, and also provides new channels for one to invite more users to join Bitcoin Cash's ecosystem.
 
-As Moeing chain grows more mature, the developed libraries and the learned lessons will help improve Bitcoin Cash's mainnet, too.
+As Smart Bitcoin Cash grows more mature, the developed libraries and the learned lessons will help improve Bitcoin Cash's mainnet, too.
 
 ### Background
 
@@ -46,13 +46,13 @@ We also observed that, since 2013, the most important trend in computers is **ad
 
 Integrated circuit technology can hardly boost frequency further after 28nm; however, it does provide more transistor budget in the new generations. Designers may use these transistors to implement more and more CPU cores.  In the last decade, surrounding all the novel programming languages hype, is the easy leveraging of the potential of more CPU cores: [channels and goroutines](https://medium.com/hootsuite-engineering/golang-routines-and-channels-dff7336eb457) of Go, [isolates](https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a) of Dart, and [fearless concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) of Rust. 
 
-The above observations shall guide the design and implementation of Moeing chain.
+The above observations shall guide the design and implementation of Smart Bitcoin Cash.
 
-### Moeing's Core Components
+### Core Components of Smart Bitcoin Cash
 
-Moeing chain's innovation lies in libraries.  Instead of inventing fancy consensus and cryptographic algorithms, we decided to adopt another methodology: to develop low-level libraries with an aim to fully uncover the hardware's potential, especially its inherent parallelism. Ordinary users and developers are provided with a compatibility layer supporting EVM and Web3, so the optimized low-level "close to the metal" libraries themselves remain concealed by this layer of abstraction.
+Smart Bitcoin Cash's innovation lies in libraries.  Instead of inventing fancy consensus and cryptographic algorithms, we decided to adopt another methodology: to develop low-level libraries with an aim to fully uncover the hardware's potential, especially its inherent parallelism. Ordinary users and developers are provided with a compatibility layer supporting EVM and Web3, so the optimized low-level "close to the metal" libraries themselves remain concealed by this layer of abstraction.
 
-With these powerful components, Moeing chain aims to enlarge the gas consumption every 15 seconds to one billion gas in the medium term. In the long run, overall throughput will be boosted further by adopting sharding and rollups.
+With these powerful components, Smart Bitcoin Cash aims to enlarge the gas consumption every 15 seconds to one billion gas in the medium term. In the long run, overall throughput will be boosted further by adopting sharding and rollups.
 
 #### MoeingEVM
 
@@ -97,7 +97,7 @@ Besides supporting MPT, LevelDB is also commonly used to store historical data s
 4. Poor spatial locality for efficient caching, which results from most keys being Hash IDs.
 5. Susceptible to DDoS attack, unless cold data’s read latency has a reasonable upper bound.
 
-MoeingDB is an application-specific database that stores blockchain history, and we developed it with the above characteristics in mind to suit blockchain's workload best. Based on its features, an open-source high QPS Web3 API can be built, benefiting both Moeing chain and Ethereum. We hope that it will facilitate the Web3 API provider market to be more decentralized.
+MoeingDB is an application-specific database that stores blockchain history, and we developed it with the above characteristics in mind to suit blockchain's workload best. Based on its features, an open-source high QPS Web3 API can be built, benefiting both Smart Bitcoin Cash and Ethereum. We hope that it will facilitate the Web3 API provider market to be more decentralized.
 
 #### MoeingKV
 
@@ -109,7 +109,7 @@ In underlying data structure design and code implementation, MoeingKV produces t
 
 While MPT cannot be replaced by MoeingADS due to compatibility, one can use MoeingKV to support MPT. MPT backed by MoeingKV might not be as fast as MoeingADS, but it is much faster than one backed by LevelDB.
 
-Though MoeingKV is not used in Moeing chain, its key ideas come from MoeingADS and MoeingDB. We particularly hope other projects may benefit from MoeingKV.
+Though MoeingKV is not used in Smart Bitcoin Cash, its key ideas come from MoeingADS and MoeingDB. We particularly hope other projects may benefit from MoeingKV.
 
 #### MoeingAOT
 
@@ -144,7 +144,7 @@ At the same time, MoeingRollup also eases the sequencer's job by providing utili
 
 #### MoeingLink
 
-Moeing chain will start as a single-shard chain. But in the long run, it is possible to include more shards and transform them into a multi-shard chain.
+Smart Bitcoin Cash will start as a single-shard chain. But in the long run, it is possible to include more shards and transform them into a multi-shard chain.
 
 MoeingLink is a protocol enabling different shards to interact directly without executing any transactions on Bitcoin Cash's mainnet.
 
@@ -153,9 +153,9 @@ Currently, all major sharding solutions require an intermediate chain. In ETH2.0
 To avoid that, MoeingLink allows shards to prove self-state to others, utilizing MoeingADS's state roots committed on layer-1. Once they have acknowledged each other’s state, they can interact directly without the help of layer-1.
 
 
-### Moeing's Consensus Algorithm
+### The Consensus Algorithm
 
-Moeing chain adopts [tendermint](https://github.com/tendermint/tendermint) as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs. 
+Smart Bitcoin Cash adopts [tendermint](https://github.com/tendermint/tendermint) as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs. 
 
 An epoch contains 2,016 blocks (takes about two weeks). During an epoch, BCH owners prove their ownerships of time-locked UTXOs and use the values of these UTXO to vote for a validator; whereas mining pools use coinbase transactions to vote. This is a hybrid consensus model: proof of hash power and stakes.
 
@@ -163,42 +163,42 @@ An epoch's end time is the largest timestamp of its blocks, and its duration tim
 
 Each validator must pledge some BCH as collateral, which would be slashed should it misbehaves during its duty.
 
-At the first phase after Moeing chain's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork.
+At the first phase after Smart Bitcoin Cash's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork.
 
 ### Token and Gas
 
-Moeing chain will not introduce new tokens. Its native token is BCH, and its gas fees are paid in BCH.
+Smart Bitcoin Cash will not introduce new tokens. Its native token is BCH, and its gas fees are paid in BCH.
 
 At the end of a quorum‘s tenure, half of the collected gas fees will be rewarded to the validators and the other half will be burned. In this sense, BCH will become a deflationary currency. A validator must pledge enough collateral to get its gas fee reward, and the reward must undergo a lock period before it can be spent.
 
 The [buyback-and-burn](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297) mechanism is very common for exchange tokens (BNB, HT, FTT, OKB, etc) and DeFi governance tokens. And Filecoin has a similar mechanism to [burn part of the gas fees](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees), which will be followed by Ethereum in [EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27). This mechanism has proven effective, so we decided to use it.
 
-BCH can be transferred bidirectionally between Bitcoin Cash's mainnet and Moeing chain, which means we can lock certain coins on the mainnet, and unlock the same amount of coins on Moeing chain, and vice versa. To bootstrap Moeing chain, we are inviting the major players in Bitcoin Cash's ecosystem to run a federated two-way pegged gateway, which bridges the mainnet and Moeing chain to transfer BCH bidirectionally, just like how [RSK and Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/) work. 
+BCH can be transferred bidirectionally between Bitcoin Cash's mainnet and Smart Bitcoin Cash, which means we can lock certain coins on the mainnet, and unlock the same amount of coins on Smart Bitcoin Cash, and vice versa. To bootstrap Smart Bitcoin Cash, we are inviting the major players in Bitcoin Cash's ecosystem to run a federated two-way pegged gateway, which bridges the mainnet and Smart Bitcoin Cash to transfer BCH bidirectionally, just like how [RSK and Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/) work. 
 
-We are aware that Bitcoin Cash's scripting language is capable of implementing a non-custodial trustless gateway by using a lock script to trace the voting process carried out inside coinbase transactions. However, this scheme has not been field-proven. We will write up dedicated proposals to describe this scheme and it will be implemented in [CashScript](https://cashscript.org/) upon passing. Afterwards, Moeing chain will switch to this new scheme in a hard fork.
+We are aware that Bitcoin Cash's scripting language is capable of implementing a non-custodial trustless gateway by using a lock script to trace the voting process carried out inside coinbase transactions. However, this scheme has not been field-proven. We will write up dedicated proposals to describe this scheme and it will be implemented in [CashScript](https://cashscript.org/) upon passing. Afterwards, Smart Bitcoin Cash will switch to this new scheme in a hard fork.
 
 
 
 ### Interoperation with other Layer-2 solutions on Bitcoin Cash
 
-There are many layer-2 extensions on Bitcoin Cash to allow issuers to mint fungible and non-fungible tokens. Among them, the most successful and important one is [Simple Ledger Protocol (SLP)](https://simpleledger.cash/). In an SLP token's ecosystem, its issuer plays a central role, who can be helpful in the transfer of tokens across Moeing chain.
+There are many layer-2 extensions on Bitcoin Cash to allow issuers to mint fungible and non-fungible tokens. Among them, the most successful and important one is [Simple Ledger Protocol (SLP)](https://simpleledger.cash/). In an SLP token's ecosystem, its issuer plays a central role, who can be helpful in the transfer of tokens across Smart Bitcoin Cash.
 
-For example, if Alice wants to transfer 10 XYZ coins from SLP to Moeing chain, she can send the coins to XYZ's issuer using SLP, then XYZ's issuer will send her 10 coins on Moeing chain, and vice versa. To step up security for this process, Alice can use an atomic swap to ensure the transactions on each side both happen or neither happen.
+For example, if Alice wants to transfer 10 XYZ coins from SLP to Smart Bitcoin Cash, she can send the coins to XYZ's issuer using SLP, then XYZ's issuer will send her 10 coins on Smart Bitcoin Cash, and vice versa. To step up security for this process, Alice can use an atomic swap to ensure the transactions on each side both happen or neither happen.
 
 
 
 ### Roadmap
 
-MoeingADS, MoeingEVM and MoeingDB are almost finished. Regardless, some throughput tests are necessary before Moeing chain can be officially launched.
+MoeingADS, MoeingEVM and MoeingDB are almost finished. Regardless, some throughput tests are necessary before Smart Bitcoin Cash can be officially launched.
 
 MoeingAOT will be ready and take effect after a hard fork by the end of 2021. MoeingKV will also be developed in 2021 with the hope to meet potential demands from Bitcoin Cash's mainnet.
 
-MoeingRollup and MoeingLink will be developed in 2022. By then, if the traffic of Moeing chain is congested, they will be deployed in a hard fork for further scaling.
+MoeingRollup and MoeingLink will be developed in 2022. By then, if the traffic of Smart Bitcoin Cash is congested, they will be deployed in a hard fork for further scaling.
 
 
 
 ### Conclusion
 
-Moeing chain provides an EVM & Web3 compatible sidechain for Bitcoin Cash, staking its hash power while utilizing BCH as gas. What’s more, by incorporating hardware-friendly components, scalability is unlocked. We believe that it will provide the same benefits of ETH2.0 in a much shorter time, achieving a block gas limit of one billion.
+Smart Bitcoin Cash provides an EVM & Web3 compatible sidechain for Bitcoin Cash, staking its hash power while utilizing BCH as gas. What’s more, by incorporating hardware-friendly components, scalability is unlocked. We believe that it will provide the same benefits of ETH2.0 in a much shorter time, achieving a block gas limit of one billion.
 
-The Moeing chain, to a large extent, can be viewed as a demo and an experiment of the novel and aggressive techniques we have been developing, which aim to optimize storage and execution engines for extreme throughput. Just like other open-source projects, there might be bugs and vulnerabilities in its design and implementation. So please be aware of the potential risks and make sure that possible losses are affordable when transferring your assets (including BCH) onto the Moeing chain.
+The Smart Bitcoin Cash, to a large extent, can be viewed as a demo and an experiment of the novel and aggressive techniques we have been developing, which aim to optimize storage and execution engines for extreme throughput. Just like other open-source projects, there might be bugs and vulnerabilities in its design and implementation. So please be aware of the potential risks and make sure that possible losses are affordable when transferring your assets (including BCH) onto the Smart Bitcoin Cash.
