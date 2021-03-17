@@ -50,7 +50,7 @@ The above observations shall guide the design and implementation of Smart Bitcoi
 
 ### Core Components of Smart Bitcoin Cash
 
-Smart Bitcoin Cash's innovation lies in libraries.  Instead of inventing fancy consensus and cryptographic algorithms, we decided to adopt another methodology: to develop low-level libraries with an aim to fully uncover the hardware's potential, especially its inherent parallelism. Ordinary users and developers are provided with a compatibility layer supporting EVM and Web3, so the optimized low-level "close to the metal" libraries themselves remain concealed by this layer of abstraction. During the implementation, we used the code name "Moeing", which is added to the libraries' names as prefix.
+Smart Bitcoin Cash's innovation lies in libraries.  Instead of inventing fancy consensus and cryptographic algorithms, we decided to adopt another methodology: to develop low-level libraries with an aim to fully uncover the hardware's potential, especially its inherent parallelism. Ordinary users and developers are provided with a compatibility layer supporting EVM and Web3, so the optimized low-level "close to the metal" libraries themselves remain concealed by this layer of abstraction. During the implementation, we used the codename "Moeing", which is added to the libraries' names as prefix.
 
 With these powerful components, Smart Bitcoin Cash aims to enlarge the gas consumption every 15 seconds to one billion gas in the medium term. In the long run, overall throughput will be boosted further by adopting sharding and rollups.
 
