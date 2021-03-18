@@ -155,7 +155,7 @@ MoeingLink是一个协议，它允许多个Shard可以直接互操作，而不�
 
 Smart Bitcoin Cash使用[tendermint](https://github.com/tendermint/tendermint)作为共识引擎。矿工和BCH持币人共同来选举验证者集合。在时间上，验证者集合按照epoch来进行选举和履行职责。
 
-一个epoch持续1000个块（大约一周时间）。在一个epoch内，BCH的持币人通过施加时间锁的UTXO来证明自己的拥有权，并且使用其拥有的数额来为验证者投票；而矿池则使用coinbase交易来投票。这是一种混合的共识模型：算力和币混合投票。
+一个epoch持续1000个块（大约一周时间）。在一个epoch内，BCH的持币人通过施加时间锁的UTXO来证明自己的拥有权，并且使用其拥有的数额来为验证者投票；而矿池则使用coinbase交易来投票。这是一种混合的共识模型：算力和币混合投票。投票的过程在比特币现金的主链上进行，并且是无许可的：成为新的验证者只需要矿工和（或）持币人的支持。
 
 一个epoch的结束时间是其中区块的最大时间戳，它的持续时间是相邻两个epoch的结束时间之差。在一个epoch期间被选举出的验证者集合，会在一个"候任状态"中保持一段时间，其长度等于epoch的持续时间的5%。之后，它们才会开始履行职责，等到下一个验证者集合的“候任状态”结束之时，它们停止履行职责。
 
@@ -171,7 +171,7 @@ Smart Bitcoin Cash不会引入新的代币，它的原生代币就是BCH，而�
 
 [回购后燃烧](https://medium.com/invao/buyback-and-burn-how-it-works-and-why-its-effective-cb2c7d9b9297)的机制，在平台币（BNB、HT、FTT、OKB等）和DeFi治理代币中非常普遍。Filecoin使用了类似的机制来[燃烧掉部分Gas fee](https://docs.filecoin.io/about-filecoin/how-filecoin-works/#gas-fees)，以太坊在硬分叉实施[EIP-1559](https://medium.com/@TrustlessState/eip-1559-the-final-puzzle-piece-to-ethereums-monetary-policy-58802ab28a27)之后，也会实施这样的机制。这一机制已经被证明是有效的，所以Smart Bitcoin Cash也会采用。
 
-BCH可以在比特币现金主网和Smart Bitcoin Cash之间双向互转。我们可以在主网上锁定若干BCH，同时在Smart Bitcoin Cash上解锁对应数额的BCH，反之亦然。为了能启动Smart Bitcoin Cash，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Smart Bitcoin Cash，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。
+BCH可以在比特币现金主网和Smart Bitcoin Cash之间双向互转。我们可以在主网上锁定若干BCH，同时在Smart Bitcoin Cash上解锁对应数额的BCH，反之亦然。为了能启动Smart Bitcoin Cash，我们正在邀请比特币现金生态中的重要参与者一同来运行一个联盟式的双向楔入的网关。这个网关连接主网和Smart Bitcoin Cash，BCH通过它双向流通，类似于[RSK和Liquid](https://blog.rsk.co/noticia/the-cutting-edge-of-sidechains-liquid-and-rsk/)所采用的机制。网关的参与者不一定要在验证者集合中。
 
 如今的加密社区已经非常适应“同一代币存在于多条链”的范式。例如，当提到USDT的时候，它可以指比特币的Omni协议上的代币、比特币现金SLP协议上的代币、以太坊上的代币，或者波场上的代币，等等。因此，我们不会使用另外的符号来表示Smart Bitcoin Cash上的BCH，以免引发误解。
 
