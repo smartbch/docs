@@ -1,2 +1,4 @@
-
 *.swp
+_book
+node_modules
+*.json
