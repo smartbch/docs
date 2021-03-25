@@ -1,18 +1,18 @@
-# 单节点测试
+# Single Node Test
 
+This document shows how to start a private testnet of smartBCH with only one node.
 
-
-第1步，创建目录smart_bch：
+Step 1: create the `smart_bch` directory.
 
 ```bash
-$ cd ~ # cd到任一目录即可
+$ cd ~ # any directory can do. Here we use home directory for example
 $ mkdir smart_bch
 $ cd smart_bch
 ```
 
 
 
-第2步，克隆moeingEVM，构建evmwrap动态链接库：
+Step 2: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
 $ cd ~/smart_bch
@@ -21,11 +21,11 @@ $ cd moeingevm/evmwrap
 $ make
 ```
 
-上面的命令执行成功后，出现~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so文件。
+After successfully executing the above commands, you'll get a ~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so file.
 
 
 
-第3步，克隆smartBCH源代码，编译smartbchd可执行程序：
+Step 3: clone the source code of smartBCH and build the executable of `smartbchd`.
 
 ```bash
 $ cd ~/smart_bch
@@ -34,11 +34,11 @@ $ cd smartbch
 $ go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
 
-上面的命令执行成功后，出现~/smart_bch/smartbch/smartbchd可执行程序。
+After successfully executing the above commands, you'll get a ~/smart_bch/smartbch/smartbchd file.
 
 
 
-第4步，初始化节点：
+Step 4: initialize the node:
 
 ```bash
 $ cd ~/smart_bch/smartbch
@@ -46,25 +46,25 @@ $ export EVMWRAP=../moeingevm/evmwrap/host_bridge/libevmwrap.so
 $ ./smartbchd init mynode --chain-id 0x1
 ```
 
-上面的命令执行成功后，会在~/.smartbchd目录（可以通过`--home`选项指定）下生成链的初始化数据。
+After successfully executing the above commands, you can find the initialized data in the `~/.smartbchd` directory. By using the `--home` option for `./smartbchd` command, you can specify another directory.
 
 
 
-第5步，启动节点：
+Step 5: start the node:
 
 ```bash
 $ ./smartbchd start
 ```
 
-上面的命令运行成功后，节点启动，并在localhost:8584（可以通过`--http.addr`选项指定）提供JSON-RPC服务。节点默认解锁了10个账户，执行下面的命令可以看到这些账户的地址：
+This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. By default, there are ten accounts created at genesis, which can be shown using the following command:
 
 ```bash
-# 在另一个命令行窗口中执行
+# Run this command in another terminal:
 $ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_accounts", "params":[],"id":1}' \
     -H "Content-Type: application/json" http://localhost:8545 | jq
 ```
 
-可以看到输出：
+And you can see something like:
 
 ```json
 {
@@ -85,5 +85,7 @@ $ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_accounts", "params":[],"i
 }
 ```
 
-关于RPC的文档可以看[这里](./json-rpc.md)。
+You can find the documents for RPC [here](./json-rpc.md).
+
+
 
