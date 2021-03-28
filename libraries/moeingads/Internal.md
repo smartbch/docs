@@ -1,15 +1,15 @@
-### Introduction to packages of OnvaKV
+### Introduction to packages of moeingads
 
-Here we introduce the packages and the data structures defined in the [OnvaKV](https://github.com/coinexchain/onvakv) repo.
+Here we introduce the packages and the data structures defined in the moeingads repo.
 
-### OnvaKV
+### moeingads
 
-OnvaKV has three building blocks: index-tree, data-tree, and meta-db.
+moeingads has three building blocks: index-tree, data-tree, and meta-db.
 
 ```
              +----------------+
              |                |
-             |     OnvaKV     |
+             |    moeingads   |
              |                |
              +----------------+
               /     /        \
@@ -107,7 +107,7 @@ A datatree keeps the following major components:
 4. The right parts of all active twigs (the right parts of the inactive twigs are all same)
 5. The upper-level nodes whose are ancestors of active twigs
 
-The components 3, 4 and 5 are stored in DRAM and volatile. So to stop OnvaKV in a friendly way, these components should be serialized and dump to disk, after a block is fully executed. When OnvaKV is stopped unexpectedly (for example, because of machine crash), the components 3, 4 and 5 will be lost, and their state must be rebuilt from components 1 and 2.
+The components 3, 4 and 5 are stored in DRAM and volatile. So to stop moeingads in a friendly way, these components should be serialized and dump to disk, after a block is fully executed. When moeingads is stopped unexpectedly (for example, because of machine crash), the components 3, 4 and 5 will be lost, and their state must be rebuilt from components 1 and 2.
 
 A datatreee also keeps some minor components, which are temporary sratchpad used during block execution. When a block is fully executed, the contents of these components will be cleared.
 
@@ -137,11 +137,11 @@ A root node is the node whose level is the largest among all the nodes.
 
 ##### The null twig and null nodes
 
-OnvaKV uses balanced binary Merkle tree whose leave count is $2^N$,. If the count of entries is not $2^N$, we just add null entries for padding, concepturally . In the implementation, we do not really add so many null entries for padding. Instead, we just add at most one null twig and at most one null node at each level. In a null twig, all the active bits are zero and all the leaves are null entries. For a null node, all its descendant (downstream) nodes and twigs are null. The null twig and null nodes are pre-computed in the `init()` function.
+moeingads uses balanced binary Merkle tree whose leave count is $2^N$,. If the count of entries is not $2^N$, we just add null entries for padding, concepturally . In the implementation, we do not really add so many null entries for padding. Instead, we just add at most one null twig and at most one null node at each level. In a null twig, all the active bits are zero and all the leaves are null entries. For a null node, all its descendant (downstream) nodes and twigs are null. The null twig and null nodes are pre-computed in the `init()` function.
 
 In the following figure. E is a null twig while F and G are null nodes. We do not keep the grey portion in DRAM and hard disk, because these twigs and nodes are all null. Instead, storing E, F and G in DRAM is enough to providing proof for every valid entry. 
 
-![OnvaKV_7](./images/OnvaKV_7.png)
+![ADS_7](./images/ADS_7.png)
 
 
 
@@ -175,7 +175,7 @@ RocksDB is a KV database written in C++. It has a Golang binding, which is not s
 
 RocksDB supports filtering during compaction, which is a unique feature among all the opensource KV databases. We use this feature in indextree.
 
-In OnvaKV there is a rocksdb database. Both metadb and indextree use it to store some information which is not performance-critical but important for consistency. All the updates generated during one block is kept in one batch, to make sure blocks are atomic. If the batch commits, the block commits. If the batch is discarded, it looks as if the block does not execute at all.
+In moeingads there is a rocksdb database. Both metadb and indextree use it to store some information which is not performance-critical but important for consistency. All the updates generated during one block is kept in one batch, to make sure blocks are atomic. If the batch commits, the block commits. If the batch is discarded, it looks as if the block does not execute at all.
 
 #### metadb
 
@@ -183,7 +183,7 @@ See metadb/metadb.go
 
 We need to store a little meta information when a block finishes its execution. The data size is not large and not performance critical, so we store them in RocksDB.
 
-When OnvaKV is not properly closed, we should use the information in metadb as guide to recover the other parts of OnvaKV.
+When moeingads is not properly closed, we should use the information in metadb as guide to recover the other parts of moeingads.
 
 The following data are stored in metadb:
 
@@ -195,10 +195,10 @@ The following data are stored in metadb:
 - EdgeNodes: the edge nodes returned by `PruneTwigs`.
 - MaxSerialNum: the maximum serial number of all the entries. When a new entry is appended, it is increased by one.
 - ActiveEntryCount: the count of all the active entries.
-- IsRunning: whether OnvaKV is running. When OnvaKV is initialized, it is set to true. When OnvaKV is closed properly, it is set to false. If it is found true during  initialization, it means OnvaKV was NOT closed properly, and you should recover the data.
-- TwigHeight: a map whose key is Twig's ID and value is the maximum value of its entries' heights. When OnvaKV is asked to 'prune till a given height', this map is used to show which twigs can be pruned.
+- IsRunning: whether moeingads is running. When moeingads is initialized, it is set to true. When moeingads is closed properly, it is set to false. If it is found true during  initialization, it means moeingads was NOT closed properly, and you should recover the data.
+- TwigHeight: a map whose key is Twig's ID and value is the maximum value of its entries' heights. When moeingads is asked to 'prune till a given height', this map is used to show which twigs can be pruned.
 
-When OnvaKV is NOT properly closed, TwigMtFileSize and EntryFileSize may be different from the real file size on disk, because of the last block's partial execution. Before recovering, the twig Merkle tree file and entry file would be truncated to the TwigMtFileSize and EntryFileSize stored in metadb, respectively.
+When moeingads is NOT properly closed, TwigMtFileSize and EntryFileSize may be different from the real file size on disk, because of the last block's partial execution. Before recovering, the twig Merkle tree file and entry file would be truncated to the TwigMtFileSize and EntryFileSize stored in metadb, respectively.
 
 #### B-tree
 
@@ -225,9 +225,9 @@ The RocksDB's content is also used to initialize the B-Tree when starting up. Wh
 
 If we no longer need the KV-pairs whose expiring height are old enough, they can be filtered out during compaction: this is how pruning works.
 
-#### Top of OnvaKV
+#### Top of moeingads
 
-See onvakv.go
+See moeingads.go
 
 It integrates the three major parts and implement the basic read/update/insert/delete operations. The most important job of it is to keep these parts synchronized. It uses a two-phase protocol: during the execution of transactions, it perform parrallel prepareations to load "hot entries" in DRAM; when a block is committed, it updates these parts in a batch way.
 
@@ -246,7 +246,7 @@ During a block, this cache undergoes a filling phase,  a marking phase and a swe
 
 ### Store Data Structures
 
-The API of OnvaKV is somehow hard to use because you must follow the three phases of the hot entry cache. It would be better to wrap it with some "store" data structures to provide an easy-to-used KV-style API. The figure below shows the relationship among these "store" data structures.
+The API of moeingads is somehow hard to use because you must follow the three phases of the hot entry cache. It would be better to wrap it with some "store" data structures to provide an easy-to-used KV-style API. The figure below shows the relationship among these "store" data structures.
 
 ```
   PrefixedStore
@@ -261,14 +261,14 @@ The API of OnvaKV is somehow hard to use because you must follow the three phase
   RootStore \     \
       |     CacheStore
       |
-   OnvaKV
+   moeingads
 ```
 
 There are three levels of caching with different lifetimes: RootStore's cache lasts for many blocks, TrunkStore's cache only exists during a block and MultiStore's cache only exists during a transaction.
 
 During run time, the relationship of these stores are shown as below.
 
-![OnvaKV_8](./images/OnvaKV_8.png)
+![ADS_8](./images/ADS_8.png)
 
 Each transaction has its own MultiStore, based on which there are several PrefixedStore. Each transaction's MultiStore can access the block's TrunkStore. When block is committed, contents in TruckStore are flushed to RootStore.
 
@@ -344,53 +344,4 @@ See store/prefix.go.
 It helps to divide a MultiStore into several "sub stores", each one of which has a unique key prefix. Every operation on PrefixedStore, will be performed on the underlying MultiStore, with the keys be prefixed. 
 
 
-
-### The Rabbit Store
-
-See store/rabbit
-
-RabbitStore is a special KV store which uses short fixed-length keys for indexing. We can replace MultiStore with it to reduce DRAM usage.
-
-#### Rabbits hop to store and eat carrots
-
-To explain how RabbitStore works, let's tell a story of rabbits first.
-
-![OnvaKV_9](./images/OnvaKV_9.png)
-
-There are 24 holes, each of which can hold a carrot. Rabbits come and put their carrots into holes according to given algorithm. Suppose now eight rabbits have come and put eight carrots in eight holes. Then the Alice rabbit is coming with her carrot which is named as "Alice's yummy carrot". Alice will do the following steps according to the algorithm:
-
-1. She hashes the name "Alice's yummy carrot" once and gets a number 13 . She hops to the #13 hole and finds another carrot in it. So her carrot cannot be stored in this hole.
-2. She hashes the name twice and get a number 22. She hops to the #22 hole and finds another carrot in it. So her carrot cannot be stored in this hole either.
-3. She hashes the name for three times and get a number 21. She hops to the #21 hole and finds an empty hole. So she can store "Alice's yummy carrot" in it.
-4. She places one stone at #13 hole and one stone at #14 hole, which mean she must pass by these holes to reach the correct hole storing her carrot.
-
-Finally, the Bob rabbit is coming with his carrot which is name as "Bob's delicious carrot". He does similar steps as Alice. He hops to #22 hole first, and then hops to #11 hole, finding these holes are full. At last he find an empty #9 hole. He stores his carrot in #9 and place two holes at #22 hole and #11 hole.
-
-Now, we can see #13 hole and #11 hole each have one pass-by stone, and #22 hole has two pass-by stones.
-
-When a rabbit comes to eat her carrot, she must follow these steps:
-
-1. Set n = 1
-2. Hash her carrot's name for n times and gets a hole number, and then check the hole:
-3. If her carrot is not there and there is no pass-by stone, her carrot can never be found (maybe eaten by someone else)
-4. If her carrot is not there and there are one or more pass-by stone, set n = n + 1 and go to step 2.
-5. If her carrot is there, she eats it and removes one pass-by stone from each hole she just passed by.
-
-If there are empty holes, a rabbit can finally find one hole to store her carrot in finite steps. And if the carrot is still there, a rabbit can finally find it to eat in finite steps.
-
-#### Short fixed-length keys for indexing
-
-The C++ version B-tree uses a special trick to reduce memory usage which only works when the key is 8 bytes long. But in practice, keys are usually quite long just like a carrot's lengthy name.
-
-There are no more than 2<sup>64</sup> holes (because the key is 8 bytes long), and we must assign a hole number to some carrots with unique names. The number of carrots are far less than 2<sup>64</sup>, but their names are much longer than 8.  The rabbits' hopping algorithm can help us map lengthy names to 8-byte hole number.
-
-In the underlying TrunkStore, the keys are 8-byte which are calculated . And the original variable length key-value pairs are packed together and used as the values stored in TrunkStore
-
-By hashing the original keys, RabbitStore gets new 8-byte short keys. By packing the original variable-length key and value together, RabbitStore gets new values. These new keys and values are stored into the underlying TrunkStore. Thus the indextree only faces fixed 8-byte short keys, which allows C++ B-tree to do the trick.
-
-The short 8-byte keys generated from adjacent original keys, will no longer be adjacent to each other any more. So RabbitStore cannot support iteration. Luckily, EVM only uses SSTORE and SLOAD to access the underlying persistent KV store and it does not need iteration at all.
-
-#### Performance Consideration
-
-The possibility of rabbits' hopping path drops exponentially as its length grows. In practice, almost all of the hopping paths have only one hop. So the performance penalty of RabbitStore is negligible.
 

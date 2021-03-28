@@ -2,8 +2,6 @@
 
 EVM's semantics requires that an account's detail can be read/written by its 20-byte address, and a storage slot can be read/written using (20-byte address, 32-byte hash) tuple.
 
-See store/rabbit
-
 RabbitStore is a special KV store which uses short fixed-length keys for indexing. We can replace MultiStore with it to reduce DRAM usage.
 
 #### Rabbits hop to store and eat carrots
