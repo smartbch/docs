@@ -24,6 +24,7 @@
       - [5.2.1 Methods](#521-methods)
         - [5.2.1.1 getAgent](#5211-getagent)
         - [5.2.1.2 createAgent](#5212-createagent)
+    - [5.3 Address Format](#53-address-format)
   - [6. License](#6-license)
 
 ## 1.  Summary
@@ -178,9 +179,13 @@ Create a new agent. The returned values of this agent's `agentInfo()` function m
 
 This function is not required to run in permissionless way, which means this function can be called only by some account witth privilege.
 
+### 5.3 Address Format
+
+One can show a text string (or a QRCode converted from this string) to others, such that others can send her coins through pending transfer agents. Such a string must follow the format of `user_address@factory_address`. For example, if the user's address is 0xb794f5ea0ba39494ce839613fffba74279579268 and the factory contract's address is 0xdc25ef3f5b8a186998338a2ada83795fba2d695e, then the string is 0xb794f5ea0ba39494ce839613fffba74279579268@0xdc25ef3f5b8a186998338a2ada83795fba2d695e.
 
 ## 6. License
 
 The content is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+
 
 
