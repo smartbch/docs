@@ -81,7 +81,9 @@ This function transfers some tokens into this agent contract, pending for going 
 
 This function returns true on success, returns false if the transferred amount is less than the recipient's minimum acceptable amount, and throws on other errors.
 
-##### 5.1.1.4 getPendingTransfer
+It is recommended to put encrypted text in the `message`, but not required. The symmetric key for encryption can be derived from the private&public keys of the sender and recipient, using the [ECDH](https://wiki.openssl.org/index.php/Elliptic_Curve_Diffie_Hellman) algorithm. 
+
+##### 5.1.1.4 getPendingTransfers
 ```
 function getPendingTransfer(address to, uint160 ticket) external view returns (uint packedInfo);
 ```
