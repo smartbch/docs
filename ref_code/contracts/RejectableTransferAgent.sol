@@ -5,9 +5,19 @@ import "./interfaces/IRejectableTransferAgent.sol";
 import "./interfaces/ISEP20.sol";
 
 contract RejectableTransferAgent is IRejectableTransferAgent {
+    address private owner;
     uint private tokenAndUnit;
     mapping(address => mapping(uint160 => uint)) private pendingInfo;
     mapping(address => uint) private minimumAcceptableAmount;
+
+    function getOwner() external view returns (address) {
+        return owner;
+    }
+
+    function changeUnit(uint96 unit) external {
+        require(msg.sender == owner);
+        tokenAndUnit = ((tokenAndUnit>>96)<<96)|uint(unit);
+    }
 
     function _safeTransferFrom(address token, address from, address to, uint value) internal {
         uint beforeAmount = ISEP20(token).balanceOf(to);
@@ -43,12 +53,12 @@ contract RejectableTransferAgent is IRejectableTransferAgent {
         packedArgs >>= (160+32);
         uint amount = packedArgs * unit;
         if(amount < minimumAcceptableAmount[to]) {
-	    return false;
-	}
+            return false;
+        }
         _safeTransferFrom(token, msg.sender, address(this), amount);
         pendingInfo[to][ticket] = packedInfo;
         emit Transfer(msg.sender, to, packedArgs, message);
-	return true;
+        return true;
     }
 
     function getPendingTransfer(address to, uint160 ticket) external override view returns (uint packedInfo) {
@@ -65,8 +75,8 @@ contract RejectableTransferAgent is IRejectableTransferAgent {
         packedInfo >>= 161;
         uint deadline = 3600*(packedInfo & ((1<<31)-1));
         if(block.timestamp <= deadline) {
-	    return false;
-	}
+            return false;
+        }
         packedInfo >>= 31;
         uint amount = packedInfo * unit;
         delete pendingInfo[to][ticket];
@@ -96,9 +106,9 @@ contract RejectableTransferAgent is IRejectableTransferAgent {
         packedInfo >>= 160;
         bool checkPreimage = (packedArgs & 1) != 0;
         if(checkPreimage) {
-	    //only check low 128 bits
+            //only check low 128 bits
             if((uint(keccak256(abi.encodePacked(preimage)))<<128) != (uint(ticket)<<128)) {
-		return false;
+                return false;
             }
         }
         packedInfo >>= 32;
@@ -124,19 +134,21 @@ contract RejectableTransferAgent is IRejectableTransferAgent {
 }
 
 contract RejectableTransferProxy {
+    address private owner;
     uint private tokenAndUnit;
     address internal immutable implLogic;
 
-    constructor(uint _tokenAndUnit, address _logic) public {
+    constructor(uint _tokenAndUnit, address _logic, address _owner) public {
         tokenAndUnit = _tokenAndUnit;
-	implLogic = _logic;
+        implLogic = _logic;
+        owner = _owner;
     }
 
     // solhint-disable-next-line no-complex-fallback
     fallback() payable external {
         // solhint-disable-next-line no-inline-assembly
-	address _impl = implLogic;
-	assembly {
+        address _impl = implLogic;
+        assembly {
             let ptr := mload(0x40)
             calldatacopy(ptr, 0, calldatasize())
             let result := delegatecall(gas(), _impl, ptr, calldatasize(), 0, 0)
@@ -150,14 +162,14 @@ contract RejectableTransferProxy {
 }
 
 contract RejectableTransferAgentFactory {
-    mapping(uint => address) private configToContract;
+    mapping(address => address) private tokenToAgent;
     address private admin;
     address private implLogic;
-    event AgentCreated(address indexed agentAddress, uint config);
+    event AgentCreated(address indexed agentAddress, uint tokenAndUnit);
 
     constructor(address _admin, address _implLogic) public {
-	admin = _admin;
-	implLogic = _implLogic;
+        admin = _admin;
+        implLogic = _implLogic;
     }
 
     function status() external view returns (address, address) {
@@ -174,17 +186,18 @@ contract RejectableTransferAgentFactory {
         implLogic = newLogic;
     }
 
-    function getContractAddr(uint tokenAndUnit) external view returns (address) {
-        return configToContract[tokenAndUnit];
+    function getAgent(address tokenAddr) external view returns (address) {
+        return tokenToAgent[tokenAddr];
     }
 
     function createAgent(uint tokenAndUnit) external returns (address) {
-        require(configToContract[tokenAndUnit] == address(0), "AlreadyCreated");
-	bytes32 salt = bytes32(tokenAndUnit);
-        RejectableTransferProxy proxy = new RejectableTransferProxy{salt: salt}(tokenAndUnit, implLogic);
-        configToContract[tokenAndUnit] == address(proxy);
+        address tokenAddr = address(tokenAndUnit>>96);
+        require(tokenToAgent[tokenAddr] == address(0), "AlreadyCreated");
+        bytes32 salt = bytes32(tokenAndUnit);
+        RejectableTransferProxy proxy = new RejectableTransferProxy{salt: salt}(tokenAndUnit, implLogic, admin);
+        tokenToAgent[tokenAddr] == address(proxy);
         emit AgentCreated(address(proxy), tokenAndUnit);
-	return address(proxy);
+        return address(proxy);
     }
 }
 

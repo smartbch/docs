@@ -20,6 +20,10 @@
         - [5.1.2.2 Accept](#5122-accept)
         - [5.1.2.3 Reject](#5123-reject)
         - [5.1.2.4 Revoke](#5124-revoke)
+    - [5.2 Factory for Transfer Agents](#52-factory-for-transfer-agents)
+      - [5.2.1 Methods](#521-methods)
+        - [5.2.1.1 getAgent](#5211-getagent)
+        - [5.2.1.2 createAgent](#5212-createagent)
   - [6. License](#6-license)
 
 ## 1.  Summary
@@ -146,6 +150,32 @@ event Reject(address indexed from, address indexed to, uint indexed packedArgs);
 event Revoke(address indexed from, address indexed to, uint indexed packedArgs);
 ```
 - **MUST** trigger when a sender successfully revokes a pending transfer she initiated.
+
+### 5.2 Factory for Transfer Agents
+
+A factory can generate new agents and hold the agents' addresses for query.
+
+**NOTES**:
+- All the listed functions and events MUST be implemented.
+
+####  5.2.1 Methods
+
+##### 5.2.1.1 getAgent
+```
+function getAgent(address token) external view returns (address);
+```
+
+Given a SEP20 token's address, returns its agent contract's address.
+
+##### 5.2.1.2 createAgent
+```
+function createAgent(address token, uint unit) external returns (address);
+```
+
+Create a new agent. The returned values of this agent's `agentInfo()` function must be the same as the parameters for calling `createAgent`.
+
+This function is not required to run in permissionless way, which means this function can be called only by some account witth privilege.
+
 
 ## 6. License
 
