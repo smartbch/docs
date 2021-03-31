@@ -26,7 +26,7 @@
   - [6. License](#6-license)
 
 ## 1.  Summary
-This SEP proposes an interface stand to create token contracts on smartBCH.
+This SEP proposes an interface standard to create token contracts on smartBCH.
 
 ## 2.  Abstract
 The following standard defines the implementation of APIs for token smart contracts. It is proposed by deriving the ERC20 protocol of Ethereum and provides the basic functionality to transfer tokens, allow tokens to be approved so they can be spent by another on-chain third party.
@@ -49,14 +49,14 @@ This SEP is under draft.
 
 ##### 5.1.1.1 name
 ```
-function name() public view returns (string)
+function name() external view returns (string)
 ```
 - Returns the name of the token - e.g. "MyToken".
 - **OPTIONAL** - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
 
 ##### 5.1.1.2 symbol
 ```
-function symbol() public view returns (string)
+function symbol() external view returns (string)
 ```
 - Returns the symbol of the token. E.g. “HIX”.
 - This method can be used to improve usability
@@ -64,7 +64,7 @@ function symbol() public view returns (string)
 
 ##### 5.1.1.3 decimals
 ```
-function decimals() public view returns (uint8)
+function decimals() external view returns (uint8)
 ```
 - Returns the number of decimals the token uses - e.g. 8, means to divide the token amount by 100000000 to get its user representation.
 - This method can be used to improve usability
@@ -72,13 +72,13 @@ function decimals() public view returns (uint8)
 
 ##### 5.1.1.4 totalSupply
 ```
-function totalSupply() public view returns (uint256)
+function totalSupply() external view returns (uint256)
 ```
 - Returns the total token supply.
 
 ##### 5.1.1.5 balanceOf
 ```
-function balanceOf(address _owner) public view returns (uint256 balance)
+function balanceOf(address _owner) external view returns (uint256 balance)
 ```
 - Returns the account balance of another account with address `_owner`.
 
@@ -87,11 +87,11 @@ function balanceOf(address _owner) public view returns (uint256 balance)
 function getOwner() external view returns (address);
 ```
 - Returns the sep20 token owner which is necessary for binding with sep2 token.
-- **NOTE** - This is an extended method of EIP20.
+- **OPTIONAL** - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
 
 ##### 5.1.1.7 transfer
 ```
-function transfer(address _to, uint256 _value) public returns (bool success)
+function transfer(address _to, uint256 _value) external returns (bool success)
 ```
 - Transfers `_value` amount of tokens to address `_to`, and MUST fire the Transfer event. The function SHOULD throw if the message caller’s account balance does not have enough tokens to spend.
 - **NOTE** - Transfers of 0 values MUST be treated as normal transfers and fire the Transfer event.
@@ -99,7 +99,7 @@ function transfer(address _to, uint256 _value) public returns (bool success)
 
 ##### 5.1.1.8 transferFrom
 ```
-function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
+function transferFrom(address _from, address _to, uint256 _value) external returns (bool success)
 ```
 - Transfers `_value` amount of tokens from address `_from` to address `_to`, and MUST fire the Transfer event.
 - The transferFrom method is used for a withdraw workflow, allowing contracts to transfer tokens on your behalf. This can be used for example to allow a contract to transfer tokens on your behalf and/or to charge fees in sub-currencies. The function SHOULD throw unless the `_from` account has deliberately authorized the sender of the message via some mechanism.
@@ -107,20 +107,20 @@ function transferFrom(address _from, address _to, uint256 _value) public returns
 
 ##### 5.1.1.9 approve
 ```
-function approve(address _spender, uint256 _value) public returns (bool success)
+function approve(address _spender, uint256 _value) external returns (bool success)
 ```
 - Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.
 - **NOTE** - To prevent attack vectors like the one described here and discussed here, clients SHOULD make sure to create user interfaces in such a way that they set the allowance first to 0 before setting it to another value for the same spender. THOUGH The contract itself shouldn’t enforce it, to allow backwards compatibility with contracts deployed before
 
 ##### 5.1.1.10 allowance
 ```
-function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+  function allowance(address _owner, address _spender) external view returns (uint256 remaining)
 ```
 - Returns the amount which `_spender` is still allowed to withdraw from `_owner`.
 
 ##### 5.1.1.11 increaseAllowance 
 ```
-function increaseAllowance(address _spender, uint256 _delta) public returns (bool success)
+  function increaseAllowance(address _spender, uint256 _delta) external returns (bool success)
 ```
 
 - Increases the amount which `_spender` is still allowed to withdraw from you.
@@ -130,7 +130,7 @@ function increaseAllowance(address _spender, uint256 _delta) public returns (boo
 
 ##### 5.1.1.12 decreaseAllowance 
 ```
-    function decreaseAllowance(address _spender, uint256 _delta) public returns (bool success)
+    function decreaseAllowance(address _spender, uint256 _delta) external returns (bool success)
 ```
 
 - Decreases the amount which `_spender` is still allowed to withdraw from you.
@@ -157,7 +157,7 @@ event Approval(address indexed _owner, address indexed _spender, uint256 _value)
 
 
 ## 6. License
-   
+
 The content is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 
