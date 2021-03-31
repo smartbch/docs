@@ -1,25 +1,26 @@
 # Table of contents
 
-* [Whitepaper](./whitepaper/SmartBCH_Whitepaper-en.md)
-* [FAQ](FAQ.md)
+* [Introduction](README.md)
+* [Whitepaper](smartbch_whitepaper-en.md)
+* [FAQ](faq.md)
 
-### Deverloper's Guide
+## Deverloper's Guide
 
-* [Introduction](./dev/Intro.md)
-* [Single Node Private Testnet](./dev/RunSingleNode.md)
-* [JSON-RPC](./dev/JsonRpc.md)
-* [Blockchain Browser API](./dev/BrowserAPI.md)
+* [Introduction](deverlopers-guide/intro.md)
+* [Single Node Private Testnet](deverlopers-guide/runsinglenode.md)
+* [JSON-RPC](deverlopers-guide/jsonrpc.md)
+* [Blockchain Browser API](deverlopers-guide/browserapi.md)
 
-### SEPs (smartBCH evolution proposals)
+## SEPs \(smartBCH evolution proposals\)
 
-* [SEP18: Rejectable token transfers on smartBCH](SEPs/SEP-18.md)
-* [SEP20: Tokens on smartBCH](SEPs/SEP-20.md)
-* [SEP206: Manipulate Native Token as a SEP20 Token](SEPs/SEP-206.md)
+* [SEP18: Rejectable token transfers on smartBCH](seps-smartbch-evolution-proposals/sep-18.md)
+* [SEP20: Tokens on smartBCH](seps-smartbch-evolution-proposals/sep-20.md)
+* [SEP206: Manipulate Native Token as a SEP20 Token](seps-smartbch-evolution-proposals/sep-206.md)
 
-### In-Depth Design Documents
+## In-Depth Design Documents
 
-* [Introduction](libraries/Intro.md)
-* [MoeingADS's General Ideas](libraries/moeingads/GeneralIdea.md)
-* [MoeingADS's RabbitStore](libraries/moeingads/RabbitStoreIntro.md)
-* [MoeingADS's internal architecture](libraries/moeingads/Internal.md)
+* [Introduction](in-depth-design-documents/intro.md)
+* [MoeingADS's General Ideas](in-depth-design-documents/generalidea.md)
+* [MoeingADS's RabbitStore](in-depth-design-documents/rabbitstoreintro.md)
+* [MoeingADS's internal architecture](in-depth-design-documents/internal.md)
 

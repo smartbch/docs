@@ -1,4 +1,4 @@
-# Documents of smartBCH
+# Introduction
 
 Here you can find the documents of smartBCH
 
