@@ -1,4 +1,4 @@
-# Summary
+# Table of contents
 
 * [Whitepaper](./whitepaper/SmartBCH_Whitepaper-en.md)
 * [FAQ](FAQ.md)
