@@ -24,4 +24,5 @@
 * [MoeingADS's General Ideas](in-depth-design-documents/generalidea.md)
 * [MoeingADS's RabbitStore](in-depth-design-documents/rabbitstoreintro.md)
 * [MoeingADS's internal architecture](in-depth-design-documents/internal.md)
+* [Benchmarking MoeingADS](in-depth-design-documents/benchmarking-moeingads.md)
 
