@@ -2,37 +2,73 @@
 
 This document shows how to start a private testnet of smartBCH with only one node.
 
-Step 1: create the `smart_bch` directory.
+Step 1: install dependencies
+
+firsrt, install rocksdb dependencies.
 
 ```bash
-$ cd ~ # any directory can do. Here we use home directory for example
-$ mkdir smart_bch
-$ cd smart_bch
+sudo apt install gcc-8 g++-8
+sudo apt-get install libgflags-dev
+sudo apt-get install libsnappy-dev
+sudo apt-get install zlib1g-de
+sudo apt-get install libbz2-dev
+sudo apt-get install liblz4-dev
+sudo apt-get install libzstd-dev
 ```
 
-Step 2: clone the moeingevm repo, and build dynamically linked library.
+then install rocksdb
 
 ```bash
-$ cd ~/smart_bch
-$ git clone https://github.com/smartbch/moeingevm.git
-$ cd moeingevm/evmwrap
-$ make
+mkdir $HOME/build
+cd $HOME/build
+wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
+tar zxvf v5.18.4.tar.gz
+cd rocksdb-5.18.4
+make CC=gcc-8 CXX=g++-8 shared_lib
+```
+
+more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
+
+Last export library path, you should export `ROCKSDB_PATH` with rocksdb root directory downloaded from above
+
+```bash
+export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
+export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
+export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
+export LD_LIBRARY_PATH=$ROCKSDB_PATH
+```
+
+Step 2: create the `smart_bch` directory.
+
+```bash
+cd ~ ;# any directory can do. Here we use home directory for example
+mkdir smart_bch
+cd smart_bch
+```
+
+Step 3: clone the moeingevm repo, and build dynamically linked library.
+
+```bash
+cd ~/smart_bch
+git clone https://github.com/smartbch/moeingevm.git
+cd moeingevm/evmwrap
+make
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
 
-Step 3: clone the source code of smartBCH and build the executable of `smartbchd`.
+Step 4: clone the source code of smartBCH and build the executable of `smartbchd`.
 
 ```bash
-$ cd ~/smart_bch
-$ git clone https://github.com/smartbch/smartbch.git
-$ cd smartbch
-$ go build github.com/smartbch/smartbch/cmd/smartbchd
+cd ~/smart_bch
+git clone https://github.com/smartbch/smartbch.git
+cd smartbch
+go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/smartbch/smartbchd file.
 
-Step 4: generate some private keys only used for test.
+Step 5: generate some private keys only used for test.
 
 ```bash
 $ cd ~/smart_bch/smartbch
@@ -50,7 +86,7 @@ e58d53577a8c30b550db1b461c5aee5c8368946be945819cdfdd77dd990e55cd
 fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
 ```
 
-Step 5: initialize the node data using test keys generated above:
+Step 6: initialize the node data using test keys generated above:
 
 ```bash
 $ ./smartbchd init mynode --chain-id 0x1 \
@@ -69,7 +105,7 @@ fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377"
 
 After successfully executing the above commands, you can find the initialized data in the `~/.smartbchd` directory. By using the `--home` option for `./smartbchd` command, you can specify another directory.
 
-Step 6: start the node:
+Step 7: start the node:
 
 ```bash
 $ ./smartbchd start

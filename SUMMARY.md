@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [Whitepaper](smartbch_whitepaper-en.md)
+* [Whitepaper\(中文\)](smartbch_whitepaper-cn.md)
 * [FAQ](faq.md)
 
 ## Deverloper's Guide
@@ -11,11 +12,11 @@
 * [JSON-RPC](deverlopers-guide/jsonrpc.md)
 * [Blockchain Browser API](deverlopers-guide/browserapi.md)
 
-## SEPs \(smartBCH evolution proposals\)
+## SmartBCH Evolution Proposals \(SEPs\)
 
-* [SEP18: Rejectable token transfers on smartBCH](seps-smartbch-evolution-proposals/sep-18.md)
-* [SEP20: Tokens on smartBCH](seps-smartbch-evolution-proposals/sep-20.md)
-* [SEP206: Manipulate Native Token as a SEP20 Token](seps-smartbch-evolution-proposals/sep-206.md)
+* [SEP18: Rejectable token transfers on smartBCH](smartbch-evolution-proposals-seps/sep-18.md)
+* [SEP20: Tokens on smartBCH](smartbch-evolution-proposals-seps/sep-20.md)
+* [SEP206: Manipulate Native Token as a SEP20 Token](smartbch-evolution-proposals-seps/sep-206.md)
 
 ## In-Depth Design Documents
 
