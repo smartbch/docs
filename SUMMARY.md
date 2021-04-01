@@ -2,7 +2,6 @@
 
 * [Introduction](README.md)
 * [Whitepaper](smartbch_whitepaper-en.md)
-* [白皮书](smartbch_whitepaper-cn.md)
 * [FAQ](faq.md)
 
 ## Deverloper's Guide
