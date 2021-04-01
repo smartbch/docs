@@ -18,18 +18,21 @@ sudo apt-get install libzstd-dev
 
 then install rocksdb
 
-```
-git clone https://github.com/facebook/rocksdb.git
-cd rocksdb
+```bash
+mkdir $HOME/build
+cd $HOME/build
+wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
+tar zxvf v5.18.4.tar.gz
+cd rocksdb-5.18.4
 make CC=gcc-8 CXX=g++-8 shared_lib
 ```
 
 more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
 
-Last export library path, you should export ROCKSDB_PATH with rocksdb root directory downloaded from above
+Last export library path, you should export `ROCKSDB_PATH` with rocksdb root directory downloaded from above
 
-```
-export ROCKSDB_PATH="$PWD/rocksdb" //this direct to rocksdb root dir
+```bash
+export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
 export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
 export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
 export LD_LIBRARY_PATH=$ROCKSDB_PATH
@@ -38,18 +41,18 @@ export LD_LIBRARY_PATH=$ROCKSDB_PATH
 Step 2: create the `smart_bch` directory.
 
 ```bash
-$ cd ~ # any directory can do. Here we use home directory for example
-$ mkdir smart_bch
-$ cd smart_bch
+cd ~ ;# any directory can do. Here we use home directory for example
+mkdir smart_bch
+cd smart_bch
 ```
 
 Step 3: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
-$ cd ~/smart_bch
-$ git clone https://github.com/smartbch/moeingevm.git
-$ cd moeingevm/evmwrap
-$ make
+cd ~/smart_bch
+git clone https://github.com/smartbch/moeingevm.git
+cd moeingevm/evmwrap
+make
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
@@ -57,10 +60,10 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 Step 4: clone the source code of smartBCH and build the executable of `smartbchd`.
 
 ```bash
-$ cd ~/smart_bch
-$ git clone https://github.com/smartbch/smartbch.git
-$ cd smartbch
-$ go build github.com/smartbch/smartbch/cmd/smartbchd
+cd ~/smart_bch
+git clone https://github.com/smartbch/smartbch.git
+cd smartbch
+go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/smartbch/smartbchd file.
