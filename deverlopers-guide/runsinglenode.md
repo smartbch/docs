@@ -1,6 +1,8 @@
 # Single Node Private Testnet
 
-This document shows how to start a private testnet of smartBCH with only one node.
+This document shows how to start a private testnet of smartBCH with only one node. 
+
+We suggest to use ubuntu 20.04.
 
 Step 1: install dependencies
 
@@ -9,17 +11,31 @@ firsrt, install rocksdb dependencies.
 ```bash
 sudo apt install gcc-8 g++-8
 sudo apt-get install libgflags-dev
-sudo apt-get install libsnappy-dev
+# sudo apt-get install libsnappy-dev
 sudo apt-get install zlib1g-dev
 sudo apt-get install libbz2-dev
 sudo apt-get install liblz4-dev
 sudo apt-get install libzstd-dev
 ```
 
-then install rocksdb
+For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
 
 ```bash
 mkdir $HOME/build
+cd $HOME/build
+wget https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz
+tar zxvf 1.1.8.tar.gz
+cd snappy-1.1.7
+mkdir build
+cd build
+cmake -DBUILD_SHARED_LIBS=On ../
+make
+sudo make install
+```
+
+then install rocksdb
+
+```bash
 cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
@@ -50,7 +66,10 @@ Step 3: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
 cd ~/smart_bch
-git clone https://github.com/smartbch/moeingevm.git
+wget https://github.com/smartbch/moeingevm/archive/refs/tags/v0.1.0.tar.gz
+tar zxvf v0.1.0.tar.gz
+rm v0.1.0.tar.gz
+mv moeingevm-0.1.0/ moeingevm
 cd moeingevm/evmwrap
 make
 ```
@@ -61,7 +80,10 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 
 ```bash
 cd ~/smart_bch
-git clone https://github.com/smartbch/smartbch.git
+wget https://github.com/smartbch/smartbch/archive/refs/tags/v0.1.0.tar.gz
+tar zxvf v0.1.0.tar.gz
+mv smartbch-0.1.0/ smartbch
+rm v0.1.0.tar.gz
 cd smartbch
 go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
