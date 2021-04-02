@@ -72,7 +72,7 @@ Step 5: generate some private keys only used for test.
 
 ```bash
 $ cd ~/smart_bch/smartbch
-$ export EVMWRAP=../moeingevm/evmwrap/host_bridge/libevmwrap.so
+$ export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
 $ ./smartbchd gen-test-keys -n 10
 7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43
