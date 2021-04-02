@@ -21,7 +21,7 @@ mkdir $HOME/build
 cd $HOME/build
 wget https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz
 tar zxvf 1.1.8.tar.gz
-cd snappy-1.1.7
+cd snappy-1.1.8
 mkdir build
 cd build
 cmake -DBUILD_SHARED_LIBS=On ../
