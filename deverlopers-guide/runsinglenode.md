@@ -10,12 +10,8 @@ firsrt, install rocksdb dependencies.
 
 ```bash
 sudo apt install gcc-8 g++-8
-sudo apt-get install libgflags-dev
-# sudo apt-get install libsnappy-dev
-sudo apt-get install zlib1g-dev
-sudo apt-get install libbz2-dev
-sudo apt-get install liblz4-dev
-sudo apt-get install libzstd-dev
+sudo apt install libgflags-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
+# sudo apt install libsnappy-dev
 ```
 
 For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
