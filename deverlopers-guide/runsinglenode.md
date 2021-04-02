@@ -1,6 +1,8 @@
 # Single Node Private Testnet
 
-This document shows how to start a private testnet of smartBCH with only one node.
+This document shows how to start a private testnet of smartBCH with only one node. 
+
+We suggest to use ubuntu 20.04.
 
 Step 1: install dependencies
 
@@ -8,18 +10,28 @@ firsrt, install rocksdb dependencies.
 
 ```bash
 sudo apt install gcc-8 g++-8
-sudo apt-get install libgflags-dev
-sudo apt-get install libsnappy-dev
-sudo apt-get install zlib1g-dev
-sudo apt-get install libbz2-dev
-sudo apt-get install liblz4-dev
-sudo apt-get install libzstd-dev
+sudo apt install libgflags-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
+# sudo apt install libsnappy-dev
+```
+
+For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
+
+```bash
+mkdir $HOME/build
+cd $HOME/build
+wget https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz
+tar zxvf 1.1.8.tar.gz
+cd snappy-1.1.8
+mkdir build
+cd build
+cmake -DBUILD_SHARED_LIBS=On ../
+make
+sudo make install
 ```
 
 then install rocksdb
 
 ```bash
-mkdir $HOME/build
 cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
@@ -35,7 +47,7 @@ Last export library path, you should export `ROCKSDB_PATH` with rocksdb root dir
 export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
 export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
 export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
-export LD_LIBRARY_PATH=$ROCKSDB_PATH
+export LD_LIBRARY_PATH=$ROCKSDB_PATH:/usr/local/lib
 ```
 
 Step 2: create the `smart_bch` directory.
@@ -50,7 +62,10 @@ Step 3: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
 cd ~/smart_bch
-git clone https://github.com/smartbch/moeingevm.git
+wget https://github.com/smartbch/moeingevm/archive/refs/tags/v0.1.0.tar.gz
+tar zxvf v0.1.0.tar.gz
+rm v0.1.0.tar.gz
+mv moeingevm-0.1.0/ moeingevm
 cd moeingevm/evmwrap
 make
 ```
@@ -61,7 +76,10 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 
 ```bash
 cd ~/smart_bch
-git clone https://github.com/smartbch/smartbch.git
+wget https://github.com/smartbch/smartbch/archive/refs/tags/v0.1.0.tar.gz
+tar zxvf v0.1.0.tar.gz
+mv smartbch-0.1.0/ smartbch
+rm v0.1.0.tar.gz
 cd smartbch
 go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
@@ -72,7 +90,7 @@ Step 5: generate some private keys only used for test.
 
 ```bash
 $ cd ~/smart_bch/smartbch
-$ export EVMWRAP=../moeingevm/evmwrap/host_bridge/libevmwrap.so
+$ export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
 $ ./smartbchd gen-test-keys -n 10
 7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43
