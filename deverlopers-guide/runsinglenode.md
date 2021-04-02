@@ -47,7 +47,7 @@ Last export library path, you should export `ROCKSDB_PATH` with rocksdb root dir
 export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
 export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
 export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
-export LD_LIBRARY_PATH=$ROCKSDB_PATH
+export LD_LIBRARY_PATH=$ROCKSDB_PATH:/usr/local/lib
 ```
 
 Step 2: create the `smart_bch` directory.
