@@ -60,6 +60,10 @@ At the first phase after Smart Bitcoin Cash's launch, only hash power is used fo
 
 Then the last quorum of nodes will take duty in the next epoch. If BCH miners support moeing, they will vote. We will talk to them before launching.
 
+### Q: How to become a validator?
+
+At the beginning of the SmartBCH launch, the voting mechanism of "one block, one vote" will be adopted. That is, in the 2,016 blocks time period of, the mining pool will get one vote to vote to the smartBCH validators for every BCH block mined. You don't need to submit any application for becoming a validator, as long as you have the computing power and can dig up enough BCH blockchains.
+
 ### Q: Will there be an ICO for smartBCH Coin?
 
 There is no ICO and no smartBCH Coin, smart Bitcoin Cash will not introduce new tokens. Its native token is BCH, and its gas fees are paid in BCH.There will be a gateway to transfer BCH onto smartBCH Chain as a gas token.
@@ -68,7 +72,19 @@ There is no ICO and no smartBCH Coin, smart Bitcoin Cash will not introduce new 
 
 The gateway between BCH mainnet and smartBCH will start a PoA gateway, and then we'll improve its liveness and correctness in a pragmatic way. Liveness means it can always work, instead of locking coins in it. Correctness means it never unlocks coins to incorrect recipients. The optimized solution may be not like any existing solutions used by RSK, Liquid, ETH2.0, cosmos or polkadot. Instead, it must fit into BCH's infrastructure. After adding introspection opcodes, covenants will be much easier to implement on BCH. And we will very likely use them.
 
+### Q: What are the advantages for developer build their DeFi protocols on the smartBCH ?
+
+The most crucial advantage for building the DeFi protocols on the smartBCH is to enjoy the inexpensive transaction fees. The demand for more ETH and the blockchain platform's ability to execute smart contracts is why the gas price fees remain high. However, smartBCH will adopt the block size expansion to make sure the inexpensive transaction fees even the user size is big.
+
+### Q: How about the throughput of the smartBCH looks like right now?
+
+The limited tests currently show that the underlying storage engine can support more than 600 times the throughput of Ethereum. However, there are still many factors to consider when running the whole chain, and there will be some challenges we might face. We hope that within 20 months, the throughput per second will be 100 times larger than ETH1.0. How much about the beginning of the launch? 10-20 times is very promising.
+
 ## Development Tools
+smartbch v0.1.0 🔥is now released: https://github.com/smartbch/smartbch/releases/tag/v0.1.0
+
+This repository contains the code of the full node client of smartBCH, an EVM & Web3 compatible sidechain for #BitcoinCash. We invite everyone to download it and start a private single node testnet to test your DApp.
+
 
 ## Contact & Media Info
 
