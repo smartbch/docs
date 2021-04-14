@@ -15,6 +15,15 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":
 {"jsonrpc":"2.0","id":67,"result":"1337"}
 ```
 
+You can also use this public test node (deployed by smartBCH community) if you do not want to deploy your local node:
+
+```bash
+$ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}' \
+		-H "Content-Type: application/json" https://smartbch.greyh.at
+
+{"jsonrpc":"2.0","id":67,"result":"1337"}
+```
+
 
 
 ## Instll Truffle
@@ -40,7 +49,7 @@ Web3.js v1.2.9
 
 ## Clone Pet-Shop
 
-Using git cmd to clone pet-shop source code into you local directory:
+Using `git clone` cmd to clone pet-shop source code into you local directory:
 
 ```bash
 $ cd somedir
@@ -48,9 +57,9 @@ $ git clone https://github.com/trufflesuite/pet-shop-tutorial.git
 $ cd pet-shop-tutorial
 ```
 
-Modify truffle-config.js, change development network port to 8545:
+Modify truffle-config.js, change development network port to match your local node (e.g. 8545):
 
-```json
+```javascript
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // for more about customizing your Truffle configuration!
@@ -64,14 +73,43 @@ module.exports = {
 };
 ```
 
+Modify truffle-config.js and add a network config like this if your want to use greyh's test node:
+
+```javascript
+const Web3 = require('web3');
+
+module.exports = {
+  // See <http://truffleframework.com/docs/advanced/configuration>
+  // for more about customizing your Truffle configuration!
+  networks: {
+    development: {
+      host: "127.0.0.1",
+      port: 8545,
+      network_id: "*" // Match any network id
+    },
+    greyh: {
+      provider: () => new Web3.providers.HttpProvider('https://smartbch.greyh.at'),
+      network_id: "*"
+    },
+  }
+};
+```
+
+Do not forget to install web3 through `npm install` cmd if you use public test node:
+
+```bash
+$ npm install web3
+```
+
 
 
 ## Deploy to smartBCH
 
-In director pet-shop-tutorial, using `truffle migrate`  cmd to deploy Pet-Shop contract into smartBCH:
+In directory pet-shop-tutorial, using `truffle migrate`  cmd to deploy Pet-Shop contract into smartBCH local testing node:
 
 ```bash
 $ truffle migrate --network development
+# truffle migrate --network greyh # deploy to greyh's testing node
 ```
 
 The output looks like this:
