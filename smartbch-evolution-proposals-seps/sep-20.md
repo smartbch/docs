@@ -103,7 +103,7 @@ function balanceOf(address _owner) external view returns (uint256 balance)
 function owner() external view returns (address);
 ```
 
-* Returns the sep20 token owner which is necessary for binding with sep2 token.
+* Returns the sep20 token owner which is necessary for binding with sep20 token.
 * **OPTIONAL** - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
 
 **5.1.1.7 transfer**
