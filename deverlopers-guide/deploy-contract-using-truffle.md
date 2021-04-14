@@ -73,7 +73,7 @@ module.exports = {
 };
 ```
 
-Modify truffle-config.js and add a network config like this if your want to use greyh's test node:
+You can modify truffle-config.js further and add a network config like this if your want to use greyh's test node too:
 
 ```javascript
 const Web3 = require('web3');
