@@ -30,7 +30,7 @@ During the post-commit phase, the execution engine does the following job:
 2. Execute the transactions in parallel
 3. Update the world state according to the successfully committed transactions
 
-In practice the committing phase is more time-consuming, especially when there are a lot of transactions and a lot of validators. But making the two engines concurrently do their jobs, more transactions can be executed and more votes can be collected.
+In practice the committing phase is more time-consuming, especially when there are a lot of transactions and a lot of validators. By making the two engines concurrently do their jobs, more transactions can be executed and more votes can be collected.
 
 ### Transaction handling in the committing phase
 
