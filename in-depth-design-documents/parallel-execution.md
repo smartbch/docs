@@ -64,6 +64,6 @@ In this phase transactions are handled in several "rounds". At each round, follo
    1. If it can be committed, write its modification to the world state
    2. If not, insert it back to the end of the standby queue
 
-For each block, at most $M$ rounds will be run. If there are too many transactions in the standby queue, they cannot be finished in  one block. In some cases, a transaction will be executed several blocks after it is added to the standby queue.
+For each block, at most $M$ rounds will be run. If there are too many transactions in the standby queue, they cannot be finished in  one block. In some cases, a transaction will be executed several blocks after it is added to the standby queue. But if a transaction has been kept in the standby queue for more than $L$ blocks, it will be marked as "executed as a nop"
 
 How to analyze the dependency? Since the world state is just a set of key-value pairs, we just keep a "touched key set" of the pairs which were updated by previous committed transactions. The next transaction can commit if and only if it never read or write a pair whose key is in the set. For the different kinds of key-value pairs in the world state, please refer to [data structures in world state](data-structures-in-world-state.md).  
