@@ -6,13 +6,11 @@ FAQs are in progress, we are continuing to add as new questions arise. If you ha
 
 See the FAQ sections below for topic based questions and answers:
 
-```text
 - smartBCH Basic
 - Development Tools 
 - Contact & Media Info
-```
 
-## smartBCH Basic
+## SmartBCH Basic
 
 ### Q: What is smartBCH?
 
@@ -34,19 +32,23 @@ And we have performed feasibility research on two extra libraries \(MoeingRollup
 
 ### Q:Does smartBCH interoperate with Ethereum?
 
-smartBCH does not directly interoperate with Ethereum, but some gateway may bridge assets between them.
+Currently smartBCH does not directly interoperate with Ethereum, but some gateway may bridge assets between them. In the future, bridges based on smart contracts are also possible, in a similar scheme like [rainbow bridge](https://near.org/blog/eth-near-rainbow-bridge/). 
 
-### Q: Did smartBCH have to change Solidity to deal with a UXTO model rather than regular ETH wallet balances?
+### Q: Does smartBCH have to change Solidity to deal with a UXTO model rather than regular ETH wallet balances?
 
-smartBCH Chain uses an account model instead of UTXO.
+SmartBCH uses an account model instead of UTXO.
 
 ### Q: Can I run any language that targets the EVM \(like Vyper\) on smartBCH or only ones specially modified?
 
 It can use any language which compiles to EVM bytecode.
 
+### Q: Can the validator who propose the current block decide the transactions' order?
+
+No. Unlike Ethereum, smartBCH reorders transactions in a pseudo random way to mitigate the problem of front-running, which makes it much harder for a validator to enforce its preferred transaction order. Besides, smartBCH also reorders transactions to maximize parallelism.
+
 ### Q: What's smartBCH's consensus model, and how does it synchronize with BCH consensus?
 
-smartBCH's consensus model is PoS. Moeing compute engine does not change BCH data. It is a side chain. smartBCH adopts tendermint as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs.
+SmartBCH uses a hybrid consensus model. It adopts tendermint as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs.
 
 An epoch contains 2,016 blocks \(takes about two weeks\). During an epoch, BCH owners prove their ownerships of time-locked UTXOs and use the values of these UTXO to vote for a validator; whereas mining pools use coinbase transactions to vote. This is a hybrid consensus model: proof of hash power and stakes. The voting process is performed on Bitcoin Cash's mainnet and totally permissionless because a new validator only needs endorsements from miners and/or holders.
 
@@ -56,9 +58,7 @@ Each validator must pledge some BCH as collateral, which would be slashed should
 
 At the first phase after Smart Bitcoin Cash's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork.
 
-### Q: BCH is only used to elect validators? What happens if BCH miners don't vote?
 
-Then the last quorum of nodes will take duty in the next epoch. If BCH miners support moeing, they will vote. We will talk to them before launching.
 
 ### Q: How to become a validator?
 
@@ -79,23 +79,4 @@ The most crucial advantage for building the DeFi protocols on the smartBCH is to
 ### Q: How about the throughput of the smartBCH looks like right now?
 
 The limited tests currently show that the underlying storage engine can support more than 600 times the throughput of Ethereum. However, there are still many factors to consider when running the whole chain, and there will be some challenges we might face. We hope that within 20 months, the throughput per second will be 100 times larger than ETH1.0. How much about the beginning of the launch? 10-20 times is very promising.
-
-## Development Tools
-smartbch v0.1.0 🔥is now released: https://github.com/smartbch/smartbch/releases/tag/v0.1.0
-
-This repository contains the code of the full node client of smartBCH, an EVM & Web3 compatible sidechain for #BitcoinCash. We invite everyone to download it and start a private single node testnet to test your DApp.
-
-
-## Contact & Media Info
-
-| Social Media | URL |
-| :--- | :--- |
-| Twitter | [https://twitter.com/SmartBCH](https://twitter.com/SmartBCH) |
-| Discord | [https://discord.gg/uNTRSz6msj](https://discord.gg/uNTRSz6msj) |
-| Medium | [https://medium.com/@smartBCH](https://medium.com/@smartBCH) |
-| Read.Cash | [https://read.cash/@smartbch](https://read.cash/@smartbch) |
-| Telegram \(Community Chat\) | [https://t.me/smartbch\_community](https://t.me/smartbch_community) |
-| Telegram Announcement Channel | [https://t.me/smartbch\_official](https://t.me/smartbch_official) |
-| GitHub | [https://github.com/smartbch](https://github.com/smartbch) |
-| Reddit | [https://www.reddit.com/user/SmartBCH](https://www.reddit.com/user/SmartBCH) |
 
