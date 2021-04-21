@@ -13,7 +13,7 @@
         * [5.1.1.3 decimals](sep-20.md#5113-decimals)
         * [5.1.1.4 totalSupply](sep-20.md#5114-totalsupply)
         * [5.1.1.5 balanceOf](sep-20.md#5115-balanceof)
-        * [5.1.1.6 getOwner](sep-20.md#5116-getowner)
+        * [5.1.1.6 owner](sep-20.md#5116-owner)
         * [5.1.1.7 transfer](sep-20.md#5117-transfer)
         * [5.1.1.8 transferFrom](sep-20.md#5118-transferfrom)
         * [5.1.1.9 approve](sep-20.md#5119-approve)
@@ -97,13 +97,13 @@ function balanceOf(address _owner) external view returns (uint256 balance)
 
 * Returns the account balance of another account with address `_owner`.
 
-**5.1.1.6 getOwner**
+**5.1.1.6 owner**
 
 ```text
-function getOwner() external view returns (address);
+function owner() external view returns (address);
 ```
 
-* Returns the sep20 token owner which is necessary for binding with sep2 token.
+* Returns the sep20 token owner which is necessary for binding with sep20 token.
 * **OPTIONAL** - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
 
 **5.1.1.7 transfer**

@@ -73,6 +73,8 @@ To make EVMs run in parallel, we allow transactions from several blocks to be mi
 
 [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930) makes a transaction explicitly containing a list of addresses and storage keys that it plans to access. This list helps analyze the interdependence of transactions. In the future, MoeingEVM will utilize it to further boost the parallelism of transaction execution.
 
+Besides more parallelism, MoeingEVM also reorders transactions in a pseudo random way to mitigate the problem of front-running, which makes it much harder for a validator to enforce its preferred transaction order. 
+
 ### MoeingADS
 
 Why are storage operations so expensive? Well, Ethereum’s storage engine MPT is absolutely the root cause.

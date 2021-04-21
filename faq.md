@@ -6,13 +6,11 @@ FAQs are in progress, we are continuing to add as new questions arise. If you ha
 
 See the FAQ sections below for topic based questions and answers:
 
-```text
 - smartBCH Basic
 - Development Tools 
 - Contact & Media Info
-```
 
-## smartBCH Basic
+## SmartBCH Basic
 
 ### Q: What is smartBCH?
 
@@ -34,19 +32,23 @@ And we have performed feasibility research on two extra libraries \(MoeingRollup
 
 ### Q:Does smartBCH interoperate with Ethereum?
 
-smartBCH does not directly interoperate with Ethereum, but some gateway may bridge assets between them.
+Currently smartBCH does not directly interoperate with Ethereum, but some gateway may bridge assets between them. In the future, bridges based on smart contracts are also possible, in a similar scheme like [rainbow bridge](https://near.org/blog/eth-near-rainbow-bridge/). 
 
-### Q: Did smartBCH have to change Solidity to deal with a UXTO model rather than regular ETH wallet balances?
+### Q: Does smartBCH have to change Solidity to deal with a UXTO model rather than regular ETH wallet balances?
 
-smartBCH Chain uses an account model instead of UTXO.
+SmartBCH uses an account model instead of UTXO.
 
 ### Q: Can I run any language that targets the EVM \(like Vyper\) on smartBCH or only ones specially modified?
 
 It can use any language which compiles to EVM bytecode.
 
+### Q: Can the validator who propose the current block decide the transactions' order?
+
+No. Unlike Ethereum, smartBCH reorders transactions in a pseudo random way to mitigate the problem of front-running, which makes it much harder for a validator to enforce its preferred transaction order. Besides, smartBCH also reorders transactions to maximize parallelism.
+
 ### Q: What's smartBCH's consensus model, and how does it synchronize with BCH consensus?
 
-smartBCH's consensus model is PoS. Moeing compute engine does not change BCH data. It is a side chain. smartBCH adopts tendermint as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs.
+SmartBCH uses a hybrid consensus model. It adopts tendermint as its consensus engine. The quorum of validators are elected by both hash power and BCH owners, and they take on duties in epochs.
 
 An epoch contains 2,016 blocks \(takes about two weeks\). During an epoch, BCH owners prove their ownerships of time-locked UTXOs and use the values of these UTXO to vote for a validator; whereas mining pools use coinbase transactions to vote. This is a hybrid consensus model: proof of hash power and stakes. The voting process is performed on Bitcoin Cash's mainnet and totally permissionless because a new validator only needs endorsements from miners and/or holders.
 
@@ -56,9 +58,11 @@ Each validator must pledge some BCH as collateral, which would be slashed should
 
 At the first phase after Smart Bitcoin Cash's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork.
 
-### Q: BCH is only used to elect validators? What happens if BCH miners don't vote?
 
-Then the last quorum of nodes will take duty in the next epoch. If BCH miners support moeing, they will vote. We will talk to them before launching.
+
+### Q: How to become a validator?
+
+At the beginning of the SmartBCH launch, the voting mechanism of "one block, one vote" will be adopted. That is, in the 2,016 blocks time period of, the mining pool will get one vote to vote to the smartBCH validators for every BCH block mined. You don't need to submit any application for becoming a validator, as long as you have the computing power and can dig up enough BCH blockchains.
 
 ### Q: Will there be an ICO for smartBCH Coin?
 
@@ -68,18 +72,11 @@ There is no ICO and no smartBCH Coin, smart Bitcoin Cash will not introduce new 
 
 The gateway between BCH mainnet and smartBCH will start a PoA gateway, and then we'll improve its liveness and correctness in a pragmatic way. Liveness means it can always work, instead of locking coins in it. Correctness means it never unlocks coins to incorrect recipients. The optimized solution may be not like any existing solutions used by RSK, Liquid, ETH2.0, cosmos or polkadot. Instead, it must fit into BCH's infrastructure. After adding introspection opcodes, covenants will be much easier to implement on BCH. And we will very likely use them.
 
-## Development Tools
+### Q: What are the advantages for developer build their DeFi protocols on the smartBCH ?
 
-## Contact & Media Info
+The most crucial advantage for building the DeFi protocols on the smartBCH is to enjoy the inexpensive transaction fees. The demand for more ETH and the blockchain platform's ability to execute smart contracts is why the gas price fees remain high. However, smartBCH will adopt the block size expansion to make sure the inexpensive transaction fees even the user size is big.
 
-| Social Media | URL |
-| :--- | :--- |
-| Twitter | [https://twitter.com/SmartBCH](https://twitter.com/SmartBCH) |
-| Discord | [https://discord.gg/uNTRSz6msj](https://discord.gg/uNTRSz6msj) |
-| Medium | [https://medium.com/@smartBCH](https://medium.com/@smartBCH) |
-| Read.Cash | [https://read.cash/@smartbch](https://read.cash/@smartbch) |
-| Telegram \(Community Chat\) | [https://t.me/smartbch\_community](https://t.me/smartbch_community) |
-| Telegram Announcement Channel | [https://t.me/smartbch\_official](https://t.me/smartbch_official) |
-| GitHub | [https://github.com/smartbch](https://github.com/smartbch) |
-| Reddit | [https://www.reddit.com/user/SmartBCH](https://www.reddit.com/user/SmartBCH) |
+### Q: How about the throughput of the smartBCH looks like right now?
+
+The limited tests currently show that the underlying storage engine can support more than 600 times the throughput of Ethereum. However, there are still many factors to consider when running the whole chain, and there will be some challenges we might face. We hope that within 20 months, the throughput per second will be 100 times larger than ETH1.0. How much about the beginning of the launch? 10-20 times is very promising.
 
