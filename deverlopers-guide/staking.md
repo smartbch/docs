@@ -25,11 +25,11 @@ It's interface is as below:
 
 ```solidity
 interface Staking {
-	  function createValidator(address rewardTo, bytes32 introduction, bytes32 pubkey) external;
-	  function editValidator(address rewardTo, bytes32 introduction) external;
+    function createValidator(address rewardTo, bytes32 introduction, bytes32 pubkey) external;
+    function editValidator(address rewardTo, bytes32 introduction) external;
     function retire() external;
-		function increaseMinGasPrice() external;
-		function decreaseMinGasPrice() external;
+    function increaseMinGasPrice() external;
+    function decreaseMinGasPrice() external;
 }
 ```
 
