@@ -4,7 +4,7 @@ Currently, there are no toolkits dedicatedly designed for smartBCH. Please use t
 
 Through a compatible Web3 API, smartbchd interacts with the wallets \(such as MetaMask\) and DApp's backend, just as an infura node does. We try our best to make it behave the same as infura for compatibility, but there are still missing features and bugs.
 
-For a list of supported RPC endpoints, please see [here](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/JsonRpc/README.md).
+For a list of supported RPC endpoints, please see [here](https://github.com/smartbch/docs/blob/main/deverlopers-guide/jsonrpc.md).
 
 We also provide a [backend design](https://github.com/smartbch/BasicBrowser/tree/main/backend) of blockchain explorer for smartBCH. It just has basic functions and is not so powerful as etherscan. If you wants to add a frontend to build a complete explorer, this [API document](browserapi.md) may help you.
 
