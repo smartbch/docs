@@ -6,7 +6,7 @@ Through a compatible Web3 API, smartbchd interacts with the wallets \(such as Me
 
 For a list of supported RPC endpoints, please see [here](jsonrpc.md).
 
-We also provide a [backend design](https://github.com/smartbch/BasicBrowser/tree/main/backend) of blockchain explorer for smartBCH. It just has basic functions and is not so powerful as etherscan. If you wants to add a frontend to build a complete explorer, this [API document](browserapi.md) may help you.
+We also provide a [backend design](https://github.com/smartbch/BasicExplorer/tree/main/backend) of blockchain explorer for smartBCH. It just has basic functions and is not so powerful as etherscan. If you wants to add a frontend to build a complete explorer, this [API document](browserapi.md) may help you.
 
 If you find a mistake in the document, please tell us by create an issue at [https://github.com/smartbch/docs/issues](https://github.com/smartbch/docs/issues). If a missing feature blocks you, we are sorry but you need to modify your application to bypass it.
 
