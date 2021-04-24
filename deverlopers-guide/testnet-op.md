@@ -1,30 +1,30 @@
 # SmartBCH TestNet Doc
 
-部署分为三个步骤：
+To deploy a testnet, we need three steps:
 
-1. 安装依赖，编译节点二进制
-2. 生成统一的genesis.json
-3. 从相同的genesis.json启动节点
+1. Install the dependencies and build binary of smartbchd
+2. Generate one unique genesis.json file
+3. Start the nodes using this unique genesis.json file
 
-## 安装
+## Build smartbchd
 
-参考https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode 文档安装依赖和编译节点，注意请运行到step4（包含）就停止下来。
+Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop before step4.
 
-⚠️获取节点代码时使用v0.1.1版本，而不是文档中的v0.1.0
+Now you have built the smartbchd binary.
 
-此时，我们拥有了编译好的smartbchd文件。
+## Generate genesis.json
 
-## 生成genesis.json文件
+#### step 1. Initialize the working directory
 
-#### step 1. 初始化工作目录
+One of the nodes must be picked for outputing the genesis.json file. We refer to this node as "generator" and the other nodes, "collaborator".
 
-节点运营人员请输入下面的命令来初始化节点工作目录
+The collaborators use the following command to initialize the chain. You can use any favorite id to replace the following "freedomMan".
 
 ```
 ./build/smartbchd init freedomMan --chain-id 0x2711
 ```
 
-⚠️开发团队请输入下面的命令来初始化一个genesis账号
+The generator use the following command to initialize the chain.
 
 ```
 ./build/smartbchd init freedomMan --chain-id 0x2711 \
@@ -32,9 +32,10 @@
   --test-keys="37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"
 ```
 
-#### step 2. 生成genesis validator
+#### step 2. generate genesis validator
 
-输入下面的命令来生成validator信息，参数为validator的操作账户的私钥。例如下面的37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287
+
+Use the `generate-genesis-validator` command to generate a validator, with the validator's operating hex-format private key as the argument.
 
 ```
 ./build/smartbchd generate-genesis-validator 37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287
@@ -42,85 +43,70 @@
 7b2241646472657373223a5b3133312c3137372c3232362c33382c3134322c3135312c3130392c32302c3230352c3233312c3139342c35392c3137302c3134382c3133362c3131362c342c3235342c3131332c3136315d2c225075626b6579223a5b33382c3131362c31312c3132322c32342c31332c34332c3233392c3231382c38392c3234392c36332c3132312c31332c3134332c3233372c35342c31342c33322c3233372c3230302c3130322c3231312c34342c32392c39332c3132392c322c39302c3232392c3234342c3135375d2c22526577617264546f223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c305d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a2267656e657369735f76616c696461746f72222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c35342c35332c3230312c3137332c3139372c3232322c3136302c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
-将命令返回的内容copy给开发团队，这串内容代表一个validator的信息，包含其操作地址，节点工作目录中的共识公钥，算力（当前为默认）和质押金额（默认）。
+All the collaborators send this command's output to the generator. The output contains the operator's address, consensus pubkey, voting power and staking amount.
 
-备注📒：私钥可以通过下面的命令生成：
+Note📒: the hex-format private key can be generated using following command.
 
 ```
 ./build/smartbchd gen-test-keys -n 1
 ```
 
 
+#### step 3. collect validators information
 
-#### step 3. 收集validator信息
-
-开发团队收集所有的validator信息，通过下面的命令依次将validator信息添加到genesis.json中。
+The generator collects the outputs from collaborator, and add the information into genesis.json, one by one.
 
 ```
 ./build/smartbchd add-genesis-validator 7b2241646472657373223a5b3133312c3137372c3232362c33382c3134322c3135312c3130392c32302c3230352c3233312c3139342c35392c3137302c3134382c3133362c3131362c342c3235342c3131332c3136315d2c225075626b6579223a5b3134312c39372c34312c39372c3138322c33352c3232302c3139392c3232302c31382c37352c38382c3137322c3135312c38322c3133332c39332c39312c3134342c3134362c3233322c32392c3231312c3231332c3135382c3233382c3232322c3134362c3231372c3138302c33372c3130355d2c22526577617264546f223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c305d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a2267656e657369735f76616c696461746f72222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c35342c35332c3230312c3137332c3139372c3232322c3136302c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
-请多次调用该命令，直到所有的validator信息被添加。
+Repeat the above command till all the collaborators' information are added.
 
-直到此时，开发团队本地的工作目录中的genesis.json包含了一个拥有BCH的gensis账户，全部genesis validator信息。
+Now, a genesis.json file is generated, which contains an account with all the native tokens and the information of all the validators.
 
-开发团队将该genesis.json文件分发给各个运营人员。运营人员用该genesis.json替换掉其本地工作目录中的genesis.json
+The generator distributes this genesis.json file to the collaborators. And the collaborators use this file to overwrite `~/.smartbchd/config/genesis.json`.
 
-该文件的位置是
+## Start the testnet
 
-```
-~/.smartbchd/config/genesis.json
-```
+#### step 1. Add seeds
 
-⚠️请务必确认替换成功。
-
-## 启动
-
-#### step 1. 添加seed信息
-
-输入下列命令启动节点，等待2秒中后ctrc-c掉程序，这一步是为了获取节点id信息。
+Using the following command to start smartbchd, and kill it after two seconds using "Ctrl-C".
 
 ```
 ./build/smartbchd start
 ```
 
-在输出的log中搜索`This Node ID`后续的字符串即节点ID
+Search the string "This Node ID" in the output log of the killed smartbchd. After this string, there is a node ID. Like following:
 
 ```
 This Node ID: f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532
 ```
 
-接着，将节点ID与本机器公网IP，端口号26656组合成p2p seed，例如：
+The, compose a p2p seed with the node ID, IP address of the server and the port number 26656. Like:
 
 ```
 f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532@45.32.38.25:26656
 ```
 
-将该seed传播给其他节点运营人员
+The collaborators send their p2p seeds to the generator. And the generator puts the collected seeds into the config.toml file, which locates at `~/.smartbchd/config/config.toml`.
 
-将收到的其他节点的seed添加到工作目录的config.toml文件中，文件位置：
 
-```
-~/.smartbchd/config/config.toml
-```
-
-打开文件，搜索`seeds = ""`，将收集到的seed添加到双引号中，多个seed用逗号分隔。例如
+The generator open the config.toml file and search for `seeds = ""`. Then add the collected seeds in, using commas to seperate the seeds, like this: 
 
 ```
-seeds = "f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532@45.32.38.25:26656"
+seeds = "f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532@45.32.38.25:26656,4ac453f3cf08ddc292e4c7f2024e4f7d51a2d4f8@54.23.83.52:26656"
 ```
 
-⚠️seed是进行p2p通信使用，建议添加5个以上的seed，以免出现连接不畅的问题。
+Then the generator send this line to all the collaborators, who replaces the seeds line in their `~/.smartbchd/config/config.toml`.
 
-#### step 2. 启动
+#### step 2. Start It!
 
 ```
 ./build/smartbchd start
 ```
 
-输入该命令后，如果网络通畅，上述操作无误，我们将会看到出块日志。
+After running this command, if the network is OK, we'll see the log showing new blocks are generated.
 
-⚠️正常出块后，请各个节点自行使用熟悉的进程管理工具如systemd来管理smartbchd进程。
-
+⚠️Please use some process management tool such as systemd to manage smartbchd.
 
 
