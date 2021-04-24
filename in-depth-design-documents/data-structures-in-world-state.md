@@ -69,14 +69,6 @@ Value: serialized bytes for a transaction
 
 
 
-### Current Validator Set
-
-Key: byte(30)
-
-Value: A json list of current validators' public keys
-
-
-
 ###Current Block's basic information
 
 Key: byte(29)

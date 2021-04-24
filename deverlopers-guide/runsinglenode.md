@@ -4,6 +4,40 @@ This document shows how to start a private testnet of smartBCH with only one nod
 
 We suggest to use ubuntu 20.04.
 
+Step 0: install the basic tools.
+
+```bash
+sudo apt update
+sudo apt install make cmake g++ gcc git
+sudo snap install go --classic
+```
+
+Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64":
+
+```bash
+wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
+tar zxvf go1.16.3.linux-amd64.tar.gz 
+```
+
+And set some environment variables for golang:
+
+```bash
+export GOROOT=~/go
+export PATH=$PATH:$GOROOT/bin
+mkdir ~/godata
+export GOPATH=~/godata
+```
+
+After installing golang, we need to patch it for larger cgo stack.
+
+```bash
+wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.0.tar.gz
+tar zxvf v0.1.0.tar.gz 
+rm v0.1.0.tar.gz
+cd patch-cgo-for-golang-0.1.0/
+cp *.c $GOROOT/src/runtime/cgo/
+```
+
 Step 1: install dependencies
 
 firsrt, install rocksdb dependencies.
@@ -41,7 +75,7 @@ make CC=gcc-8 CXX=g++-8 shared_lib
 
 more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
 
-Last export library path, you should export `ROCKSDB_PATH` with rocksdb root directory downloaded from above
+Last, export library path. You should export `ROCKSDB_PATH` with rocksdb root directory downloaded from above
 
 ```bash
 export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
@@ -62,10 +96,8 @@ Step 3: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
 cd ~/smart_bch
-wget https://github.com/smartbch/moeingevm/archive/refs/tags/v0.1.0.tar.gz
-tar zxvf v0.1.0.tar.gz
-rm v0.1.0.tar.gz
-mv moeingevm-0.1.0/ moeingevm
+git clone --depth 1 https://github.com/smartbch/moeingevm
+git checkout tags/v0.1.1
 cd moeingevm/evmwrap
 make
 ```
@@ -76,10 +108,8 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 
 ```bash
 cd ~/smart_bch
-wget https://github.com/smartbch/smartbch/archive/refs/tags/v0.1.0.tar.gz
-tar zxvf v0.1.0.tar.gz
-mv smartbch-0.1.0/ smartbch
-rm v0.1.0.tar.gz
+git clone --depth 1 https://github.com/smartbch/smartbch
+git checkout tags/v0.1.1
 cd smartbch
 go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
