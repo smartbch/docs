@@ -9,7 +9,6 @@ Step 0: install the basic tools.
 ```bash
 sudo apt update
 sudo apt install make cmake g++ gcc git
-sudo snap install go --classic
 ```
 
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64":
@@ -31,10 +30,10 @@ export GOPATH=~/godata
 After installing golang, we need to patch it for larger cgo stack.
 
 ```bash
-wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.0.tar.gz
-tar zxvf v0.1.0.tar.gz 
-rm v0.1.0.tar.gz
-cd patch-cgo-for-golang-0.1.0/
+wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.1.tar.gz
+tar zxvf v0.1.1.tar.gz 
+rm v0.1.1.tar.gz
+cd patch-cgo-for-golang-0.1.1
 cp *.c $GOROOT/src/runtime/cgo/
 ```
 
@@ -45,7 +44,6 @@ firsrt, install rocksdb dependencies.
 ```bash
 sudo apt install gcc-8 g++-8
 sudo apt install libgflags-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
-# sudo apt install libsnappy-dev
 ```
 
 For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
@@ -97,6 +95,7 @@ Step 3: clone the moeingevm repo, and build dynamically linked library.
 ```bash
 cd ~/smart_bch
 git clone --depth 1 https://github.com/smartbch/moeingevm
+cd moeingevm
 git checkout tags/v0.1.1
 cd moeingevm/evmwrap
 make
@@ -109,6 +108,7 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 ```bash
 cd ~/smart_bch
 git clone --depth 1 https://github.com/smartbch/smartbch
+cd smartbch
 git checkout tags/v0.1.1
 cd smartbch
 go build github.com/smartbch/smartbch/cmd/smartbchd
