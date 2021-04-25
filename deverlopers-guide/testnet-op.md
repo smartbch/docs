@@ -8,7 +8,7 @@ To deploy a testnet, we need three steps:
 
 ## Build smartbchd
 
-Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop after step 4.
+Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop after step 4 (do not run step 5).
 
 Now you have got the smartbchd binary.
 
@@ -32,10 +32,10 @@ The generator use the following command to initialize the chain.
   --test-keys="37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"
 ```
 
-#### step 2. generate genesis validator
+#### step 2. send generated genesis validator to generator
 
 
-Use the `generate-genesis-validator` command to generate a validator, with the validator's operating hex-format private key as the argument.
+Use the `generate-genesis-validator` command to generate a validator, with the validator's hex-format operating private key as the argument.
 
 ```
 ./build/smartbchd generate-genesis-validator 37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287
@@ -51,24 +51,7 @@ Note📒: the hex-format private key can be generated using following command.
 ./build/smartbchd gen-test-keys -n 1
 ```
 
-
-#### step 3. collect validators information
-
-The generator collects the outputs from collaborator, and add the information into genesis.json, one by one.
-
-```
-./build/smartbchd add-genesis-validator 7b2241646472657373223a5b3133312c3137372c3232362c33382c3134322c3135312c3130392c32302c3230352c3233312c3139342c35392c3137302c3134382c3133362c3131362c342c3235342c3131332c3136315d2c225075626b6579223a5b3134312c39372c34312c39372c3138322c33352c3232302c3139392c3232302c31382c37352c38382c3137322c3135312c38322c3133332c39332c39312c3134342c3134362c3233322c32392c3231312c3231332c3135382c3233382c3232322c3134362c3231372c3138302c33372c3130355d2c22526577617264546f223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c305d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a2267656e657369735f76616c696461746f72222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c35342c35332c3230312c3137332c3139372c3232322c3136302c302c305d2c2249735265746972696e67223a66616c73657d
-```
-
-Repeat the above command till all the collaborators' information are added.
-
-Now, a genesis.json file is generated, which contains an account with all the native tokens and the information of all the validators.
-
-The generator distributes this genesis.json file to the collaborators. And the collaborators use this file to overwrite `~/.smartbchd/config/genesis.json`.
-
-## Start the testnet
-
-#### step 1. Add seeds
+#### step 3. send p2p seed to generator
 
 Using the following command to start smartbchd, and kill it after two seconds using "Ctrl-C".
 
@@ -88,7 +71,26 @@ The, compose a p2p seed with the node ID, IP address of the server and the port 
 f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532@45.32.38.25:26656
 ```
 
-The collaborators send their p2p seeds to the generator. And the generator puts the collected seeds into the config.toml file, which locates at `~/.smartbchd/config/config.toml`.
+The collaborators send their p2p seeds to the generator.
+
+
+## Start the testnet
+
+#### step 4. collect validators information and p2p seeds
+
+The generator collects the outputs from collaborator, and add the information into genesis.json, one by one.
+
+```
+./build/smartbchd add-genesis-validator 7b2241646472657373223a5b3133312c3137372c3232362c33382c3134322c3135312c3130392c32302c3230352c3233312c3139342c35392c3137302c3134382c3133362c3131362c342c3235342c3131332c3136315d2c225075626b6579223a5b3134312c39372c34312c39372c3138322c33352c3232302c3139392c3232302c31382c37352c38382c3137322c3135312c38322c3133332c39332c39312c3134342c3134362c3233322c32392c3231312c3231332c3135382c3233382c3232322c3134362c3231372c3138302c33372c3130355d2c22526577617264546f223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c305d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a2267656e657369735f76616c696461746f72222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c35342c35332c3230312c3137332c3139372c3232322c3136302c302c305d2c2249735265746972696e67223a66616c73657d
+```
+
+Repeat the above command till all the collaborators' information are added.
+
+Now, a genesis.json file is generated, which contains an account with all the native tokens and the information of all the validators.
+
+The generator distributes this genesis.json file to the collaborators. And the collaborators use this file to overwrite `~/.smartbchd/config/genesis.json`.
+
+Also, the generator puts the collected seeds into the config.toml file, which locates at `~/.smartbchd/config/config.toml`.
 
 
 The generator open the config.toml file and search for `seeds = ""`. Then add the collected seeds in, using commas to seperate the seeds, like this: 
@@ -99,7 +101,11 @@ seeds = "f392e4c7f2024e4f7d51a2d4f8cf08ddc4ac4532@45.32.38.25:26656,4ac453f3cf08
 
 Then the generator send this line to all the collaborators, who replaces the seeds line in their `~/.smartbchd/config/config.toml`.
 
-#### step 2. Start It!
+#### step 5. Start It!
+
+All the collaborators must make sure they update `~/.smartbchd/config/genesis.json` and `~/.smartbchd/config/config.toml` using the information sent by the generator.
+
+Then, all the nodes (including collaborators and the generator) run the following command:
 
 ```
 ./build/smartbchd start

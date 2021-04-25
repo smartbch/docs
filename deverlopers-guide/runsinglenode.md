@@ -97,6 +97,7 @@ cd ~/smart_bch
 git clone -b v0.1.1 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
+export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
@@ -115,9 +116,8 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/smart
 Step 5: generate some private keys only used for test.
 
 ```bash
-$ cd ~/smart_bch/smartbch
-$ export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
-$ ./smartbchd gen-test-keys -n 10
+cd ~/smart_bch/smartbch
+./smartbchd gen-test-keys -n 10
 7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43
 594d82ba88e52b2e037da8513493074eee5e6a6820d836afee5764fb78830285
@@ -133,7 +133,7 @@ fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
 Step 6: initialize the node data using test keys generated above:
 
 ```bash
-$ ./smartbchd init mynode --chain-id 0x1 \
+./smartbchd init mynode --chain-id 0x1 \
   --init-balance=10000000000000000000 \
   --test-keys="7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc,\
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43,\
@@ -152,7 +152,7 @@ After successfully executing the above commands, you can find the initialized da
 Step 7: start the node:
 
 ```bash
-$ ./smartbchd start
+./smartbchd start
 ```
 
 This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. By default, there are ten accounts created at genesis, which can be shown using the following command:
