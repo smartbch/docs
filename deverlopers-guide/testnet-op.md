@@ -8,9 +8,9 @@ To deploy a testnet, we need three steps:
 
 ## Build smartbchd
 
-Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop before step4.
+Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop after step 4.
 
-Now you have built the smartbchd binary.
+Now you have got the smartbchd binary.
 
 ## Generate genesis.json
 
