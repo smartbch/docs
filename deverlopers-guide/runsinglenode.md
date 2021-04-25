@@ -94,9 +94,7 @@ Step 3: clone the moeingevm repo, and build dynamically linked library.
 
 ```bash
 cd ~/smart_bch
-git clone --depth 1 https://github.com/smartbch/moeingevm
-cd moeingevm
-git checkout tags/v0.1.1
+git clone -b v0.1.1 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 ```
@@ -107,9 +105,7 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 
 ```bash
 cd ~/smart_bch
-git clone --depth 1 https://github.com/smartbch/smartbch
-cd smartbch
-git checkout tags/v0.1.1
+git clone -b v0.1.1 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build github.com/smartbch/smartbch/cmd/smartbchd
 ```
