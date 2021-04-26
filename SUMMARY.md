@@ -8,8 +8,10 @@
 
 * [Introduction](deverlopers-guide/intro.md)
 * [Single Node Private Testnet](deverlopers-guide/runsinglenode.md)
-* [Deploy contract using Truffle](deverlopers-guide/deploy-contract-using-truffle.md)
-* [JSON-RPC](deverlopers-guide/jsonrpc.md)
+* [Deploy contracts using Truffle](deverlopers-guide/deploy-contract-using-truffle.md)
+* [Deploy contracts using Remix](deverlopers-guide/deploy-contract-using-remix.md)
+* [Test using MetaMask](deverlopers-guide/test-using-metamask.md)
+* [JSON-RPC Endpoints](deverlopers-guide/jsonrpc.md)
 * [Blockchain Browser API](deverlopers-guide/browserapi.md)
 * [Staking Scheme](deverlopers-guide/staking.md)
 

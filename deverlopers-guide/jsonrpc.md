@@ -190,7 +190,7 @@ Returns:
 
 `QUANTITY` - integer of count
 
-### sbch_setSep20FromAddressCount
+### sbch_getSep20FromAddressCount
 
 Returns the times addr acts as a from-address of a SEP20 Transfer event at some contract.
 
