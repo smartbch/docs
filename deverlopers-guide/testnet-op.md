@@ -39,15 +39,15 @@ The generator use the following command to initialize the chain.
   --test-keys="37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"
 ```
 
-#### step 2. send generated genesis validator to generator
+#### step 2. Each collaborator sends its genesis validator to generator
 
-Use following command to generate a new the hex-format private key for validator
+Use following command to get a new the hex-format private key for validator
 
 ```
 ./build/smartbchd gen-test-keys -n 1
 ```
 
-Use the `generate-genesis-validator` command to generate a validator, with the validator's hex-format operating private key as the argument.
+Use the `generate-genesis-validator` command to build a validator, with the validator's hex-format operating private key as the argument.
 
 ```
 ./build/smartbchd generate-genesis-validator 37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287
