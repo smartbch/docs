@@ -136,7 +136,7 @@ fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
 Step 6: initialize the node data using test keys generated above:
 
 ```bash
-./smartbchd init mynode --chain-id 0x1 \
+./smartbchd init mynode --chain-id 0x539 \
   --init-balance=10000000000000000000 \
   --test-keys="7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc,\
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43,\
