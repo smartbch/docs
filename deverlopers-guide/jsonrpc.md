@@ -94,7 +94,7 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | [sbch\_getTxListByHeight](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/sbch_getTxListByHeight/README.md) | N/A | N/A | ✅ |
 | [sbch_getToAddressCount](jsonrpc.md#sbch_getToAddressCount.md) | N/A | N/A | ✅ |
 | [sbch_getSep20ToAddressCount](jsonrpc.md#sbch_getSep20ToAddressCount) | N/A | N/A | ✅ |
-| [such_setSep20FromAddressCount](jsonrpc.md#such_setSep20FromAddressCount) | N/A | N/A | ✅ |
+| [sbch_setSep20FromAddressCount](jsonrpc.md#sbch_setSep20FromAddressCount) | N/A | N/A | ✅ |
 
 ### sbch\_queryTxBySrc
 
@@ -190,7 +190,7 @@ Returns:
 
 `QUANTITY` - integer of count
 
-### such_setSep20FromAddressCount
+### sbch_setSep20FromAddressCount
 
 Returns the times addr acts as a from-address of a SEP20 Transfer event at some contract.
 
