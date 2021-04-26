@@ -8,7 +8,7 @@ To deploy a testnet, we need three steps:
 
 ## About machine
 
-Please use machine with 2 core, 8G memory and 64G disk for testnet, and open port 26656, 8545,8546 on your machine by configuring the firewall.
+Please use machine with 2 core, 8G memory and 64G disk for testnet, and open port 26656, 8545,8546 on your machine by configuring the firewall. And please use ubuntu 20.04. Other OS has not been tested.
 
 
 ## Build smartbchd
