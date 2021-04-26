@@ -8,7 +8,8 @@ To deploy a testnet, we need three steps:
 
 ## About machine
 
-We support machine with 2 core, 8G memory and 64G disk.
+Please use machine with 2 core, 8G memory and 64G disk for testnet, and open port 26656, 8545,8546 on your machine by configuring the firewall.
+
 
 ## Build smartbchd
 
@@ -21,6 +22,8 @@ Now you have got the smartbchd binary.
 #### step 1. Initialize the working directory
 
 One of the nodes must be picked for outputing the genesis.json file. We refer to this node as "generator" and the other nodes, "collaborator".
+
+Depending on who you are (a generator or a collaborator), select one of the following command to run:
 
 The collaborators use the following command to initialize the chain. You can use any favorite id to replace the following "freedomMan".
 
@@ -107,8 +110,6 @@ Then the generator send this line to all the collaborators, who replaces the see
 #### step 5. Start It!
 
 All the collaborators must make sure they update `~/.smartbchd/config/genesis.json` and `~/.smartbchd/config/config.toml` using the information sent by the generator.
-
-Then, open port 26656, 8545,8546 on your machine.
 
 Final, all the nodes (including collaborators and the generator) run the following command:
 
