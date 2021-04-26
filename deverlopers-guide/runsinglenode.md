@@ -42,7 +42,10 @@ Step 1: install dependencies
 firsrt, install rocksdb dependencies.
 
 ```bash
+sudo apt update
+sudo apt install cmake
 sudo apt install gcc-8 g++-8
+sudo apt install gcc g++
 sudo apt install libgflags-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
 ```
 
