@@ -92,9 +92,9 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | ✅ |
 | [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | ✅ |
 | [sbch\_getTxListByHeight](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/sbch_getTxListByHeight/README.md) | N/A | N/A | ✅ |
-| sbch_getToAddressCount | N/A | N/A | ✅ |
-| sbch_getSep20ToAddressCount | N/A | N/A | ✅ |
-| such_setSep20FromAddressCount | N/A | N/A | ✅ |
+| [sbch_getToAddressCount](jsonrpc.md#sbch_getToAddressCount.md) | N/A | N/A | ✅ |
+| [sbch_getSep20ToAddressCount](jsonrpc.md#sbch_getSep20ToAddressCount) | N/A | N/A | ✅ |
+| [such_setSep20FromAddressCount](jsonrpc.md#such_setSep20FromAddressCount) | N/A | N/A | ✅ |
 
 ### sbch\_queryTxBySrc
 
