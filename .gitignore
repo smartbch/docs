@@ -4,3 +4,4 @@ node_modules
 ref_code/node_modules
 ref_code/.secret
 ref_code/build
+.DS_Store

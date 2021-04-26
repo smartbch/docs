@@ -1,8 +1,12 @@
 # JSON-RPC
 
+
+
 ## JSON-RPC smartBCH
 
 Here is a list of all the supported RPC endpoints of smartBCH, sorted by the prefixes. The endpoints with "sbch" prefix are smartBCH-specific, which are used by the [BasicBrowser](https://github.com/smartbch/BasicBrowser). The endpoints with "web3", "net" and "eth" prefixes have the same function as infura, except for some features which are described below.
+
+
 
 ### Web3
 
@@ -11,6 +15,8 @@ Here is a list of all the supported RPC endpoints of smartBCH, sorted by the pre
 | web3\_clientVersion | [https://eth.wiki/json-rpc/API\#web3\_clientVersion](https://eth.wiki/json-rpc/API#web3_clientVersion) | [https://infura.io/docs/ethereum/json-rpc/web3-clientVersion](https://infura.io/docs/ethereum/json-rpc/web3-clientVersion) | ✅ |
 | web3\_sha3 | [https://eth.wiki/json-rpc/API\#web3\_sha3](https://eth.wiki/json-rpc/API#web3_sha3) |  | ✅ |
 
+
+
 ### Net
 
 | JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
@@ -18,6 +24,8 @@ Here is a list of all the supported RPC endpoints of smartBCH, sorted by the pre
 | net\_version | [https://eth.wiki/json-rpc/API\#net\_version](https://eth.wiki/json-rpc/API#net_version) | [https://infura.io/docs/ethereum/json-rpc/net-version](https://infura.io/docs/ethereum/json-rpc/net-version) | ✅ |
 | net\_peerCount | [https://eth.wiki/json-rpc/API\#net\_peercount](https://eth.wiki/json-rpc/API#net_peercount) | [https://infura.io/docs/ethereum/json-rpc/net-peerCount](https://infura.io/docs/ethereum/json-rpc/net-peerCount) | ❌ |
 | net\_listening | [https://eth.wiki/json-rpc/API\#net\_listening](https://eth.wiki/json-rpc/API#net_listening) | [https://infura.io/docs/ethereum/json-rpc/net-listening](https://infura.io/docs/ethereum/json-rpc/net-listening) | ❌ |
+
+
 
 ### ETH
 
@@ -73,6 +81,8 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | eth\_submitHashrate | [https://eth.wiki/json-rpc/API\#eth\_submithashrate](https://eth.wiki/json-rpc/API#eth_submithashrate) | [https://infura.io/docs/ethereum/json-rpc/eth-hashrate](https://infura.io/docs/ethereum/json-rpc/eth-hashrate) | ❌ |
 | eth\_chainId |  | [https://infura.io/docs/ethereum/json-rpc/eth-chainId](https://infura.io/docs/ethereum/json-rpc/eth-chainId) | ✅ |
 
+
+
 ## SBCH
 
 | JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
@@ -82,6 +92,9 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | ✅ |
 | [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | ✅ |
 | [sbch\_getTxListByHeight](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/sbch_getTxListByHeight/README.md) | N/A | N/A | ✅ |
+| sbch_getToAddressCount | N/A | N/A | ✅ |
+| sbch_getSep20ToAddressCount | N/A | N/A | ✅ |
+| such_setSep20FromAddressCount | N/A | N/A | ✅ |
 
 ### sbch\_queryTxBySrc
 
@@ -152,3 +165,40 @@ Returns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
 
+### sbch_getToAddressCount
+
+Returns the times addr acts as a to-address of a transaction.
+
+Parameters:
+
+1. `DATA`, 20 Bytes - EOA or contract address
+
+Returns:
+
+`QUANTITY` - integer of count
+
+### sbch_getSep20ToAddressCount
+
+Returns the times addr acts as a to-address of a SEP20 Transfer event at some contract.
+
+Parameters:
+
+1. `DATA`, 20 Bytes - SEP20 contract address
+2. `DATA`, 20 Bytes - EOA or contract address
+
+Returns:
+
+`QUANTITY` - integer of count
+
+### such_setSep20FromAddressCount
+
+Returns the times addr acts as a from-address of a SEP20 Transfer event at some contract.
+
+Parameters:
+
+1. `DATA`, 20 Bytes - SEP20 contract address
+2. `DATA`, 20 Bytes - EOA or contract address
+
+Returns:
+
+`QUANTITY` - integer of count

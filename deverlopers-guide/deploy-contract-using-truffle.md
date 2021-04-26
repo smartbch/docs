@@ -6,7 +6,7 @@ This article takes [Pet-Shop](https://www.trufflesuite.com/tutorials/pet-shop) a
 
 ## Start smartBCH single testing node
 
-Please flow [this doc](runsinglenode.md) to start smartBCH single testing node. When the test node is started using default options, it will serve JSON-RPC on localhost:8485. You can using the following cmd to see if node works well:
+Please flow [this doc](runsinglenode.md) to start smartBCH single testing node. When the testing node is started with default options, it will serve JSON-RPC on localhost:8485. You can use the following cmd to see if node works well:
 
 ```bash
 $ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}' \
