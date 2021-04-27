@@ -83,6 +83,25 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 
 
 
+## TM
+
+| JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
+| ---------------- | ---------------- | ---------------------- | ------------ |
+| tm\_nodeInfo     | N/A              | N/A                    | ✅            |
+|                  |                  |                        |              |
+
+### tm_nodeInfo
+
+Returns the information about Tendermint node.
+
+Parameters: No
+
+Retrns: 
+
+`Object`
+
+
+
 ## SBCH
 
 | JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
@@ -92,9 +111,9 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | ✅ |
 | [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | ✅ |
 | [sbch\_getTxListByHeight](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/sbch_getTxListByHeight/README.md) | N/A | N/A | ✅ |
-| [sbch_getToAddressCount](jsonrpc.md#sbch_getToAddressCount.md) | N/A | N/A | ✅ |
-| [sbch_getSep20ToAddressCount](jsonrpc.md#sbch_getSep20ToAddressCount) | N/A | N/A | ✅ |
-| [sbch_setSep20FromAddressCount](jsonrpc.md#sbch_setSep20FromAddressCount) | N/A | N/A | ✅ |
+| [sbch_getAddressCount](jsonrpc.md#sbch_getAddressCount.md) | N/A | N/A | ✅ |
+| [sbch_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | ✅ |
+|                                                              |                  |                        |  |
 
 ### sbch\_queryTxBySrc
 
@@ -165,40 +184,30 @@ Returns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
 
-### sbch_getToAddressCount
+### sbch_getAddressCount
 
-Returns the times addr acts as a to-address of a transaction.
-
-Parameters:
-
-1. `DATA`, 20 Bytes - EOA or contract address
-
-Returns:
-
-`QUANTITY` - integer of count
-
-### sbch_getSep20ToAddressCount
-
-Returns the times addr acts as a to-address of a SEP20 Transfer event at some contract.
+Returns the times addr acts as a to-address or from-address of a transaction.
 
 Parameters:
 
-1. `DATA`, 20 Bytes - SEP20 contract address
+1. `String`, kind of the query, could be `"from"`, `"to"`, or `"both"`
 2. `DATA`, 20 Bytes - EOA or contract address
 
 Returns:
 
 `QUANTITY` - integer of count
 
-### sbch_getSep20FromAddressCount
+### sbch_getSep20AddressCount
 
-Returns the times addr acts as a from-address of a SEP20 Transfer event at some contract.
+Returns the times addr acts as a to-address or from-address of a SEP20 Transfer event at some contract.
 
 Parameters:
 
-1. `DATA`, 20 Bytes - SEP20 contract address
-2. `DATA`, 20 Bytes - EOA or contract address
+1. `String`, kind of the query, could be `"from"`, `"to"`, or `"both"`
+2. `DATA`, 20 Bytes - SEP20 contract address
+3. `DATA`, 20 Bytes - EOA or contract address
 
 Returns:
 
 `QUANTITY` - integer of count
+
