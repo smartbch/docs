@@ -6,6 +6,11 @@ To deploy a testnet, we need three steps:
 2. Generate one unique genesis.json file
 3. Start the nodes using this unique genesis.json file
 
+## About machine
+
+Please use machine with 2 core, 8G memory and 64G disk for testnet, and open port 26656, 8545,8546 on your machine by configuring the firewall. And please use ubuntu 20.04. Other OS has not been tested.
+
+
 ## Build smartbchd
 
 Please refer to [this document](https://docs.smartbch.org/smartbch/deverlopers-guide/runsinglenode) and stop after step 4 (do not run step 5).
@@ -17,6 +22,8 @@ Now you have got the smartbchd binary.
 #### step 1. Initialize the working directory
 
 One of the nodes must be picked for outputing the genesis.json file. We refer to this node as "generator" and the other nodes, "collaborator".
+
+Depending on who you are (a generator or a collaborator), select one of the following command to run:
 
 The collaborators use the following command to initialize the chain. You can use any favorite id to replace the following "freedomMan".
 
@@ -32,10 +39,15 @@ The generator use the following command to initialize the chain.
   --test-keys="37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"
 ```
 
-#### step 2. send generated genesis validator to generator
+#### step 2. Each collaborator sends its genesis validator to generator
 
+Use following command to get a new the hex-format private key for validator
 
-Use the `generate-genesis-validator` command to generate a validator, with the validator's hex-format operating private key as the argument.
+```
+./build/smartbchd gen-test-keys -n 1
+```
+
+Use the `generate-genesis-validator` command to build a validator, with the validator's hex-format operating private key as the argument.
 
 ```
 ./build/smartbchd generate-genesis-validator 37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287
@@ -43,13 +55,7 @@ Use the `generate-genesis-validator` command to generate a validator, with the v
 7b2241646472657373223a5b3133312c3137372c3232362c33382c3134322c3135312c3130392c32302c3230352c3233312c3139342c35392c3137302c3134382c3133362c3131362c342c3235342c3131332c3136315d2c225075626b6579223a5b33382c3131362c31312c3132322c32342c31332c34332c3233392c3231382c38392c3234392c36332c3132312c31332c3134332c3233372c35342c31342c33322c3233372c3230302c3130322c3231312c34342c32392c39332c3132392c322c39302c3232392c3234342c3135375d2c22526577617264546f223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c305d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a2267656e657369735f76616c696461746f72222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c35342c35332c3230312c3137332c3139372c3232322c3136302c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
-All the collaborators send this command's output to the generator. The output contains the operator's address, consensus pubkey, voting power and staking amount.
-
-Note📒: the hex-format private key can be generated using following command.
-
-```
-./build/smartbchd gen-test-keys -n 1
-```
+⚠️ All the collaborators send this command's output to the generator. The output contains the operator's address, consensus pubkey, voting power and staking amount.
 
 #### step 3. send p2p seed to generator
 
@@ -105,7 +111,7 @@ Then the generator send this line to all the collaborators, who replaces the see
 
 All the collaborators must make sure they update `~/.smartbchd/config/genesis.json` and `~/.smartbchd/config/config.toml` using the information sent by the generator.
 
-Then, all the nodes (including collaborators and the generator) run the following command:
+Final, all the nodes (including collaborators and the generator) run the following command:
 
 ```
 ./build/smartbchd start
