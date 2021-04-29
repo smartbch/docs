@@ -1,6 +1,6 @@
 # Testnets for smartBCH
 
-You can test you DApp using a [local single-node testnet](./runsinglenode.md) if you want set up one. And in most cases, you do not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilized.
+You can test you DApp using a [local single-node testnet](deverlopers-guide/runsinglenode.md) if you want set up one. And in most cases, you do not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilized.
 
 You can run tests with [metamask](deverlopers-guide/test-using-metamask.md), [truffle](deverlopers-guide/deploy-contract-using-truffle.md), or [remix](deverlopers-guide/deploy-contract-using-remix.md).
 
