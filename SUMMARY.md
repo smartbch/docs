@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [Whitepaper](smartbch_whitepaper-en.md)
 * [FAQ](faq.md)
+* [Testnets](testnets.md)
 
 ## Deverloper's Guide
 

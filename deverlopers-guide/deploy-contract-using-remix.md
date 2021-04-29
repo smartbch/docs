@@ -2,6 +2,7 @@
 
 This article shows how to deploy smart contract using Remix IDE.
 
+Please note in the following example we assume you are using a [local single-node testnet](./runsinglenode.md). Instead, if you want to use a remote node to provide JSON-RPC, just replace "localhost" with the node's IP address.
 
 
 Step 1, open [Remix IDE](http://remix.ethereum.org/) in your browser:
