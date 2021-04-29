@@ -47,7 +47,7 @@ If you started smartBCH testing node on localhost:8545 for JSON-RPC, it happens 
 
 ![metamask-settings-networks-localhost-8584](../.gitbook/assets/metamask-settings-networks-localhost-8584.png) 
 
-But the chain ID may not match, in that case, you can replace 1337 with your smartBCH chain ID. And it's better that you change Currency Symbol to BCH. You can also add a new Network configuration like this:
+But the chain ID may not match, in that case, you can replace 1337 with your smartBCH chain ID (for example, for the smartBCH-T1 testnet, it's 0x2711). And it's better that you change Currency Symbol to BCH. You can also add a new Network configuration like this:
 
 ![metamask-settings-networks-new](../.gitbook/assets/metamask-settings-networks-new.png)
 
