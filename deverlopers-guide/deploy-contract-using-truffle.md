@@ -27,7 +27,7 @@ $ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":
 
 
 
-## Instll Truffle
+## Install Truffle
 
 You need to install Node.js first, [here](https://nodejs.org/en/download/package-manager/) are detailed information about how to install it on various platforms. Then, run the following cmd to install truffle:
 
