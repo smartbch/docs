@@ -2,6 +2,7 @@
 
 This article takes [Pet-Shop](https://www.trufflesuite.com/tutorials/pet-shop) as an example to introduce how to deploy smart contract into smartBCH chain using [truffle](https://www.trufflesuite.com/truffle).
 
+Please note in the following example we assume you are using a [local single-node testnet](./runsinglenode.md). Instead, if you want to use a remote node to provide JSON-RPC, just replace "localhost" with the node's IP address.
 
 
 ## Start smartBCH single testing node
