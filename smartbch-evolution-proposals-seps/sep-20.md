@@ -179,6 +179,7 @@ event Approval(address indexed _owner, address indexed _spender, uint256 _value)
 ```
 
 **MUST** trigger on any successful call to `approve(address _spender, uint256 _value)`, `increaseAllowance(address _spender, uint256 _delta)` or `decreaseAllowance(address _spender, uint256 _delta)`.
+**OPTIONAL** may trigger on any successful call to `transferFrom(address _from, address _to, uint256 _value)` which changes allowance, but it is not required.
 
 ## 6. License
 
