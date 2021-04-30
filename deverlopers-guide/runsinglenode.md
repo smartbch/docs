@@ -184,5 +184,5 @@ And you can see something like:
 }
 ```
 
-You can find the documents for RPC [here](https://github.com/smartbch/docs/tree/8282c530b70c78b50bf4438575fbf9ff50539882/dev/json-rpc.md).
+You can find the documents for RPC [here](jsonrpc.md).
 
