@@ -108,7 +108,7 @@ Step 4: clone the source code of smartBCH and build the executable of `smartbchd
 cd ~/smart_bch
 git clone -b v0.1.2 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
-go build github.com/smartbch/smartbch/cmd/smartbchd
+go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/smartbch/smartbchd file.
