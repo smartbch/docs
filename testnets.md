@@ -45,3 +45,40 @@ Last, start smartbchd:
 ~/build/smartbchd start
 ```
 
+### smartBCH-T1a
+
+This is the another testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
+
+1. http://158.247.197.98:8545
+
+Test coin faucet can be found at http://--------:8080/faucet
+
+In this testnet, the gas price can be as low as zero.
+
+To join this testnet as a non-validator node, follow the steps below:
+
+First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](deverlopers-guide/runsinglenode.md).
+
+Second, prepare the working directory:
+
+```bash
+cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
+
+~/build/smartbchd init freedomMan --chain-id 0x2711
+
+cat > ~/.smartbchd/config/genesis.json <<EOF
+{"genesis_time":"2021-05-10T08:12:51.389723498Z","chain_id":"0x2711","initial_height":"1","consensus_params":{"block":{"max_bytes":"22020096","max_gas":"-1","time_iota_ms":"1000"},"evidence":{"max_age_num_blocks":"100000","max_age_duration":"172800000000000","max_bytes":"1048576"},"validator":{"pub_key_types":["ed25519"]},"version":{}},"app_hash":"","app_state":{"validators":[{"Address":[131,177,226,38,142,151,109,20,205,231,194,59,170,148,136,116,4,254,113,161],"Pubkey":[128,218,60,236,176,123,26,23,186,131,84,63,104,104,11,183,111,237,49,149,183,180,131,161,47,166,241,210,164,50,68,205],"RewardTo":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"VotingPower":1,"Introduction":"genesis_validator","StakedCoins":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,53,201,173,197,222,160,0,0],"IsRetiring":false}],"alloc":{"0x83b1e2268e976d14cde7c23baa94887404fe71a1":{"balance":"0x204fce5e3e25026110000000","secretKey":"0x37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"}}}}
+EOF
+
+cp ~/.smartbchd/config/config.toml ~/tmp
+
+gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"25f2aa2d2aa5b09f1867ab88ff3e284e035ab511@158.247.192.195:26656\""}' ~/tmp > ~/.smartbchd/config/config.toml
+
+rm ~/tmp
+```
+
+Last, start smartbchd:
+
+```bash
+~/build/smartbchd start
+```
