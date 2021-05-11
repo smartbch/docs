@@ -49,7 +49,7 @@ Last, start smartbchd:
 
 This is the another testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
 
-1. https://moeing.app:8545
+1. https://moeing.app:9545
 
 Test coin faucet can be found at http://158.247.197.98:8081/faucet
 
