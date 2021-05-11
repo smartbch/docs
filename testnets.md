@@ -50,7 +50,9 @@ rm ~/tmp
 This is a testnet for smartBCH with nodes supports https. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
 
 1. https://moeing.app:9545
-2. https://moeing.tech:9545
+2. http://moeing.app:8545
+3. https://moeing.tech:9545
+4. http://moeing.tech:8545
 
 Test coin faucet can be found at http://moeing.tech:8081/faucet
 
