@@ -5,23 +5,23 @@ You can test your DApp using a [local single-node testnet](deverlopers-guide/run
 You can run tests with [metamask](deverlopers-guide/test-using-metamask.md), [truffle](deverlopers-guide/deploy-contract-using-truffle.md), or [remix](deverlopers-guide/deploy-contract-using-remix.md).
 
 
-### smartBCH-T1
+### ~~smartBCH-T1 (not active)~~
 
-This is the first testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
+~~This is the first testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:~~
 
-1. http://106.75.244.31:8545
-2. http://106.75.214.131:8545
-3. http://135.181.219.10:8545
+1. ~~http://106.75.244.31:8545~~
+2. ~~http://106.75.214.131:8545~~
+3. ~~http://135.181.219.10:8545~~
 
-Test coin faucet can be found at http://moeing.tech:8080/faucet
+~~Test coin faucet can be found at http://moeing.tech:8080/faucet~~
 
-In this testnet, the gas price can be as low as zero.
+~~In this testnet, the gas price can be as low as zero.~~
 
-To join this testnet as a non-validator node, follow the steps below:
+~~To join this testnet as a non-validator node, follow the steps below:~~
 
-First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](deverlopers-guide/runsinglenode.md).
+~~First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](deverlopers-guide/runsinglenode.md).~~
 
-Second, prepare the working directory:
+~~Second, prepare the working directory:~~
 
 ```bash
 cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
@@ -39,7 +39,7 @@ gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"63211024f412d931521b1
 rm ~/tmp
 ```
 
-Last, start smartbchd:
+~~Last, start smartbchd:~~
 
 ```bash
 ~/build/smartbchd start
@@ -47,9 +47,11 @@ Last, start smartbchd:
 
 ### smartBCH-T1a
 
-This is the another testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
+This is a testnet for smartBCH with nodes supports https. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
 
 1. https://moeing.app:9545
+2. https://moeing.tech:9545
+3. http://106.75.214.131:8545
 
 Test coin faucet can be found at http://moeing.tech:8081/faucet
 
@@ -72,7 +74,7 @@ EOF
 
 cp ~/.smartbchd/config/config.toml ~/tmp
 
-gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"25f2aa2d2aa5b09f1867ab88ff3e284e035ab511@158.247.192.195:26656\""}' ~/tmp > ~/.smartbchd/config/config.toml
+gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"25f2aa2d2aa5b09f1867ab88ff3e284e035ab511@158.247.192.195:26656,ecda5896373d6d2e8e22d2d542fd1daf4f4a003d@52.32.81.115:26656,0f3563ae60f7aff5f5eca567ef505fc79d5b54ef@207.148.84.37:26656\""}' ~/tmp > ~/.smartbchd/config/config.toml
 
 rm ~/tmp
 ```
