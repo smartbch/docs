@@ -13,7 +13,7 @@ This is the first testnet for smartBCH. The chain ID is 0x2711. You can use the 
 2. http://106.75.214.131:8545
 3. http://135.181.219.10:8545
 
-Test coin faucet can be found at http://158.247.197.98:8080/faucet
+Test coin faucet can be found at http://moeing.tech:8080/faucet
 
 In this testnet, the gas price can be as low as zero.
 
@@ -51,7 +51,7 @@ This is the another testnet for smartBCH. The chain ID is 0x2711. You can use th
 
 1. https://moeing.app:9545
 
-Test coin faucet can be found at http://158.247.197.98:8081/faucet
+Test coin faucet can be found at http://moeing.tech:8081/faucet
 
 In this testnet, the gas price can be as low as zero.
 
