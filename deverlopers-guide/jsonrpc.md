@@ -159,7 +159,10 @@ Retrns:
 
 ### sbch\_queryLogs
 
-Query logs by address, topics and block range. It is different from `eth_getLogs` in: 1\) the contract address is required, not optional; 2\) the topics are position-independent, which means as long as a log has the specified topics in any position, it will be included in the returned result.
+Query logs by address, topics and block range. It is different from `eth_getLogs` in: 
+
+1. the contract address is required, not optional; 
+2. the topics are position-independent, which means as long as a log has the specified topics in any position, it will be included in the returned result.
 
 Parameters:
 
