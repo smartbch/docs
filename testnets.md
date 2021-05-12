@@ -53,6 +53,7 @@ This is a testnet for smartBCH with nodes supports https. The chain ID is 0x2711
 2. http://moeing.app:8545
 3. https://moeing.tech:9545
 4. http://moeing.tech:8545
+5. https://t.smartbch.games:9546
 
 Test coin faucet can be found at http://moeing.tech:8081/faucet
 

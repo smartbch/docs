@@ -115,6 +115,8 @@ Retrns:
 | [sbch_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | ✅ |
 |                                                              |                  |                        |  |
 
+
+
 ### sbch\_queryTxBySrc
 
 Returns the information about transactions requested by sender address and block range.
@@ -124,10 +126,15 @@ Parameters:
 1. `DATA`, 20 Bytes - from address
 2. `QUANTITY` - integer, start number
 3. `QUANTITY` - integer, end number
+4. `QUANTITY` - integer, the maximal number of txs to return, `0` stands for default limit
+
+Note: the start number can be greater than the end number, if so, the results will be sorted by block height in descending order.
 
 Retrns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
+
+
 
 ### sbch\_queryTxByDst
 
@@ -138,10 +145,15 @@ Parameters:
 1. `DATA`, 20 Bytes - to address
 2. `QUANTITY|TAG` - integer of start number, or string  `"latest"` for the last mined block
 3. `QUANTITY|TAG` - integer of end number, or string  `"latest"` for the last mined block
+4. `QUANTITY` - integer, the maximal number of txs to return, `0` stands for default limit
+
+Note: the start number can be greater than the end number, if so, the results will be sorted by block height in descending order.
 
 Retrns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
+
+
 
 ### sbch\_queryTxByAddr
 
@@ -152,14 +164,22 @@ Parameters:
 1. `DATA`, 20 Bytes - from or to address
 2. `QUANTITY|TAG` - integer of start number, or string  `"latest"` for the last mined block
 3. `QUANTITY|TAG` - integer of end number, or string  `"latest"` for the last mined block
+4. `QUANTITY` - integer, the maximal number of txs to return, `0` stands for default limit
+
+Note: the start number can be greater than the end number, if so, the results will be sorted by block height in descending order.
 
 Retrns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
 
+
+
 ### sbch\_queryLogs
 
-Query logs by address, topics and block range. It is different from `eth_getLogs` in: 1\) the contract address is required, not optional; 2\) the topics are position-independent, which means as long as a log has the specified topics in any position, it will be included in the returned result.
+Query logs by address, topics and block range. It is different from `eth_getLogs` in: 
+
+1. the contract address is required, not optional; 
+2. the topics are position-independent, which means as long as a log has the specified topics in any position, it will be included in the returned result.
 
 Parameters:
 
@@ -167,10 +187,15 @@ Parameters:
 2. `Array of DATA`, topics
 3. `QUANTITY|TAG` - integer of start number, or string  `"latest"` for the last mined block
 4. `QUANTITY|TAG` - integer of end number, or string  `"latest"` for the last mined block
+5. `QUANTITY` - integer, the maximal number of txs to return, `0` stands for default limit.
+
+Note: the start number can be greater than the end number, if so, the results will be sorted by block height in descending order.
 
 Returns:
 
 `Array` - array of log objects, see [eth\_getLogs](https://eth.wiki/json-rpc/API#eth_getLogs)
+
+
 
 ### sbch\_getTxListByHeight
 
@@ -184,6 +209,8 @@ Returns:
 
 `Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
 
+
+
 ### sbch_getAddressCount
 
 Returns the times addr acts as a to-address or from-address of a transaction.
@@ -196,6 +223,8 @@ Parameters:
 Returns:
 
 `QUANTITY` - integer of count
+
+
 
 ### sbch_getSep20AddressCount
 
