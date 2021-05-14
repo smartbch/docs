@@ -19,7 +19,7 @@ An epoch's end time is the largest timestamp of its blocks, and its duration tim
 
 Before elected as a validator on duty, you must first register as a candidate validator, by sending transactions on smartBCH.
 
-A special smart contract at the address 0x2710 handles transactions related to staking. It only accepts calls from EOAs (externally owned accounts) and cannot be called by other smart contracts. It is implemented using native code and can do jobs which normal EVM contracts cannot do.
+A special smart contract at the address 0x2710 handles transactions related to staking. It has several functions which can only be called from EOAs (externally owned accounts) and one function which can only be called by other smart contracts. It is implemented using native code and can do jobs which normal EVM contracts cannot do.
 
 It's interface is as below:
 
@@ -30,6 +30,7 @@ interface StakingContract {
     function retire() external;
     function increaseMinGasPrice() external;
     function decreaseMinGasPrice() external;
+    function sumVotingPower(address[] calldata addrList) external override returns (uint summedPower, uint totalPower) // this function can only be called by other contracts
 }
 ```
 
@@ -44,6 +45,12 @@ After becoming a candidate validator, an EOA cannot call `createValidator` again
 A validator must pledge some BCH as collateral, which would be slashed if it misbehaves during its duty. Once its pledged collateral is less than a lower bound because of slashing, its voting power is reduced to zero until enough collateral is replenished. A validator can pledge collateral by sending BCH when calling `createValidator` and `editValidator`.
 
 If a validator no longer wants to act as validator, it can call `retire` to mark its status as "retiring". The votes to a retiring validator is not counted when electing the next quorum.
+
+### Query a Address Set's Voting Power
+
+A smart contract can call the `sumVotingPower` function to sum all the voting power owned by the address set specified in `addrList`. It also returns the total voting power owned by all the active validators. These two parameters are returned as `summedPower` and `totalPower`, respectively. 
+
+A smart contract can record incoming votes from validators and use `sumVotingPower` to decide whether the votes are enough. In such a way, people can make the validator set act as Supreme Court to decide some cases finally.
 
 ### Adjust Gas Fee
 
