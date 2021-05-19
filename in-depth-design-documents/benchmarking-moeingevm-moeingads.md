@@ -35,7 +35,7 @@ We selected two instances on AWS for the bencharmk:
 1. m6gd.2xlarge: Amazon Graviton2 Processor, 8 vCPUs, 32GB DRAM, 475GB SSD
 2. m5ad.4xlarge: AMD EPYC Processor, 16 vCPUs, 64GB DRAM, 600GB SSD
 
-Now let's run this benchmark.
+Now let's run this benchmark. The whole process takes more than 20 hours, so please be patient.
 
 Step 0: please follow [this document](../developers-guide/runsinglenode.md) and finish the step 1, 2, 3 and 4.
 
@@ -49,6 +49,7 @@ go run -tags cppbtree . genkeys60
 Step 2: generate several blocks filled with random transactions:
 
 ```bash
+ulimit -n 30000
 RANDFILE=~/go1.16.3.linux-amd64.tar.gz  go run -tags cppbtree . gen |tee gen.log
 ```
 
@@ -64,5 +65,6 @@ The generated can be categorized into three groups:
 2. Initialize the storage slots and the target address
 3. Transfer random amount of BCHs to the random selected target addresses and overwrite the storage slots randomly.
 
-We just care about the performance of group 3. Because after the blocks in group 2, MoeingADS has already taken a lot of SSD space which is too large to be cached in DRAM. In 1000 blocks of group 3, there are 50K EOAs sending transactions, 50K contract addresses which each contains 1000 storage slots to be read and written, and 50M EOAs accepting coins. To contain these data, MoeingADS takes about ------- GB disk.
+We just care about the performance of group 3. Because after the blocks in group 2, MoeingADS has already taken a lot of SSD space which is too large to be cached in DRAM. In 1000 blocks of group 3, there are 50K EOAs sending transactions, 50K contract addresses which each contains 1000 storage slots to be read and written, and 50M EOAs accepting coins. To contain these data, MoeingADS takes 100+ GB disk.
 
+The result shows that on m5ad.4xlarge, MoeingEVM averagely takes 1.79 sec to execute the 10K transactions in a block of group 3. So in each second `43722*10000/1.79=244,256,983` (0.244 billion) gas can be burnt.
