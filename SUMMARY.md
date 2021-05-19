@@ -5,16 +5,16 @@
 * [FAQ](faq.md)
 * [Testnets](testnets.md)
 
-## Deverloper's Guide
+## Developer's Guide
 
-* [Introduction](deverlopers-guide/intro.md)
-* [Single Node Private Testnet](deverlopers-guide/runsinglenode.md)
-* [Deploy contracts using Truffle](deverlopers-guide/deploy-contract-using-truffle.md)
-* [Deploy contracts using Remix](deverlopers-guide/deploy-contract-using-remix.md)
-* [Test using MetaMask](deverlopers-guide/test-using-metamask.md)
-* [JSON-RPC Endpoints](deverlopers-guide/jsonrpc.md)
-* [Blockchain Browser API](deverlopers-guide/browserapi.md)
-* [Staking Scheme](deverlopers-guide/staking.md)
+* [Introduction](developers-guide/intro.md)
+* [Single Node Private Testnet](developers-guide/runsinglenode.md)
+* [Deploy contracts using Truffle](developers-guide/deploy-contract-using-truffle.md)
+* [Deploy contracts using Remix](developers-guide/deploy-contract-using-remix.md)
+* [Test using MetaMask](developers-guide/test-using-metamask.md)
+* [JSON-RPC Endpoints](developers-guide/jsonrpc.md)
+* [Blockchain Browser API](developers-guide/browserapi.md)
+* [Staking Scheme](developers-guide/staking.md)
 
 ## In-Depth Design Documents
 
