@@ -209,10 +209,19 @@ cp ./priv_validator_key.json ~/.smartbchd/config/
 #### Step 11: start the node:
 
 ```bash
-./smartbchd start
+./smartbchd start --unlock="7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc,\
+08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43,\
+594d82ba88e52b2e037da8513493074eee5e6a6820d836afee5764fb78830285,\
+433721d2f0e5c90d0a67a91153eaac3aa9db974ba9b4b9a7be219f02c12c015d,\
+ff1f7f7276b877274043a42d17258b79dd4fd32ca17c48a5dc75049c1f931841,\
+bab883ae3c7578be66ba5f1c1798dd52ab84ff9403a62c0b478491264df4a50e,\
+2698171de1409b229fa14b71fa982507b276c7234c34cee8c42ac0713a614a4f,\
+cb7883806fa970ef34b10286b80122b3188b09a24d154d2b81fb30e61c8b99ad,\
+e58d53577a8c30b550db1b461c5aee5c8368946be945819cdfdd77dd990e55cd,\
+fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377"
 ```
 
-This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. By default, there are ten accounts created at genesis, which can be shown using the following command:
+This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. We unlocked accounts created at genesis, which can be shown using the following command:
 
 ```bash
 # Run this command in another terminal:
