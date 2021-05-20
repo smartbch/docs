@@ -67,4 +67,4 @@ The generated can be categorized into three groups:
 
 We just care about the performance of group 3. Because after the blocks in group 2, MoeingADS has already taken a lot of SSD space which is too large to be cached in DRAM. In 1000 blocks of group 3, there are 50K EOAs sending transactions, 50K contract addresses which each contains 1000 storage slots to be read and written, and 50M EOAs accepting coins. To contain these data, MoeingADS takes 100+ GB disk.
 
-The result shows that on m5ad.4xlarge, MoeingEVM averagely takes 1.79 sec to execute the 10K transactions in a block of group 3. So in each second `43722*10000/1.79=244,256,983` (0.244 billion) gas can be burnt.
+The result shows that on m5ad.4xlarge, MoeingEVM averagely takes 1.79 sec to execute the 10K transactions in a block of group 3. So in each second `43722*10000/1.79=244,256,983` (0.244 billion) gas can be burnt. For m6gd.2xlarge, the result is 0.127 billion.
