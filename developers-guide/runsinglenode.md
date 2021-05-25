@@ -251,4 +251,3 @@ And you can see something like:
 ```
 
 You can find the documents for RPC [here](jsonrpc.md).
-
