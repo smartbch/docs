@@ -101,10 +101,10 @@ The gathered results are:
 
 | CPU          | Performance of Group 3 (billion gas per second) | Performance of Group 2 (billion gas per second) |
 | ------------ | ----------------------------------------------- | ----------------------------------------------- |
-| r6gd.2xlarge | 2.1                                             | 5.7                                             |
-| m6gd.4xlarge | 3.4                                             | 8.6                                             |
-| c6gd.8xlarge | 4.3                                             | 10.1                                            |
-| m5ad.4xlarge | 2.9                                             | 7.7                                             |
+| r6gd.2xlarge | 0.21                                            | 0.57                                            |
+| m6gd.4xlarge | 0.34                                            | 0.86                                            |
+| c6gd.8xlarge | 0.43                                            | 1.01                                            |
+| m5ad.4xlarge | 0.29                                            | 0.77                                            |
 
 When CPU count increases from 8 to 16, the speed-up is obvious; but when from 16 to 32, the speed-up is not so obvious. This is because there are some jobs which cannot be parallelized.
 
