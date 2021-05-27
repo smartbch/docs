@@ -10,7 +10,7 @@ In these nodes, just pick one to generate the genesis file. And all the other no
 
 #### Step 0: Prepare
 
-Just finish the steps 1, 2, 3, 4 as [running a single-node testnet](./runsinglenode.md).
+Follow the instructions in [running a single-node testnet](./runsinglenode.md), and Just finish the steps 0, 1, 2, 3 and 4 described in it.
 
 
 
@@ -146,7 +146,7 @@ if the `status` displays `0x1`, congratulations, your genesis validator actived 
 
 #### Step 0: Prepare
 
-Just finish the steps 1-9 as [running a single-node testnet](./runsinglenode.md).
+Just finish the steps 0-9 as [running a single-node testnet](./runsinglenode.md).
 
 
 
