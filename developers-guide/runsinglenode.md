@@ -11,8 +11,6 @@ We suggest to use ubuntu 20.04.
 ```bash
 sudo apt update
 sudo apt install make cmake g++ gcc git 
-sudo apt install npm
-npm install -g ethereum-private-key-to-address
 ```
 
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
@@ -151,6 +149,13 @@ A validator needs two private keys: one ed25519 key for consensus engine (tender
 ```bash
 ethereum_private_key_to_address 7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc
 0xd5Fd2C57069d93B6cE3126275a288D21b8aA2E87
+```
+
+If you have not installed the `ethereum_private_key_to_address` tool, install it as below:
+
+```bash
+sudo apt install npm
+npm install -g ethereum-private-key-to-address
 ```
 
 

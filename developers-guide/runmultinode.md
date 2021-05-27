@@ -18,16 +18,11 @@ Just finish the steps 1, 2, 3, 4 as [running a single-node testnet](./runsinglen
 
 ```bash
 cd ~/smart_bch/smartbch
-./smartbchd gen-test-keys -n 1
-fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
+./smartbchd gen-test-keys -n 1 --show-address
+2915b09298d0362df490fe3969b10aece94cd3460fb1ba29184cba31516a9b5f 0xF0c6969C2a554ddae639ba1Aa1d2fA11382CAb2B
 ```
 
-The above command generates one private key. And we show its corresponding EOA address like this:
-
-```bash
-ethereum-private-key-to-address fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
-0xA6f8D15B18B2B93cBF7FAe192184ccd9E03BfAf4
-```
+The above command generates one private key. And the corresponding EOA address is `0xF0c6969C2a554ddae639ba1Aa1d2fA11382CAb2B`.
 
 
 
@@ -48,7 +43,7 @@ The output hex string is consensus pubkey which will be used in `generate-genesi
 
 ```bash
 ./smartbchd generate-genesis-validator \
-	--validator-address=0xA6f8D15B18B2B93cBF7FAe192184ccd9E03BfAf4 \
+	--validator-address=0xF0c6969C2a554ddae639ba1Aa1d2fA11382CAb2B \
 	--consensus-pubkey=a07871d10858179c1bb3c1f0d7bab31103135b76f96b6bd1f06a5bc0d350f862 \
 	--voting-power=1 \
 	--staking-coin=0 \
@@ -64,13 +59,18 @@ The output hex string contains the information of a validator. Send the this hex
 
 #### Step 4: wait for the data directory's tarball and unpack it
 
-The genesis-generator will send you a tarball, which contains the initial content for the data directory.
+The genesis-generator will send you a tarball named dot.smartbchd.tgz, which contains the initial content for the data directory.
 
 ```bash
 cd ~
 tar zxvf dot.smartbchd.tgz
-mv dot.smartbchd .smartbchd
+./smartbchd init mynode --chain-id 0x2711 \
+  --init-balance=1000000000000000000000000000000 \
+  --test-keys="a07871d10858179c1bb3c1f0d7bab31103135b76f96b6bd1f06a5bc0d350f862"
+cp -rf dot.smartbchd/* .smartbchd/
 ```
+
+The balance number and the test-keys are not importance, because these information will be overwritten by the genesis.json file in the `dot.smartbchd` directory.
 
 
 
@@ -154,10 +154,11 @@ Just finish the steps 1-9 as [running a single-node testnet](./runsinglenode.md)
 
 Using `./build/smartbchd add-genesis-validator` multiple times, one time with one hex string sent by one node. Finally we'll get all the validators' information in the genesis.json file.h
 
-Then, make a copy of the `~/.smartbchd` directory.
+Then, make a copy of the `~/.smartbchd` directory, excluding the `node_key.json` file. 
 
 ```bash
 cp -r ~/.smartbchd ~/dot.smartbchd
+rm ~/dot.smartbchd/config/node_key.json
 ```
 
 
