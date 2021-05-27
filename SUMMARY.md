@@ -9,6 +9,7 @@
 
 * [Introduction](developers-guide/intro.md)
 * [Single Node Private Testnet](developers-guide/runsinglenode.md)
+* [Multi-Node Testnet](developers-guide/runmultinode.md)
 * [Deploy contracts using Truffle](developers-guide/deploy-contract-using-truffle.md)
 * [Deploy contracts using Remix](developers-guide/deploy-contract-using-remix.md)
 * [Test using MetaMask](developers-guide/test-using-metamask.md)
