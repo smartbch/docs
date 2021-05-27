@@ -70,7 +70,7 @@ tar zxvf dot.smartbchd.tgz
 cp -rf dot.smartbchd/* .smartbchd/
 ```
 
-In the `./smartbchd init` command, the balance number and the test-keys are not importance, because these information will be overwritten by the genesis.json file coming from the `dot.smartbchd` directory.
+In the `./smartbchd init` command, the balance number and the test-keys are not important, because these information will be overwritten by the genesis.json file coming from the `dot.smartbchd` directory.
 
 
 
