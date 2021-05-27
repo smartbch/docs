@@ -10,7 +10,9 @@ We suggest to use ubuntu 20.04.
 
 ```bash
 sudo apt update
-sudo apt install make cmake g++ gcc git
+sudo apt install make cmake g++ gcc git 
+sudo apt install npm
+npm install -g ethereum-private-key-to-address
 ```
 
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
@@ -142,6 +144,15 @@ e58d53577a8c30b550db1b461c5aee5c8368946be945819cdfdd77dd990e55cd
 fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377
 ```
 
+The output private keys will be used as input for the next step.
+
+A validator needs two private keys: one ed25519 key for consensus engine (tendermint) and one secp256k1 key for operate it using smart contracts. Now we pick the secp256k1 key out from above generated keys. We just choose the first one and show its corresponding address:
+
+```bash
+ethereum_private_key_to_address 7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc
+0xd5Fd2C57069d93B6cE3126275a288D21b8aA2E87
+```
+
 
 
 #### Step 6: initialize the node data using test keys generated above:
@@ -161,18 +172,22 @@ e58d53577a8c30b550db1b461c5aee5c8368946be945819cdfdd77dd990e55cd,\
 fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377"
 ```
 
-After successfully executing the above commands, you can find the initialized data in the `~/.smartbchd` directory. By using the `--home` option for `./smartbchd` command, you can specify another directory.
+After successfully executing the above commands, you can find the initialized data in the `~/.smartbchd` directory. By using the `--home` option for `./smartbchd` command, you can specify another directory. In the  `~/.smartbchd` directory, the genesis file specifies that all the EOAs corresponding to the above private keys will have a balance of 1000000000000000000000000000000.
 
 
 
 #### Step 7: generate genesis validator consensus key info
+
+Now we generate the ed25519 private key for consensus engine:
 
 ```bash
 ./smartbchd generate-consensus-key-info
 d6569de9567bac00d9946dc72ca71ffe0ff735729eb966e8437d6b6b24fe0ff1
 ```
 
-The output hex string is consensus pubkey which is used in `generate-genesis-validator` command, and a file containing the consensus public and private key is generated under the current directory, named `priv_validator_key.json`.
+The output hex string is consensus pubkey which will be used in `generate-genesis-validator` command, and a file containing the consensus public and private key is generated under the current directory, named `priv_validator_key.json`.
+
+Since now we are just running a single node for test, the key file is not so important. In production, a validator's operator must take good care of this key file `priv_validator_key.json` and back it up safely.
 
 
 
@@ -180,7 +195,7 @@ The output hex string is consensus pubkey which is used in `generate-genesis-val
 
 ```bash
 ./smartbchd generate-genesis-validator \
-	--validator-address=0xd5fd2c57069d93b6ce3126275a288d21b8aa2e87 \
+	--validator-address=0xd5Fd2C57069d93B6cE3126275a288D21b8aA2E877 \
 	--consensus-pubkey=d6569de9567bac00d9946dc72ca71ffe0ff735729eb966e8437d6b6b24fe0ff1 \
 	--voting-power=1 \
 	--staking-coin=100000000000000000000 \
@@ -188,13 +203,20 @@ The output hex string is consensus pubkey which is used in `generate-genesis-val
 7b2241646472657373223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c225075626b6579223a5b3231352c362c3232372c3135392c3232302c37312c39342c36372c3235312c3230352c3139332c3233312c3231352c3232342c3130342c3132342c3232352c37352c36332c3235312c3133352c3139392c3233302c3135372c352c3138372c32362c3234352c32312c3136362c37352c36355d2c22526577617264546f223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a22667265656d616e222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c352c3130372c3139392c39342c34352c39392c31362c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
+The `validator-address` uses the one we get at step 5, and the `consensus-pubkey` is the one we get at step 7.
+
+The output hex string contains the information of a validator.
+
 
 
 #### Step 9: add genesis validator info to genesis.json using hex string generated above
 
 ```bash
-./build/smartbchd add-genesis-validator 7b2241646472657373223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c225075626b6579223a5b3231352c362c3232372c3135392c3232302c37312c39342c36372c3235312c3230352c3139332c3233312c3231352c3232342c3130342c3132342c3232352c37352c36332c3235312c3133352c3139392c3233302c3135372c352c3138372c32362c3234352c32312c3136362c37352c36355d2c22526577617264546f223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a22667265656d616e222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c352c3130372c3139392c39342c34352c39392c31362c302c305d2c2249735265746972696e67223a66616c73657d
+./build/smartbchd add-genesis-validator \
+7b2241646472657373223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c225075626b6579223a5b3231352c362c3232372c3135392c3232302c37312c39342c36372c3235312c3230352c3139332c3233312c3231352c3232342c3130342c3132342c3232352c37352c36332c3235312c3133352c3139392c3233302c3135372c352c3138372c32362c3234352c32312c3136362c37352c36355d2c22526577617264546f223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a22667265656d616e222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c352c3130372c3139392c39342c34352c39392c31362c302c305d2c2249735265746972696e67223a66616c73657d
 ```
+
+Using the hex string outputted at the last step as the argument, we call `add-genesis-validator`. It adds one validator's information into the genesis file. You can use this command repeatedly to add more validators. Since we only need one validator for single node test, here we just use this command once.
 
 
 
@@ -203,6 +225,8 @@ The output hex string is consensus pubkey which is used in `generate-genesis-val
 ```bash
 cp ./priv_validator_key.json ~/.smartbchd/config/
 ```
+
+Thus, when this node starts up, it can use the private consensus key.
 
 
 
@@ -220,6 +244,8 @@ cb7883806fa970ef34b10286b80122b3188b09a24d154d2b81fb30e61c8b99ad,\
 e58d53577a8c30b550db1b461c5aee5c8368946be945819cdfdd77dd990e55cd,\
 fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377"
 ```
+
+You can also ignore the `unlock` argument to unlock no accounts.
 
 This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. We unlocked accounts created at genesis, which can be shown using the following command:
 
