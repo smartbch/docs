@@ -83,6 +83,16 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 
 
 
+### Txpool (non-standard)
+
+| JSON-RPC methods | Doc                                                         | Implemented?           |
+| :--------------- | :---------------------------------------------------------- | :--------------------- |
+| txpool_content   | https://geth.ethereum.org/docs/rpc/ns-txpool#txpool_content | ✅ (returns empty data) |
+| txpool_status    | https://geth.ethereum.org/docs/rpc/ns-txpool#txpool_status  | ✅ (returns empty data) |
+| txpool_inspect   | https://geth.ethereum.org/docs/rpc/ns-txpool#txpool_inspect | ✅ (returns empty data) |
+
+
+
 ## TM
 
 | JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
@@ -207,7 +217,7 @@ Parameters:
 
 Returns:
 
-`Array` - array of transaction objects, see [eth\_getTransactionByHash](https://eth.wiki/json-rpc/API#eth_getTransactionByHash)
+`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
 
 
 
