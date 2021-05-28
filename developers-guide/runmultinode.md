@@ -127,7 +127,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params"
 Now, you had send an `editValidator` transaction to staking contract. Check this transaction's receipt (replace `your_tx_hash` with what the hex string you get above):
 
 ```
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["your_tx_has"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["your_tx_hash"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
 ```
 
 If the `status` is `0x1`, congratulations, your genesis validator is activated now.
