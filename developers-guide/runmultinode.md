@@ -64,6 +64,7 @@ The genesis-generator will send you a tarball named dot.smartbchd.tgz, which con
 ```bash
 cd ~
 tar zxvf dot.smartbchd.tgz
+rm -rf .smartbchd
 ./smartbchd init mynode --chain-id 0x2711
 cp -rf dot.smartbchd/* .smartbchd/
 ```

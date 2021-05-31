@@ -1,8 +1,8 @@
 # Testnets for smartBCH
 
-You can test your DApp using a [local single-node testnet](deverlopers-guide/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
+You can test your DApp using a [local single-node testnet](developers-guide/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
 
-You can run tests with [metamask](deverlopers-guide/test-using-metamask.md), [truffle](deverlopers-guide/deploy-contract-using-truffle.md), or [remix](deverlopers-guide/deploy-contract-using-remix.md).
+You can run tests with [metamask](developers-guide/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
 
 
 ### ~~smartBCH-T1 (not active)~~
@@ -19,7 +19,7 @@ You can run tests with [metamask](deverlopers-guide/test-using-metamask.md), [tr
 
 ~~To join this testnet as a non-validator node, follow the steps below:~~
 
-~~First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](deverlopers-guide/runsinglenode.md).~~
+~~First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).~~
 
 ~~Second, prepare the working directory:~~
 
@@ -61,7 +61,7 @@ In this testnet, the gas price can be as low as zero.
 
 To join this testnet as a non-validator node, follow the steps below:
 
-First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](deverlopers-guide/runsinglenode.md).
+First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
 
 Second, prepare the working directory:
 
@@ -85,4 +85,39 @@ Last, start smartbchd:
 
 ```bash
 ~/build/smartbchd start
+```
+
+
+### smartBCH-billiongas
+
+This is a testnet for smartBCH to demonstrate its billion gas capacity. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
+
+1. http://billiongas.org:8545
+2. http://billiongas.net:8545
+3. http://billiongas.io:8545
+
+In this testnet, the gas price can be as low as zero.
+
+To join this testnet as a non-validator node, follow the steps below:
+
+First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
+
+Second, prepare the working directory:
+
+```bash
+cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
+cd ~
+rm -rf .smartbchd
+~/build/smartbchd init freedomMan --chain-id 0x2711
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.1/dot.smartbchd.tgz
+tar zxvf dot.smartbchd.tgz
+cp -rf dot.smartbchd/* .smartbchd/
+```
+
+Last, start smartbchd. Since this "billiongas" testnet needs a lot of SSD space, you'd better use the `--home` option to specify another location for the data directory.
+
+```bash
+export DIR=/path/to/a/big/disk
+mv ~/.smartbchd $DIR
+~/build/smartbchd start --home=$DIR/.smartbchd
 ```
