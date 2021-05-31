@@ -64,15 +64,9 @@ The genesis-generator will send you a tarball named dot.smartbchd.tgz, which con
 ```bash
 cd ~
 tar zxvf dot.smartbchd.tgz
-./smartbchd init mynode --chain-id 0x2711 \
-  --init-balance=1000000000000000000000000000000 \
-  --test-keys="a07871d10858179c1bb3c1f0d7bab31103135b76f96b6bd1f06a5bc0d350f862"
+./smartbchd init mynode --chain-id 0x2711
 cp -rf dot.smartbchd/* .smartbchd/
 ```
-
-In the `./smartbchd init` command, the balance number and the test-keys are not important, because these information will be overwritten by the genesis.json file coming from the `dot.smartbchd` directory.
-
-
 
 #### Step 5: Copy private key file to data directory and start node
 
@@ -85,7 +79,7 @@ cp ./priv_validator_key.json ~/.smartbchd/config/
 Now start the node:
 
 ```
-./build/smartbchd start
+./smartbchd start
 ```
 
 
@@ -107,7 +101,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["your_
 After you have enough bch, you can run the following command:
 
 ```
-./build/smartbchd staking \
+./smartbchd staking \
 --validator-key=07427a59913df1ae8af709f60f536ddba122b0afa8908291471ca58c603a7447 \
 --staking-coin=2000000000000000000000000 \
 --nonce=0 \
@@ -144,7 +138,7 @@ Just finish the steps 0-9 as [running a single-node testnet](./runsinglenode.md)
 
 #### Step 1: add genesis validator info to genesis.json using hex strings sent by other nodes
 
-Using `./build/smartbchd add-genesis-validator` multiple times, one time with one hex string sent by one node. Finally you'll include all the validators' information in the genesis.json file.
+Using `./smartbchd add-genesis-validator` multiple times, one time with one hex string sent by one node. Finally you'll include all the validators' information in the genesis.json file.
 
 Then, make a copy of the `~/.smartbchd` directory, excluding the `node_key.json` file. 
 

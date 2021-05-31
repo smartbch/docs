@@ -102,7 +102,7 @@ cd smart_bch
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.1.4 --depth 1 https://github.com/smartbch/moeingevm
+git clone -b v0.1.6 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
@@ -116,7 +116,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.1.4 --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.1.6 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
