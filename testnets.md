@@ -117,7 +117,8 @@ cp -rf dot.smartbchd/* .smartbchd/
 Last, start smartbchd. Since this "billiongas" testnet needs a lot of SSD space, you'd better use the `--home` option to specify another location for the data directory.
 
 ```bash
-export DIR=/path/to/a/big/disk
-mv ~/.smartbchd $DIR
+export DIR=/path/to/a/dir/in/big/disk
+mkdir $DIR
+mv ~/.smartbchd $DIR/
 ~/build/smartbchd start --home=$DIR/.smartbchd
 ```
