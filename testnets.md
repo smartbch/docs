@@ -95,6 +95,7 @@ This is a testnet for smartBCH to demonstrate its billion gas capacity. The chai
 1. http://billiongas.org:8545
 2. http://billiongas.net:8545
 3. http://billiongas.io:8545
+4. http://billiongas.cash:8545
 
 In this testnet, the gas price can be as low as zero.
 
