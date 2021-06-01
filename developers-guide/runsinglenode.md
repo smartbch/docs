@@ -9,6 +9,7 @@ We suggest to use ubuntu 20.04.
 #### Step 0: install the basic tools.
 
 ```bash
+sudo sed -i -e '$a* soft nofile 65536\n* hard nofile 65536' /etc/security/limits.conf ;# enlarge count of open files
 sudo apt update
 sudo apt install make cmake g++ gcc git 
 ```
