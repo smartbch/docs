@@ -1,6 +1,6 @@
 # Introduction
 
-Currently, there are no toolkits dedicatedly designed for smartBCH. Please use the tools from Ethereum's ecosystem \(Remix, truffle, waffle, ganache, etc\) to develop the source code and compile the EVM bytecode. After the DApp works fine on ganache, you can start testing it with smartbchd \(the executable of smartBCH's full node client\), which can [start a single node private testnet](runsinglenode.md).
+Currently, there are no toolkits dedicatedly designed for smartBCH. Please use the tools from Ethereum's ecosystem \(Remix, truffle, waffle, ganache, etc\) to develop the source code and compile the EVM bytecode. After the DApp works fine on ganache, you can start testing it with smartbchd \(the executable of smartBCH's full node client\), which can [start a single node private testnet](runsinglenode.md), or a [multi-node testnet](runmultinode.md)
 
 Through a compatible Web3 API, smartbchd interacts with the wallets \(such as MetaMask\) and DApp's backend, just as an infura node does. We try our best to make it behave the same as infura for compatibility, but there are still missing features and bugs.
 
