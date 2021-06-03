@@ -25,6 +25,7 @@
 * [MoeingADS's internal architecture](in-depth-design-documents/internal.md)
 * [Benchmarking MoeingADS](in-depth-design-documents/benchmarking-moeingads.md)
 * [Benchmarking MoeingEVM and MoeingADS](in-depth-design-documents/benchmarking-moeingevm-moeingads.md)
+* [Benchmarking Testnet](in-depth-design-documents/benchmarking-testnet.md)
 * [Transaction Reordering in smartBCH](in-depth-design-documents/tx-reorder.md)
 * [Transaction Parallel Execution in smartBCH](in-depth-design-documents/parallel-execution.md)
 * [Data structures in world state](in-depth-design-documents/data-structures-in-world-state.md)
