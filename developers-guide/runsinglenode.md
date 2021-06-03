@@ -9,6 +9,7 @@ We suggest to use ubuntu 20.04.
 #### Step 0: install the basic tools.
 
 ```bash
+sudo sed -i -e '$a* soft nofile 65536\n* hard nofile 65536' /etc/security/limits.conf ;# enlarge count of open files
 sudo apt update
 sudo apt install make cmake g++ gcc git 
 ```
@@ -238,6 +239,7 @@ Thus, when this node starts up, it can use the private consensus key.
 #### Step 11: start the node:
 
 ```bash
+ulimit -n 65536
 ./smartbchd start --unlock="7fc6cf51adb430d9220c9f3ed4e992e75b5d1e8e52fe2bc99183cadc141725bc,\
 08c65e04cd27b03d8bb8d19ffadadd82c2dd0935e3f23f313857a2c9629bba43,\
 594d82ba88e52b2e037da8513493074eee5e6a6820d836afee5764fb78830285,\
