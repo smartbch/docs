@@ -80,7 +80,7 @@ cp ./priv_validator_key.json ~/.smartbchd/config/
 Now start the node:
 
 ```
-ulimit -n 60000
+ulimit -n 65536
 ./smartbchd start
 ```
 

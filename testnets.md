@@ -121,6 +121,6 @@ Last, start smartbchd. Since this "billiongas" testnet needs a lot of SSD space,
 export DIR=/path/to/a/dir/in/big/disk
 mkdir $DIR
 mv ~/.smartbchd $DIR/
-ulimit -n 60000
+ulimit -n 65536
 ~/build/smartbchd start --home=$DIR/.smartbchd
 ```
