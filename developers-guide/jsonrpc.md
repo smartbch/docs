@@ -120,9 +120,10 @@ Retrns:
 | [sbch\_queryTxByDst](jsonrpc.md#sbch_queryTxByDst) | N/A | N/A | ✅ |
 | [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | ✅ |
 | [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | ✅ |
-| [sbch\_getTxListByHeight](https://github.com/smartbch/docs/tree/9947b4fd8cf43b045ad11d8d0442b35ae6cb3b09/dev/sbch_getTxListByHeight/README.md) | N/A | N/A | ✅ |
-| [sbch_getAddressCount](jsonrpc.md#sbch_getAddressCount.md) | N/A | N/A | ✅ |
-| [sbch_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | ✅ |
+| [sbch\_getTxListByHeight](jsonrpc.md#sbch_getTxListByHeight) | N/A | N/A | ✅ |
+| [sbch\_getTxListByHeightWithRange](jsonrpc.md#sbch_getTxListByHeightWithRange) | N/A | N/A | ✅ |
+| [sbch\_getAddressCount](jsonrpc.md#sbch_getAddressCount) | N/A | N/A | ✅ |
+| [sbch\_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | ✅ |
 |                                                              |                  |                        |  |
 
 
@@ -214,6 +215,22 @@ Get tx list by height.
 Parameters:
 
 1. `QUANTITY|TAG` - integer of start number, or string  `"latest"` for the last mined block
+
+Returns:
+
+`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+
+
+
+### sbch\_getTxListByHeightWithRange
+
+Get tx list by height and tx index range.
+
+Parameters:
+
+1. `QUANTITY|TAG` - integer of start number, or string  `"latest"` for the last mined block
+2. `QUANTITY` - integer of start tx index
+3. `QUANTITY` - integer of end tx index, or "0x0" which stands for "the largest tx index"
 
 Returns:
 
