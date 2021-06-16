@@ -2,19 +2,19 @@
 
 #### Dependencies
 
-首先按照[多节点测试网](./runmultinode.md)步骤执行，注意启动步骤替换成下面的命令，其余保持一致。
+Please follow the guide for [multi-node testnet](./runmultinode.md). And do add the `--mainnet-url` option to specifiy a bitcoincashnode's RPC endpoint, which can be a real one or a fake one, just as following:
 
 ```
-./smartbchd start --mainnet-url=http://127.0.0.1:1234/
+./smartbchd start --mainnet-url=http://node-ip-address:port-number
 ```
 
 
 
-#### Fake Node 操作步骤
+#### Running a Fake RPC Server for Testing
 
-fake node模拟BCH主网行为，由smartBCH开发人员负责操作，步骤如下：
+The `bchnode` tool mimics a real bitcoincashnode's RPC behavior. You can use it with the following steps:
 
-##### 启动
+##### Start the bchnode RPC Server
 
 ```
 Git clone https://github.com/smartbch/testkit.git
@@ -22,48 +22,47 @@ cd bchnode
 go run main.go &
 ```
 
-##### 添加公钥和voting power信息
+##### Add a New Validator's public key and voting power
 
-格式为：`pubkey`-`votingPower`-`action`，action分为add | edit | retire三种
+The format is `pubkey`-`votingPower`-`action`, where the action can be "add", "edit" or "retire".
 
 ```
-cd scripts
+cd scripts ;# there are some utility scripts in the directory testkit/bchnode/scripts
 ./pubkey.sh eeed4fae3da010e393efed2aacd271971fd2383fc68109a475d6c9ef65435d52-9-add
 ```
 
-添加公钥后fake node开始出块，出块间隔默认为3s。
+The `bchnode` produces blocks with fixed interval (default is 3 seconds) to vote for the validators.
 
-##### 调整区块间隔
+##### Adjust block interval
 
-比如将区块间隔调整为10s
+To change the block interval to 10 seconds:
 
 ```
 ./interval.sh 10
 ```
 
-##### 区块重组
+##### Simulate a Block Reorg
 
 ```
 ./reorg.sh
 ```
 
-主网会从8个区块前开始分叉，并形成新的最近8个区块的信息。
+The `bchnode` will simulate a fork at the height which is 8 blocks less than current height, and re-generate the recent 8 blocks.
 
 
 
-#### 测试步骤
+#### The Suggested Scenarios for Test
 
-1. 按照genesis.json文件中的voting power和pubkey配置fake node
-
-2. 保持现有的validator之间的voting power比例三个epoch
-3. 调整voting power比例，通过switch epoch切换主validator
-4. fake node重组，smartBCH保持正常出块
-5. 添加新的validator并通过fake node voting激活
-6. 重启smartBCH节点可以正常同步区块
-
+1. Configure `bchnode` to follow the voting power and pubkeys specified in genesis.json
+2. Keep the current voting power and pubkeys for three epochs.
+3. Change the voting power setting of `bchnode`, such that at new epochs, the smartbchd follows the new voting power.
+4. Run block reorg at `bchnode`, and smartbchd can work normally.
+5. Add new validators in and let `bchnode` vote them to be active.
+6. Restart smartbchd and it can also work fine.
 
 
-#### smartBCH epoch参数
+
+#### smartBCH parameters for testing with bchnode
 
 ```
 NumBlocksInEpoch       int64 = 30

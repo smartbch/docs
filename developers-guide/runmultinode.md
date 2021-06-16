@@ -18,7 +18,7 @@ Follow the instructions in [running a single-node testnet](./runsinglenode.md), 
 
 ```bash
 cd ~/smart_bch/smartbch
-./smartbchd gen-test-keys -n 1 --show-address
+./smartbchd gen-test-keys -n 1 --show-address | tee gen-test-keys.txt
 2915b09298d0362df490fe3969b10aece94cd3460fb1ba29184cba31516a9b5f 0xF0c6969C2a554ddae639ba1Aa1d2fA11382CAb2B
 ```
 
@@ -31,7 +31,7 @@ The above command generates one private key. And the corresponding EOA address i
 Now we generate the ed25519 private key for consensus engine:
 
 ```bash
-./smartbchd generate-consensus-key-info
+./smartbchd generate-consensus-key-info |tee generate-consensus-key-info.txt
 a07871d10858179c1bb3c1f0d7bab31103135b76f96b6bd1f06a5bc0d350f862
 ```
 
@@ -83,6 +83,8 @@ Now start the node:
 ulimit -n 65536
 ./smartbchd start
 ```
+
+For the `smartbchd start` command, you can use `--mainnet-url` option to specify a bitcoincashnode's RPC endpoint, and use `--home` option to specifiy another data directory other than ~/.smartbchd .
 
 
 
@@ -176,4 +178,3 @@ Then send this dot.smartbchd.tgz file to all the other nodes.
 
 
 
-#### 

@@ -187,7 +187,7 @@ After successfully executing the above commands, you can find the initialized da
 Now we generate the ed25519 private key for consensus engine:
 
 ```bash
-./smartbchd generate-consensus-key-info
+./smartbchd generate-consensus-key-info | tee generate-consensus-key-info.txt
 d6569de9567bac00d9946dc72ca71ffe0ff735729eb966e8437d6b6b24fe0ff1
 ```
 
@@ -255,6 +255,9 @@ fbb4694007aff7a979f46e76f9ec522015ed74702594864bde419a6c4a24f377"
 You can also ignore the `unlock` argument to unlock no accounts.
 
 This command starts the node which provides JSON-RPC service at localhost:8584. You can use the `--http.addr` option to select another port other than localhost:8584. We unlocked accounts created at genesis, which can be shown using the following command:
+
+
+You can also use `--mainnet-url` option to specify a bitcoincashnode's RPC endpoint, and use `--home` option to specifiy another data directory other than ~/.smartbchd .
 
 ```bash
 # Run this command in another terminal:
