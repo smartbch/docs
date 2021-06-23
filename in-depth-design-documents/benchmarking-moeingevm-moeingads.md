@@ -84,6 +84,7 @@ Step 3: replay the transactions in the generated blocks:
 
 ```bash
 go build -tags cppbtree .
+rm -rf testdbdata
 /usr/bin/time -v ./stresstest replay |tee replay.log
 ```
 
