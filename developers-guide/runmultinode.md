@@ -71,7 +71,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 
 #### Step 5: Copy private key file to data directory and start node
 
-Copy priv_validator_key.json generated in Step 2, to the data directory:
+Copy priv_validator_key.json generated in Step 2, to get the data directory:
 
 ```bash
 cp ./priv_validator_key.json ~/.smartbchd/config/
@@ -178,11 +178,13 @@ Then send this dot.smartbchd.tgz file to all the other nodes.
 
 
 
-### 3. On the node which create validator after chain startup
+### 3. Join in as a validator after genesis
+
+You can also join in an already-running smartBCH chain as a new validator.
 
 #### Step 0: create new validator
 
-Follow the step 0,1,2 in `On the nodes which do not generate the genesis file`, and use these key info to build command below:
+Follow the step 0,1,2 described in the above section 1, to get the validator account key and the consensus key. Then, you can use these key information to build command below:
 
 ```
 ./smartbchd staking \
@@ -194,28 +196,36 @@ Follow the step 0,1,2 in `On the nodes which do not generate the genesis file`, 
 --chain-id=0x2711
 ```
 
-#### Step 1: send raw transaction
+This command will output a hex string to be used in the next step.
 
-Make sure you have enough bch in you validator account.
+#### Step 1: send transaction to register as a validator
 
-Then broadcast the transaction (replace `--your_tx_data` with what hex string get above):
+Make sure you have enough BCH in you validator account.
+
+Then broadcast the transaction (replace `your_tx_data` with what hex string get above):
 
 ```
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["you_tx_data"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
 ```
 
-Now, you had send an `editValidator` transaction to staking contract. Check this transaction's receipt (replace `your_tx_hash` with what the hex string you get above):
+OK, now you had send a `createValidator` transaction to the staking contract. Check this transaction's receipt (replace `your_tx_hash` with what the hex string you get in above command):
 
 ```
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["your_tx_hash"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
 ```
 
-If the `status` is `0x1`, congratulations, your genesis validator is created now.
+If the `status` is `0x1`, congratulations, your validator is created now, but it has no voting power now.
 
 #### Step 2: voting in the BCH mainnet
+
+Someone must vote for your validator to make it active in a future epoch. If you are using [a fake BCH node](https://github.com/smartbch/testkit/tree/main/bchnode), the voting for new validator can be started using the following command:
 
 ```
 ./bchnode/scripts pubkey.sh "you_consenesus_pubkey"-"you_voting_power"-add
 ```
 
 Like this: `./pubkey.sh d4849694a7105200464dfc1160c95ed26664b556c3e468b03312ed9ebd937eb4-1-add`
+
+If you are using a real BCH node, please use **`getblocktemplate`** to specify the coinbase transaction for voting.
+
+You can also starting voting before registering the validator, which can make sure then it is registered, it gets voting power as soon as possible.
