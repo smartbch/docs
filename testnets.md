@@ -127,3 +127,29 @@ Last, start smartbchd.
 
 ```
 
+If you want to join the underlying BCH testnet, here is the configuration file for bitcoincashnode:
+
+```
+regtest=1
+
+[regtest]
+
+bind=0.0.0.0
+port=8331
+rpcbind=0.0.0.0
+rpcport=8332
+
+zmqpubhashtx=tcp://0.0.0.0:8333
+zmqpubhashblock=tcp://0.0.0.0:8333
+
+rpcuser=test
+rpcpassword=test
+rpcthreads=4
+
+rpcallowip=0.0.0.0/0
+
+whitelistrelay=0
+
+addnode=47.115.171.70:28331
+```
+
