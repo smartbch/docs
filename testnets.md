@@ -118,7 +118,7 @@ Last, start smartbchd.
 ./smartbchd start --mainnet-url=http://34.150.125.124:8332 \
   --mainnet-user=test \
   --mainnet-password=test \
-  --mainnet-genesis-height=6000 \
+  --mainnet-genesis-height=10900 \
   --log-validators=true \
   --smartbch-url=http://35.220.203.194:8545 \
   --watcher-speedup=true 

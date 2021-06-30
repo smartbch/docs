@@ -17,8 +17,8 @@ sudo apt install make cmake g++ gcc git
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
 
 ```bash
-wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
-tar zxvf go1.16.3.linux-amd64.tar.gz 
+wget https://golang.org/dl/go1.16.5.linux-amd64.tar.gz
+tar zxvf go1.16.5.linux-amd64.tar.gz 
 ```
 
 And set some environment variables for golang:
