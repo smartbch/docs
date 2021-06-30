@@ -58,6 +58,8 @@ This is a testnet for smartBCH to demonstrate its billion gas capacity. The chai
 
 In this testnet, the gas price can be as low as zero.
 
+Test coin faucet can be found at http://34.92.91.11:8080/faucet
+
 To join this testnet as a non-validator node, follow the steps below:
 
 First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
