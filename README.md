@@ -4,7 +4,7 @@ Here is the document site for smartBCH.
 
 If you just want to know general information about smartBCH, the [white paper](smartbch_whitepaper-en.md) and [FAQ](faq.md) would be enough.
 
-From a DApp developer's view, smartBCH is just yet another EVM-compatible block chain, similar to BSC, heco and Tron. But since the underlying architecture of smartBCH has MANY differences from Ethereum, there are some issues that developers must be aware of. So we provide [developers guides](deverlopers-guide/intro.md) here.
+From a DApp developer's view, smartBCH is just yet another EVM-compatible block chain, similar to BSC, heco and Tron. But since the underlying architecture of smartBCH has MANY differences from Ethereum, there are some issues that developers must be aware of. So we provide [developers guides](developers-guide/intro.md) here.
 
 If you are a researcher or a low-level library hacker, you may be interested in the several moeing\*\*\* libraries provided by smartBCH. They are the core innovations and infrastructure for high TPS. If you want to learn their details or use them in other projects, here is [in-depth introduction](in-depth-design-documents/intro.md).
 
