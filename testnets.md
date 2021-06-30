@@ -127,6 +127,8 @@ Last, start smartbchd.
 
 ```
 
+Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](developers-guide/runmultinode.md).
+
 If you want to join the underlying BCH testnet, here is the configuration file for bitcoincashnode:
 
 ```
