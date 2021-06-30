@@ -10,6 +10,7 @@
 * [Introduction](developers-guide/intro.md)
 * [Single Node Private Testnet](developers-guide/runsinglenode.md)
 * [Multi-Node Testnet](developers-guide/runmultinode.md)
+* [Fake RPC Server for Testing](developers-guide/runmultinodewithfakenode.md)
 * [Deploy contracts using Truffle](developers-guide/deploy-contract-using-truffle.md)
 * [Deploy contracts using Remix](developers-guide/deploy-contract-using-remix.md)
 * [Test using MetaMask](developers-guide/test-using-metamask.md)
@@ -32,8 +33,9 @@
 
 ## SmartBCH Evolution Proposals \(SEPs\)
 
-* [SEP18: Rejectable token transfers on smartBCH](smartbch-evolution-proposals-seps/sep-18.md)
 * [SEP101: Store values with arbitrary length](smartbch-evolution-proposals-seps/sep-101.md)
+* [SEP102: Adjustment of Used Gas](smartbch-evolution-proposals-seps/sep-102.md)
+* [SEP18: Rejectable token transfers on smartBCH](smartbch-evolution-proposals-seps/sep-18.md)
 * [SEP20: Tokens on smartBCH](smartbch-evolution-proposals-seps/sep-20.md)
 * [SEP206: Manipulate Native Token as a SEP20 Token](smartbch-evolution-proposals-seps/sep-206.md)
 

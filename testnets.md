@@ -4,16 +4,17 @@ You can test your DApp using a [local single-node testnet](developers-guide/runs
 
 You can run tests with [metamask](developers-guide/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
 
+### smartBCH-T1a (not active)
 
-### ~~smartBCH-T1 (not active)~~
+~~This is a testnet for smartBCH with nodes supports https. The chain ID is 0x2711. You can use the following JSON-RPC nodes:~~
 
-~~This is the first testnet for smartBCH. The chain ID is 0x2711. You can use the following JSON-RPC nodes:~~
+1. ~~https://moeing.app:9545~~
+2. ~~http://moeing.app:8545~~
+3. ~~https://moeing.tech:9545~~
+4. ~~http://moeing.tech:8545~~
+5. ~~https://t.smartbch.games:9546~~
 
-1. ~~http://106.75.244.31:8545~~
-2. ~~http://106.75.214.131:8545~~
-3. ~~http://135.181.219.10:8545~~
-
-~~Test coin faucet can be found at http://moeing.tech:8080/faucet~~
+~~Test coin faucet can be found at http://moeing.tech:8081/faucet~~
 
 ~~In this testnet, the gas price can be as low as zero.~~
 
@@ -22,48 +23,6 @@ You can run tests with [metamask](developers-guide/test-using-metamask.md), [tru
 ~~First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).~~
 
 ~~Second, prepare the working directory:~~
-
-```bash
-cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
-
-~/build/smartbchd init freedomMan --chain-id 0x2711
-
-cat > ~/.smartbchd/config/genesis.json <<EOF
-{"genesis_time":"2021-04-28T08:52:30.924811088Z","chain_id":"0x2711","initial_height":"1","consensus_params":{"block":{"max_bytes":"22020096","max_gas":"-1","time_iota_ms":"1000"},"evidence":{"max_age_num_blocks":"100000","max_age_duration":"172800000000000","max_bytes":"1048576"},"validator":{"pub_key_types":["ed25519"]},"version":{}},"app_hash":"","app_state":{"validators":[{"Address":[131,177,226,38,142,151,109,20,205,231,194,59,170,148,136,116,4,254,113,161],"Pubkey":[216,67,236,41,175,121,7,192,158,182,170,217,10,110,107,227,136,73,179,237,32,89,47,137,235,159,143,117,10,4,205,166],"RewardTo":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"VotingPower":10,"Introduction":"genesis_validator","StakedCoins":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,53,201,173,197,222,160,0,0],"IsRetiring":false},{"Address":[77,107,212,170,94,71,12,121,49,45,142,134,13,33,235,187,35,24,138,28],"Pubkey":[9,59,7,178,72,63,73,82,107,168,156,253,25,170,107,35,79,46,81,231,61,155,95,29,164,45,228,103,53,119,136,48],"RewardTo":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"VotingPower":1,"Introduction":"genesis_validator","StakedCoins":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,53,201,173,197,222,160,0,0],"IsRetiring":false},{"Address":[59,65,43,120,81,44,91,200,255,60,222,186,33,102,94,22,34,52,199,115],"Pubkey":[27,215,102,227,235,52,63,129,170,212,140,91,27,61,3,146,116,113,4,211,15,195,76,160,25,34,5,178,87,189,241,196],"RewardTo":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"VotingPower":1,"Introduction":"genesis_validator","StakedCoins":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,53,201,173,197,222,160,0,0],"IsRetiring":false}],"alloc":{"0x83b1e2268e976d14cde7c23baa94887404fe71a1":{"balance":"0x204fce5e3e25026110000000","secretKey":"0x37929f578acf92f58f14c5b9cd45ff28c2868c2ba194620238f25d354926a287"}}}}
-EOF
-
-cp ~/.smartbchd/config/config.toml ~/tmp
-
-gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"63211024f412d931521b1b64e2606510c13b3f64@139.180.189.205:26656,4c81dfb478831d006411769db2939f39a85058ec@45.32.38.25:26656,6b30dd5a93b343f1e1804caf06d027c31e3f442f@158.247.197.98:26656,bb298794e8fd14e7eccd97a99915291743e591e4@106.75.244.31:26656,bb298794e8fd14e7eccd97a99915291743e591e4@106.75.244.31:26656,2533226d85037357b933c77db179badb0d00898c@106.75.214.131:26656,6e278aebce4e5b00ebf261d996f8e46fea134738@47.242.105.251:26656\""}' ~/tmp > ~/.smartbchd/config/config.toml
-
-rm ~/tmp
-```
-
-~~Last, start smartbchd:~~
-
-```bash
-~/build/smartbchd start
-```
-
-### smartBCH-T1a
-
-This is a testnet for smartBCH with nodes supports https. The chain ID is 0x2711. You can use the following JSON-RPC nodes:
-
-1. https://moeing.app:9545
-2. http://moeing.app:8545
-3. https://moeing.tech:9545
-4. http://moeing.tech:8545
-5. https://t.smartbch.games:9546
-
-Test coin faucet can be found at http://moeing.tech:8081/faucet
-
-In this testnet, the gas price can be as low as zero.
-
-To join this testnet as a non-validator node, follow the steps below:
-
-First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
-
-Second, prepare the working directory:
 
 ```bash
 cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
@@ -81,7 +40,7 @@ gawk '$1!="seeds" {print $0} $1=="seeds" {print "seeds = \"25f2aa2d2aa5b09f1867a
 rm ~/tmp
 ```
 
-Last, start smartbchd:
+~~Last, start smartbchd:~~
 
 ```bash
 ~/build/smartbchd start
@@ -98,6 +57,8 @@ This is a testnet for smartBCH to demonstrate its billion gas capacity. The chai
 4. http://billiongas.cash:8545
 
 In this testnet, the gas price can be as low as zero.
+
+Test coin faucet can be found at http://34.92.91.11:8080/faucet
 
 To join this testnet as a non-validator node, follow the steps below:
 
@@ -124,3 +85,73 @@ mv ~/.smartbchd $DIR/
 ulimit -n 65536
 ~/build/smartbchd start --home=$DIR/.smartbchd
 ```
+
+### smartBCH-T2
+
+This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitcoincashnode client which mines with CPU.The chain ID is 0x2711. You can use the following JSON-RPC nodes:
+
+1. http://35.220.203.194:8545
+2. http://34.92.91.11:8545
+3. http://34.85.10.192:8546
+
+Test coin faucet can be found at http://moeing.tech:8081/faucet
+
+In this testnet, the gas price can be as low as zero.
+
+To join this testnet as a non-validator node, follow the steps below:
+
+First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
+
+Second, prepare the working directory:
+
+```bash
+cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
+cd ~
+rm -rf .smartbchd
+~/build/smartbchd init freedomMan --chain-id 0x2711
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.2/dot.smartbchd.tgz
+tar zxvf dot.smartbchd.tgz
+cp -rf dot.smartbchd/* .smartbchd/
+```
+
+Last, start smartbchd. 
+
+```bash
+./smartbchd start --mainnet-url=http://34.150.125.124:8332 \
+  --mainnet-user=test \
+  --mainnet-password=test \
+  --mainnet-genesis-height=10900 \
+  --log-validators=true \
+  --smartbch-url=http://35.220.203.194:8545 \
+  --watcher-speedup=true 
+
+```
+
+Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](developers-guide/runmultinode.md).
+
+If you want to join the underlying BCH testnet, here is the configuration file for bitcoincashnode:
+
+```
+regtest=1
+
+[regtest]
+
+bind=0.0.0.0
+port=8331
+rpcbind=0.0.0.0
+rpcport=8332
+
+zmqpubhashtx=tcp://0.0.0.0:8333
+zmqpubhashblock=tcp://0.0.0.0:8333
+
+rpcuser=test
+rpcpassword=test
+rpcthreads=4
+
+rpcallowip=0.0.0.0/0
+
+whitelistrelay=0
+
+addnode=47.115.171.70:28331
+```
+

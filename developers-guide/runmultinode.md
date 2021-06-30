@@ -18,7 +18,7 @@ Follow the instructions in [running a single-node testnet](./runsinglenode.md), 
 
 ```bash
 cd ~/smart_bch/smartbch
-./smartbchd gen-test-keys -n 1 --show-address
+./smartbchd gen-test-keys -n 1 --show-address | tee gen-test-keys.txt
 2915b09298d0362df490fe3969b10aece94cd3460fb1ba29184cba31516a9b5f 0xF0c6969C2a554ddae639ba1Aa1d2fA11382CAb2B
 ```
 
@@ -31,7 +31,7 @@ The above command generates one private key. And the corresponding EOA address i
 Now we generate the ed25519 private key for consensus engine:
 
 ```bash
-./smartbchd generate-consensus-key-info
+./smartbchd generate-consensus-key-info |tee generate-consensus-key-info.txt
 a07871d10858179c1bb3c1f0d7bab31103135b76f96b6bd1f06a5bc0d350f862
 ```
 
@@ -71,7 +71,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 
 #### Step 5: Copy private key file to data directory and start node
 
-Copy priv_validator_key.json generated in Step 2, to the data directory:
+Copy priv_validator_key.json generated in Step 2, to get the data directory:
 
 ```bash
 cp ./priv_validator_key.json ~/.smartbchd/config/
@@ -83,6 +83,8 @@ Now start the node:
 ulimit -n 65536
 ./smartbchd start
 ```
+
+For the `smartbchd start` command, you can use `--mainnet-url` option to specify a bitcoincashnode's RPC endpoint, and use `--home` option to specifiy another data directory other than ~/.smartbchd .
 
 
 
@@ -176,4 +178,54 @@ Then send this dot.smartbchd.tgz file to all the other nodes.
 
 
 
-#### 
+### 3. Join in as a validator after genesis
+
+You can also join in an already-running smartBCH chain as a new validator.
+
+#### Step 0: create new validator
+
+Follow the step 0,1,2 described in the above section 1, to get the validator account key and the consensus key. Then, you can use these key information to build command below:
+
+```
+./smartbchd staking \
+--validator-key=fceb6fbf700ae1faaf482fbaf7c3dfd2c8635956ed23a3eb1178e5d71ac34dbc \
+--staking-coin=1000000000000000000000000 \
+--consensus-pubkey=d4849694a7105200464dfc1160c95ed26664b556c3e468b03312ed9ebd937eb4 \
+--type=create \
+--nonce=0 \
+--chain-id=0x2711
+```
+
+This command will output a hex string to be used in the next step.
+
+#### Step 1: send transaction to register as a validator
+
+Make sure you have enough BCH in you validator account.
+
+Then broadcast the transaction (replace `your_tx_data` with what hex string get above):
+
+```
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["you_tx_data"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
+```
+
+OK, now you had send a `createValidator` transaction to the staking contract. Check this transaction's receipt (replace `your_tx_hash` with what the hex string you get in above command):
+
+```
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["your_tx_hash"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
+```
+
+If the `status` is `0x1`, congratulations, your validator is created now, but it has no voting power now.
+
+#### Step 2: voting in the BCH mainnet
+
+Someone must vote for your validator to make it active in a future epoch. If you are using [a fake BCH node](https://github.com/smartbch/testkit/tree/main/bchnode), the voting for new validator can be started using the following command:
+
+```
+./bchnode/scripts pubkey.sh "you_consenesus_pubkey"-"you_voting_power"-add
+```
+
+Like this: `./pubkey.sh d4849694a7105200464dfc1160c95ed26664b556c3e468b03312ed9ebd937eb4-1-add`
+
+If you are using a real BCH node, please use **`getblocktemplate`** to specify the coinbase transaction for voting.
+
+You can also starting voting before registering the validator, which can make sure then it is registered, it gets voting power as soon as possible.
