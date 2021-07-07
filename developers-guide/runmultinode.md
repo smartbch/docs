@@ -229,3 +229,52 @@ Like this: `./pubkey.sh d4849694a7105200464dfc1160c95ed26664b556c3e468b03312ed9e
 If you are using a real BCH node, please use **`getblocktemplate`** to specify the coinbase transaction for voting.
 
 You can also starting voting before registering the validator, which can make sure then it is registered, it gets voting power as soon as possible.
+
+
+
+### 4. Adjust minGasPrice
+
+You can adjust minmum gas price that tx must pay for its gas in smartBCH chain, but only an active validator and its rewardTo address has permission to do this.
+
+#### Step 0: generate minGasPrice adjust signed rawTx
+
+Follow the step 0,1,2 described in the above section 1, to get the validator account key and the consensus key. Then, you can use these key information to build increase minGasPrice command below:
+
+```
+./smartbchd staking \
+--validator-key=fceb6fbf700ae1faaf482fbaf7c3dfd2c8635956ed23a3eb1178e5d71ac34dbc \
+--type=increase \
+--nonce=0 \
+--chain-id=0x2711
+```
+
+or decrease minGasPrice command below:
+
+```
+./smartbchd staking \
+--validator-key=fceb6fbf700ae1faaf482fbaf7c3dfd2c8635956ed23a3eb1178e5d71ac34dbc \
+--type=decrease \
+--nonce=0 \
+--chain-id=0x2711
+```
+
+These two command will output a hex string to be used in the next step.
+
+#### Step 1: send transaction to adjust minGasPrice
+
+Make sure you have enough BCH in you sender account.
+
+Then broadcast the transaction (replace `your_tx_data` with what hex string get above):
+
+```
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["you_tx_data"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
+```
+
+OK, now you had send a `increaseMinGasPrice` transaction to the staking contract. Check this transaction's receipt (replace `your_tx_hash` with what the hex string you get in above command):
+
+```
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["your_tx_hash"],"id":1}' -H "Content-Type: application/json" http://localhost:8545
+```
+
+If the `status` is `0x1`, congratulations, your update success.
+
