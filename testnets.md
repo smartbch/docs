@@ -94,7 +94,7 @@ This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitco
 2. http://34.92.91.11:8545
 3. http://34.85.10.192:8546
 
-Test coin faucet can be found at http://moeing.tech:8081/faucet
+Test coin faucet can be found at http://moeing.tech:8080/faucet
 
 In this testnet, the gas price can be as low as zero.
 
