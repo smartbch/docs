@@ -11,7 +11,7 @@ The voting protocol is simple: the first output of the coinbase transaction whic
 1. It begins with the "OP_RETURN" opcode
 2. The pushed value after OP_RETURN is a 37-byte string, in which the starting 5 bytes are 0x73, 0x42, 0x43, 0x48 and 0x0, and the ending 32 bytes are an ed25519 public key, which is used to identify a node in tendermint
 
-There maybe multiple outputs meeting the above two requirements, but only the first one is regarded as a vote, and the others are ignored.
+There may be multiple outputs meeting the above two requirements, but only the first one is regarded as a vote, and the others are ignored.
 
 An epoch's end time is the largest timestamp of its blocks, and its duration time is the difference between the end times of adjacent epochs. The quorum elected during an epoch will stay in a stand-by state for 5% of the epoch's duration time. Then it takes its turn to be on duty, until the next quorum leaves its stand-by state, which is necessary because any Bitcoin Cash reorganization may alter the blocks in an epoch.
 
