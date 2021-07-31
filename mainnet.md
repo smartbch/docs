@@ -34,6 +34,7 @@ mainnet-rpc-password = "<my password>"
 Last, start smartbchd. 
 
 ```bash
+cd ~/build
 ./smartbchd start --mainnet-genesis-height=698502
 ```
 
