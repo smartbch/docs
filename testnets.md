@@ -11,7 +11,7 @@ You can run tests with [metamask](developers-guide/test-using-metamask.md), [tru
 This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitcoincashnode client which mines with CPU.The chain ID is 0x2711. You can use the following JSON-RPC nodes:
 
 1. http://35.220.203.194:8545
-2. https://moeing.tech:8546
+2. https://moeing.tech:9545
 
 Test coin faucet can be found at http://34.92.246.27:8080/faucet
 
