@@ -21,9 +21,18 @@ In this testnet, the gas price can be as low as 1Gwei.
 
 To join this testnet as a non-validator node, follow the steps below:
 
-First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
+First, build the latest binary by running the step 0, 1, 2, 3 of [this document](developers-guide/runsinglenode.md).
 
-Second, prepare the working directory:
+Second, clone & build smartbch from amber branch:
+
+```bash
+cd ~/smart_bch
+git clone -b amber --depth 1 https://github.com/smartbch/smartbch
+cd smartbch
+go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
+```
+
+Third, prepare the working directory:
 
 ```bash
 cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
@@ -38,7 +47,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 Last, start smartbchd. 
 
 ```bash
-./smartbchd start --mainnet-genesis-height=602983
+~/build/smartbchd start --mainnet-genesis-height=602983
 ```
 
 Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](developers-guide/runmultinode.md).
