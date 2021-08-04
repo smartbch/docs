@@ -15,6 +15,8 @@ This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitco
 
 Test coin faucet can be found at http://34.92.246.27:8080/faucet
 
+We sincerely thank [Allen Day](https://github.com/allenday) for donating several cloud servers to bring up this testnet. 
+
 In this testnet, the gas price can be as low as 1Gwei.
 
 To join this testnet as a non-validator node, follow the steps below:
