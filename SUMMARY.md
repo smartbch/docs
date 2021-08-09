@@ -5,6 +5,7 @@
 * [FAQ](faq.md)
 * [Mainnet](mainnet.md)
 * [Testnets](testnets.md)
+* [Decentralized Cross-Chain Bridge](sha-gate.md)
 
 ## Developer's Guide
 
