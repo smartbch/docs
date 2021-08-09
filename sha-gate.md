@@ -1,4 +1,6 @@
-# SHA-Gate: a sidechain bridge for Bitcoin Cash
+# Decentralized Cross-Chain Bridge
+
+## SHA-Gate: a sidechain bridge for Bitcoin Cash
 
 This document describes a mechanism named "SHA-Gate" which transfers BCH between the Bitcoin Cash main chain and a sidechain.  It is decentralized, non-custodian, miner-supervised and fully implemented with Bitcoin Cash's script bytecode. It does not require any consensus change of Bitcoin Cash, nor rely on operators' honesty for asset security.
 
