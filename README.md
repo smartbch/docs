@@ -10,7 +10,7 @@ If you are a researcher or a low-level library hacker, you may be interested in 
 
 You can join smartBCH with a full-node client by following [this guide](./mainnet.md).
 
-The decentralized bridge connecting BCH and smartBCH is named as [SHA-Bridge](./sha-gate.md). The developers are now busy studying its feasibility and safety. We invite the BCH community to help use review and refine SHA-Bridge, to speed up its development.
+The decentralized bridge connecting BCH and smartBCH is named as [SHA-Gate](./sha-gate.md). The developers are now busy in studying its feasibility and safety, with coding and implementation followed soon. We invite the BCH community to help us review and refine SHA-Gate, to speed up its development.
 
 The SEPs are **s**martBCH **e**volution **p**roposals, in which the community discusses future direction of smartBCH.
 
