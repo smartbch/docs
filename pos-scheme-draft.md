@@ -6,7 +6,7 @@ After the launching of smartBCH, the developers have been thinking about how to 
 
 This document introduces our solution, which is named as LeverDay. It begins with a smart contract named XHedge which extends the function of AnyHedge (a famous Bitcoin Cash futures contract). Then it combines XHedge and the concept of coin-day to enable voting.
 
-Just like AnyHedge, XHedge needs an oracle to submit the price of BCH (relative to USD) onto smartBCH.
+Just like AnyHedge, XHedge needs one or more oracles to submit the price of BCH (relative to USD) onto smartBCH.
 
 XHedge allows Bob to divide some BCH into a LeverNFT and a HedgeNFT. Bob needs to provide the following arguments:
 
@@ -16,6 +16,7 @@ XHedge allows Bob to divide some BCH into a LeverNFT and a HedgeNFT. Bob needs t
 4. Penalty on closeout: Pc
 5. Mature time: MT
 6. A validator Bob would like to support
+7. The price oracle which this pair of NFTs trust 
 
 And then XHedge will deduct some BCH from Bob's account and lock them. The locked Amount is `A=(1+CR0)*Vh/P0`. After that Bob get a LeverNFT and a HedgeNFT, he can transfer them to other persons. In some scenarios, these NFT can be both burnt and the BCH locked because of them will be liquidated:
 
