@@ -8,23 +8,23 @@ This document introduces this solution, which is named as LeverDay. It begins wi
 
 Just like AnyHedge, XHedge needs one or more oracles to submit the price of BCH (relative to USD) onto smartBCH.
 
-XHedge allows Bob to divide some BCH into a LeverNFT and a HedgeNFT. Bob needs to provide the following arguments:
+Suppose now BCH's price is `P0` and Bob wants to use XHedge to divide some BCH into a pair of LeverNFT/HedgeNFT.  He must provide the following arguments:
 
-1. The initial collateral rate: CR0
-2. The minimum collateral rate: CRmin
-3. The value contained in the HedgeNFT (measured in USD): Vh
-4. Penalty on closeout: Pc
-5. Mature time: MT
+1. The initial collateral rate: `CR0`
+2. The minimum collateral rate: `CRmin`
+3. The value contained in the HedgeNFT (measured in USD): `Vh`
+4. Penalty on closeout: `Pc`
+5. Mature time: `MT`
 6. A validator Bob would like to support
-7. The price oracle which this pair of NFTs will trust 
+7. The price oracle which this pair of NFTs will trust
 
 And then XHedge will deduct some BCH from Bob's account and lock them. The locked Amount is `A=(1+CR0)*Vh/P0`. After that Bob get a LeverNFT and a HedgeNFT, which can be transferred to other persons. In some scenarios, these NFT can be both burnt and the BCH locked because of them will be liquidated:
 
-1. After the mature time (MT), any owner of these two NFTs can initiate liquidation. At the liquidation moment, if BCH's price is P, then the owner of HedgeNFT can get `min(A, Vh*P)` and the owner of LeverNFT, `max(0, A-Vh*P)`. The owner of HedgeNFT secures the value of her asset, while the owner of LeverNFT enlarges her risk and benefit.
-2. Before the mature time, if the price `P` drops and the locked BCH cannot meet the minimum collateral rate (`A < (1+CRmin)*Vh/P`), then the owner of HedgeNFT can initiate liquidation.  The owner of HedgeNFT can get `min(A, Vh*P*(1+Pc))` and the owner of LeverNFT, `max(0, A-Vh*P1*(1+Pc))`. 
+1. Before the mature time, if the price drops to `P1` and the locked BCH cannot meet the minimum collateral rate (`A < (1+CRmin)*Vh/P`), then the owner of HedgeNFT can initiate liquidation.  The owner of HedgeNFT can get `min(A, Vh*P1*(1+Pc))` and the owner of LeverNFT, `max(0, A-Vh*P1*(1+Pc))`. 
+2. After the mature time `MT`, any owner of these two NFTs can initiate liquidation. At the liquidation moment, if BCH's price is `P2`, then the owner of HedgeNFT can get `min(A, Vh*P2)` and the owner of LeverNFT, `max(0, A-Vh*P2)`. The owner of HedgeNFT secures the value of her asset, while the owner of LeverNFT enlarges her risk and benefit.
 3. At any time, if both LeverNFT and HedgeNFT belong to the same account, then this account can get all the locked BCH by burning both NTF tokens.
 
-The owner of LeverNFT can increase of decrease the locked BCH amount `A`:
+The owner of LeverNFT can increase or decrease the locked BCH amount `A`:
 
 1. At any time, she can deposit more BCH to enlarge A: add margin to avoid closeout
 2. When the current price `P` is large enough for `P>P0*CR0`, she can withdraw some BCH to shrink A (reduce the margin), as long as A is still no less than `(1+CR0)*Vh/P` after withdrawing. And, from the coins withdrawn by her, 0.5% is deducted and paid to the owner of HedgeNFT as a compensation fee.
