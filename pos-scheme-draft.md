@@ -38,7 +38,9 @@ XHedge will record how long the coins have been locked because of a pair of NFTs
 
 Since anyone can send transactions to reset the accumulated coin-days, it is very hard for the LeverNFT's owner to accumulate a lot of coin-days. The supported validator would like to turn her accumulated coin-days into votes before the next epoch.
 
-XHedge will be implemented in EVM bytecode (compiled from solidity), just like any other smart contract. It votes for the validators by calling a predefined smart contract, which is implemented using golang and only allows XHedge to call it.
+XHedge will be implemented in EVM bytecode (compiled from solidity), just like any other smart contract. Inside its storage the accumulated coin-days voted for each validate are recorded. When switching to another epoch, the staking logic of smartBCH will scan these records for voting information and then clears these records.
+
+ votes for the validators by calling a predefined smart contract, which is implemented using golang and only allows XHedge to call it.
 
 Who has the rights to change the supported validator? The owner of the LeverNFT. Because only she is a stakeholder of BCH, while the owner of HedgeNFT is actually holding USD.
 
