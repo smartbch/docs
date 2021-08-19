@@ -36,7 +36,7 @@ XHedge will record how long the coins have been locked because of a pair of NFTs
 1. Use this pair of NFT to vote for the supported validator, and the voting power equals the accumulated coin-days.
 2. Reset the accumulated coin-days to zero.
 
-Since anyone can send transactions to reset the accumulated coin-days, it is very hard for the LeverNFT's owner to accumulate a lot of coin-days. The supported validator would like to turn her accumulated coin-days into votes before the next epoch.
+Since anyone can send transactions to reset the accumulated coin-days, it is very hard for the LeverNFT's owner to accumulate a lot of coin-days. It will be very common for a validator to scan HedgeNFTs which are supporting her and turn the accumulated coin-days into votes before the next epoch.
 
 XHedge will be implemented in EVM bytecode (compiled from solidity), just like any other smart contract. Inside its storage the accumulated coin-days voted for each validate are recorded. When switching to another epoch, the staking logic of smartBCH will scan these records for voting information and then clears these records.
 
