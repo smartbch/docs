@@ -47,7 +47,9 @@ All the coins existing in smartBCH are locked in a special kind of BCH UTXOs, na
 
 When a P2PKH address sends some coins into a cc_covenant, it means these coins are sent onto smartBCH. 
 
-Alice wants to send coins from BCH onto smartBCH. So she sends a transaction with one or more UTXOs as the input and one cc_covenant as the output. The first input must be a P2PKH UTXO. And since this transaction reveals the secp256k1 public key of this P2PKH address, a smartBCH address can be calculated by hashing this public key with Keccak256, and the unlocked coins will be deposited to this address. 
+Alice wants to send coins from BCH onto smartBCH. So she sends a transaction with one or more UTXOs as the input and one cc_covenant as the output. There are two ways to indicate the receiver on smartBCH. One way is adding an extra OP_RETURN output to directly specify the receiver's address. The other way is by inferencing: The first input must be a P2PKH UTXO. And since this transaction reveals the secp256k1 public key of this P2PKH address, a smartBCH address can be calculated by hashing this public key with Keccak256, and the unlocked coins will be deposited to this address.
+
+There will be a lower bound of the value contained in a cc_covenant, to prevent dusting attacks.
 
 This process is performed by all the smartBCH's full clients. It needs no party's manual operation, instead, it is fully automatic. Every smartBCH node must connect to a BCHN RPC server to fetch the latest blocks and transactions on BCH. Once it finds a new cc_covenant is created in a predefined way, it unlocks the same amount of BCH on smartBCH sidechain.
 
