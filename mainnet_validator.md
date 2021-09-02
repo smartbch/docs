@@ -69,12 +69,12 @@ Using validator private key and consensus pubkey generated in step 3 to build co
 ```
 ./smartbchd staking \
 --validator-key=<your validator private key> \
---staking-coin=0 \
+--staking-coin=1 \
 --consensus-pubkey=<your consensus pub key> \
 --introduction=<your validator introduction> \
 --type=create \
 --nonce=0 \
---gas-price=10000000000 \
+--gas-price=1250000000 \
 --chain-id=0x2710
 ```
 
