@@ -31,6 +31,7 @@
 * [Benchmarking Testnet](in-depth-design-documents/benchmarking-testnet.md)
 * [Transaction Reordering in smartBCH](in-depth-design-documents/tx-reorder.md)
 * [Transaction Parallel Execution in smartBCH](in-depth-design-documents/parallel-execution.md)
+* [Send back-to-back Transactions](in-depth-design-documents/send-back-to-back-tx.md)
 * [Data structures in world state](in-depth-design-documents/data-structures-in-world-state.md)
 
 ## SmartBCH Evolution Proposals \(SEPs\)
