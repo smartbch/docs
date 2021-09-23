@@ -117,7 +117,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.3.2 --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.3.3 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
@@ -218,7 +218,7 @@ The output hex string contains the information of a validator.
 #### Step 9: add genesis validator info to genesis.json using hex string generated above
 
 ```bash
-./build/smartbchd add-genesis-validator \
+./smartbchd add-genesis-validator \
 7b2241646472657373223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c225075626b6579223a5b3231352c362c3232372c3135392c3232302c37312c39342c36372c3235312c3230352c3139332c3233312c3231352c3232342c3130342c3132342c3232352c37352c36332c3235312c3133352c3139392c3233302c3135372c352c3138372c32362c3234352c32312c3136362c37352c36355d2c22526577617264546f223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a22667265656d616e222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c352c3130372c3139392c39342c34352c39392c31362c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
@@ -261,7 +261,7 @@ You can also use `--mainnet-url` option to specify a bitcoincashnode's RPC endpo
 
 ```bash
 # Run this command in another terminal:
-$ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_accounts", "params":[],"id":1}' \
+curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_accounts", "params":[],"id":1}' \
     -H "Content-Type: application/json" http://localhost:8545 | jq
 ```
 
