@@ -1,45 +1,42 @@
-# SEP18: Rejectable token transfers on smartBCH
+# SEP18: Blockchain cheques on smartBCH
 
-* [SEP-18: Rejectable token transfers on smartBCH](sep-18.md#rejectable-token-transfers-on-smartbch)
+* [SEP-18: Blockchain cheques on smartBCH](sep-18.md#blockchain-cheques-on-smartbch)
   * [1. Summary](sep-18.md#1--summary)
   * [2. Abstract](sep-18.md#2--abstract)
   * [3. Motivation](sep-18.md#3--motivation)
   * [4. Status](sep-18.md#4--status)
   * [5. Specification](sep-18.md#5--specification)
-    * [5.1 Rejectable transfers](sep-18.md#51-rejectable-transfers)
+    * [5.1 Blockchain cheques](sep-18.md#51-blockchain-cheques)
       * [5.1.1 Methods](sep-18.md#511-methods)
-        * [5.1.1.1 agentInfo](sep-18.md#5111-agentinfo)
-        * [5.1.1.2 minimumAcceptableAmount](sep-18.md#5112-minimumacceptableamount)
-        * [5.1.1.3 transfer](sep-18.md#5113-transfer)
-        * [5.1.1.4 getPendingTransfer](sep-18.md#5114-getpendingtransfer)
-        * [5.1.1.5 revoke](sep-18.md#5115-revoke)
-        * [5.1.1.6 accept](sep-18.md#5116-accept)
-        * [5.1.1.7 reject](sep-18.md#5117-reject)
+        * [5.1.1.1 encryptionPubkeys](sep-18.md#5111-encryptionpubkeys)
+        * [5.1.1.2 setEncryptionPubkey](sep-18.md#5112-setencryptionpubkey)
+        * [5.1.1.3 unsetEncryptionPubkey](sep-18.md#5113-unsetencryptionpubkey)
+        * [5.1.1.4 writeCheque](sep-18.md#5114-writecheque)
+        * [5.1.1.5 revokeCheque](sep-18.md#5115-revokecheque)
+        * [5.1.1.6 acceptCheque](sep-18.md#5116-acceptcheque)
+        * [5.1.1.7 refuseCheque](sep-18.md#5117-refusecheque)
       * [5.1.2 Events](sep-18.md#512-events)
-        * [5.1.2.1 Transfer](sep-18.md#5121-transfer)
-        * [5.1.2.2 Accept](sep-18.md#5122-accept)
-        * [5.1.2.3 Reject](sep-18.md#5123-reject)
-        * [5.1.2.4 Revoke](sep-18.md#5124-revoke)
-    * [5.2 Factory for Transfer Agents](sep-18.md#52-factory-for-transfer-agents)
-      * [5.2.1 Methods](sep-18.md#521-methods)
-        * [5.2.1.1 getAgent](sep-18.md#5211-getagent)
-        * [5.2.1.2 createAgent](sep-18.md#5212-createagent)
-    * [5.3 Address Format](sep-18.md#53-address-format)
+        * [5.1.2.1 SetEncryptionPubkey](sep-18.md#5121-setencryptionpubkey)
+        * [5.1.2.2 UnsetEncryptionPubkey](sep-18.md#5122-unsetencryptionpubkey)
+        * [5.1.2.3 NewCheque](sep-18.md#5123-newcheque)
+        * [5.1.2.4 RevokeCheque](sep-18.md#5124-revokecheque)
+        * [5.1.2.5 AcceptCheque](sep-18.md#5125-acceptcheque)
+        * [5.1.2.6 RefuseCheque](sep-18.md#5126-refusecheque)
   * [6. License](sep-18.md#6-license)
 
 ## 1.  Summary
 
-This SEP proposes an interface standard to create token transfer agent contracts on smartBCH.
+This SEP proposes an interface standard for sending and receiving blockchain cheques on smartBCH.
 
 ## 2.  Abstract
 
-The following standard defines the implementation of APIs for token transfer agent smart contracts. This agent smart contract holds the tokens the sender transfers and the recipient can choose to accept them or return them back to the sender.
+The following standard defines the implementation of APIs for blockchain cheque smart contracts. Such contracts hold the tokens the sender transfers and the recipient can choose to accept them or return them back to the sender.
 
 ## 3.  Motivation
 
-Many IM tools support the feature of "Red Envelop", with which the recipient can choose to accept or ignore. Normal token transferring can not provide such a feature, so a special agent constract is needed to support such a feature.
+In the physical world, you can write cheques to some payees. Cheques have richer information and features than normal funds transfer. They can carry memos to explain the reason. They have deadlines to enforce the payees to accept them before a given date. The payees can choose to accept the funds or reject them by destroying the cheque.
 
-This SEP can work with custodial wallets, where the private key is not controlled by the recipient but the wallet operator. The recipient can use the preimage-checking mechanism to improve security.
+In some scenarios, we would like to mimic paper cheques on blockchain. Besides, blockchain cheques can provide more secrity by adding passphrase and more privacy by encrypting memos.
 
 ## 4.  Status
 
@@ -47,164 +44,153 @@ This SEP is under draft.
 
 ## 5.  Specification
 
-### 5.1 Rejectable transfers
+### 5.1 Blockchain cheques
 
 **NOTES**:
 
-* The following specifications use syntax from Solidity **0.6.12** \(or above\)
+* The following specifications use syntax from Solidity **0.8.6** \(or above\)
 * All the listed functions and events MUST be implemented.
 
 #### 5.1.1 Methods
 
-**5.1.1.1 agentInfo**
+**5.1.1.1 encryptionPubkeys**
 
 ```text
-function agentInfo() external view returns (address token, uint unit);
+function encryptionPubkeys(address receiver) external view returns (uint);
 ```
 
-Each agent contract handles one SEP20 token and the transferred tokens must be integral multiple of a unit. `agentInfo()` returns the token's address and the unit amount.
+Blockchain cheques can carry memos. To preserve privacy, all the memos must be encrypted with the receiver's public key for encryption. If a receiver does not book her public key for encryption in a contract, then nobody can send cheques with non-zero-length memos to her.
 
-**5.1.1.2 minimum acceptable amount**
+Given a reciever's address, the function `encryptionPubkeys` returns the corresponding 32-byte public key for encryption. It returns zero if the receiver does not book a public key.
+
+**5.1.1.2 setEncryptionPubkey**
 
 ```text
-function setMinimumAcceptableAmount(uint amount) external;
-function getMinimumAcceptableAmount(address account) external returns (uint);
+function setEncryptionPubkey(uint pubkey, address referee) external;
 ```
 
-A user can use `setMinimumAcceptableAmount` to set the minimum acceptable amount that others transfer to her. If she never sets such a value, its default value is zero. And `getMinimumAcceptableAmount` queries the minimum acceptable amount set by an `account`.
+A user uses `setEncryptionPubkey` to set `pubkey` as her public key for encryption. The argument `referee` is the address of the account who suggest this user to call `setEncryptionPubkey`. It can be set to zero if there is no referee at all.
 
-**5.1.1.3 transfer**
+**5.1.1.3 unsetEncryptionPubkey**
 
 ```text
-function transfer(address to, uint packedArgs, bytes calldata message) external returns (bool);
+function unsetEncryptionPubkey() external;
 ```
 
-This function transfers some tokens into this agent contract, pending for going to the `to` address in the future, with a `message` explaining why. The bit fields `packedArgs` contain extra arguments:
+A user uses `unsetEncryptionPubkey` to cancel her public key for encryption. After that, this contract no longer allows sending any cheques with memos to her.
 
-* 64-bit transferring amount \(255~192\)
-* 31-bit deadline \(191~161\), which equals the deadline's UNIX timestamp divied by 3600
-* 1-bit checkPreimage \(160\), specifying whether the recipient should enter a correct `preimage` to recieve the tokens
-* 160-bit ticket \(159~0\), which is used to uniquely identify a transfer to some recipient. It contains two parts:
-  * 32-bit nonce \(159~128\), which are meaningless bits, just used to avoid conflicting with existing ticket
-  * 128-bit hash low bits \(127~0\), which are the low 128 bits of `keccak(preimage)`
-
-This function returns true on success, returns false if the transferred amount is less than the recipient's minimum acceptable amount, and throws on other errors.
-
-It is recommended to put encrypted text in the `message`, but not required. The symmetric key for encryption can be derived from the private&public keys of the sender and recipient, using the [ECDH](https://wiki.openssl.org/index.php/Elliptic_Curve_Diffie_Hellman) algorithm.
-
-**5.1.1.4 getPendingTransfers**
+**5.1.1.4 writeCheque**
 
 ```text
-function getPendingTransfer(address to, uint160 ticket) external view returns (uint packedInfo);
+function writeCheque(address payee,
+			address coinType,
+			uint96 amount,
+			uint64 deadline,
+			uint passphraseOrHashtag,
+			bytes calldata memo) external payable;
+function writeCheques(address[] calldata payeeList,
+			address coinType,
+			uint96 amount,
+			uint64 deadline,
+			uint[] calldata passphraseHashList,
+			bytes[] calldata memoList) external payable;
 ```
 
-Given a recipient's address `to` and a `ticket`, query a 256-bit word `packedInfo` which describes a pending transfer. The bit fields of `packedInfo` are:
+The function `writeCheque` is used to write a cheque to the `payee`. The fund contained in the cheque must be an SEP20 token, whose address is `coinType`. The fund quantity is specified by `amount`. The `payee` must accept this cheque before the time `deadline`, which is UNIX timestamp, or this cheque will get expired.
 
-* 64-bit transferring amount \(255~192\)
-* 31-bit deadline \(191~161\), which equals the deadline's UNIX timestamp divied by 3600
-* 1-bit checkPreimage \(160\), specifying whether the recipient should enter a correct `preimage` to recieve the tokens
-* 160-bit from-address \(159~0\), showing who initiated this transfer by sending tokens into this agent contract
+A cheque can has a passphrase or a hash tag, according to the `passphraseOrHashtag` argument:
+1. If this argument is zero, then this cheque has no passphrase nor hash tag.
+2. Otherwise, if the most significant byte of this argument is 35 (the ascii code of "#"), then this cheque has a hash tag. Hash tag is usually a human-readable short string.
+3. Otherwise, if the most significant byte of this argument is not 35, then the other 31 bytes of `passphraseOrHashtag` is a hash calculated from a passphrase. The passphrase can be transferred off-chain to the receiver, through eMail, IM or other tools. The `memo` can also hint the receiver about what the passphrase is. To accept the cheque and get the fund in it, the receiver must provide correct passphrase, which can be hashed into the low 31 bytes of `passphraseOrHashtag`. The exact value of the highest byte does not make any difference.
 
-**5.1.1.5 revoke**
+A cheque can has a memo, which is always encrypted with the receiver's public key for encryption. If a receiver does not book her public key for encryption in the contract, the contract must refuse anyone to send cheques with non-zero-length memos.
+
+The function `writeCheques` is a batched version of `writeCheque`. It can write several cheques to different receivers at one time. The `deadline` and the funds' `coinType` and `amount` for the cheques must be the same. The memos and passphrases (or hashtags) for different recievers, can be different.
+
+For each sent cheque, the contract must assign a unique 256-bit ID to it, which will be used to refer to this cheque in the subsequent operations.
+
+**5.1.1.5 revokeCheque**
 
 ```text
-function revoke(address to, uint160 ticket) external returns (bool);
+function revokeCheque(uint id) public;
+function revokeCheques(uint[] calldata idList) external;
 ```
 
-The sender who initiated a transfer can revoke it by calling `revoke` with the recipient's address `to` and the `ticket`. A successful revocation must happen after the deadline. The sender could initiate the transfer by specifying a zero deadline, which means she can revoke it at any time.
+The sender who wrote a cheque can revoke it by calling `revokeCheque` with the cheque's `id`, after it is expired, i.e., passes its deadline. Thus she can take back the fund inside the cheque.
 
-This function returns true on success, returns false if current timestamp is no larger than deadline and throws on other errors.
+The function `revokeCheques` is a batched version of `revokeCheque`. It revokes multiple expired cheques at a time.
 
-**5.1.1.6 accept**
+**5.1.1.6 acceptCheque**
 
 ```text
-function accept(uint160 ticket) external returns (bool);
-function acceptWithPreimage(uint160 ticket, uint preimage) external returns (bool);
-function acceptWithBeneficiary(uint160 ticket, address beneficiary) external returns (bool);
-function acceptWithPreimageAndBeneficiary(uint160 ticket, uint preimage, address beneficiary) external returns (bool);
+function acceptCheque(uint id, bytes calldata passphrase) external;
+function acceptCheques(uint[] calldata idList) external;
 ```
 
-A recipient accepts the tokens in a pending transfer by specifying the `ticket` and the coins will be sent to `beneficiary`. If the `checkPreimage` bit of `packedInfo` of this pending transfer is 1, the recipient must also specify a correct `preimage` such that the low 128 bits of `keccak(preimage)` and `ticket` are the same.
+The receiver can accept a cheque by providing a passphrase, before it is expired. If the cheque has a passphrase, then passphrase provided by the receiver will be hashed and checked against the `passphraseOrHashtag` field. If the passphrase is incorrent, the receiver cannot get the fund.
 
-There are four variants of functions which have different arguments. If `preimage` is not specified, its default value is zero. If `beneficiary` is not specified, its default value is the recipient's address.
+The function `acceptCheques` is a batched version of `acceptCheque`, which does not have a `passphrase` argument. All the specified cheques must have no passphrase.
 
-These functions return true on success, return false if checking of `preimage` is failed, and throw on other errors.
-
-A recipient can use an address from non-custodial wallet as the `beneficiary` address, such that the recipient's account will never accumulate a lot of coins. The sender can use other channels \(IM, email, SMS, etc\) to inform the recipient about the `presage`. Thus the custodial wallet's operator cannot accept all its customers pending transfers and dispear.
-
-**5.1.1.7 reject**
+**5.1.1.7 refuseCheque**
 
 ```text
-function reject(uint160 ticket) external;
+function refuseCheque(uint id) external;
+function refuseCheques(uint[] calldata idList) external;
 ```
 
-A recipient rejects the tokens in a pending transfer by specifying the `ticket` and the coins will be returned to the initiator.
+The receiver can refuse a cheque anytime before it is expired. The fund inside the refused cheque will immediately go back to the sender.
+
+The function `refuseCheques` is a batched version of `refuseCheque`.
 
 #### 5.1.2 Events
 
-**5.1.2.1 Transfer**
+**5.1.2.1 SetEncryptionPubkey**
 
 ```text
-event Transfer(address indexed from, address indexed to, uint indexed packedArgs, bytes message);
+event SetEncryptionPubkey(address indexed payee, address referee, uint key);
 ```
 
-* **MUST** trigger when a sender successfully initiates a pending transfer.
+* **MUST** trigger when a user sets her public key for encryption.
 
-**5.1.2.2 Accept**
+**5.1.2.2 UnsetEncryptionPubkey**
 
 ```text
-event Accept(address indexed from, address indexed to, uint indexed packedArgs);
+event UnsetEncryptionPubkey(address indexed payee);
 ```
 
-* **MUST** trigger when a recipient successfully accepts a pending transfer.
+* **MUST** trigger when a user unsets her public key for encryption.
 
-**5.1.2.3 Reject**
+**5.1.2.3 NewCheque**
 
 ```text
-event Reject(address indexed from, address indexed to, uint indexed packedArgs);
+event NewCheque(address indexed payee, uint indexed id, address indexed drawer,
+		uint coinTypeAndAmount, uint startAndEndTime, uint passphraseOrHashtag, bytes memo);
 ```
 
-* **MUST** trigger when a recipient rejects a pending transfer.
+* **MUST** trigger when a new cheque is successfully generated. `payee` is the account who can accept this cheque, `id` is assigned by the contract to uniquely identify this cheque, and `drawer` is the account who writes this cheque. The `passphraseOrHashtag` and `memo` have the same value as the arguments for calling `writeCheque`. The high 160 bits of `coinTypeAndAmount` is the fund's SEP20 address and the low 96 bits is the amount. The bits 127~64 of `startAndEndTime` is the time when this cheque is generated and bits 63~0 of `startAndEndTime` is the deadline.
 
-**5.1.2.4 Revoke**
+**5.1.2.4 RevokeCheque**
 
 ```text
-event Revoke(address indexed from, address indexed to, uint indexed packedArgs);
+event RevokeCheque(address indexed payee, uint indexed id, address indexed drawer);
 ```
+* **MUST** trigger when an expired cheque is revoked. `payee` is the account who did not accept this cheque, `id` is assigned by the contract to uniquely identify this cheque, and `drawer` is the account who wrote this cheque. 
 
-* **MUST** trigger when a sender successfully revokes a pending transfer she initiated.
-
-### 5.2 Factory for Transfer Agents
-
-A factory can generate new agents and hold the agents' addresses for query.
-
-**NOTES**:
-
-* All the listed functions and events MUST be implemented.
-
-#### 5.2.1 Methods
-
-**5.2.1.1 getAgent**
+**5.1.2.5 AcceptCheque**
 
 ```text
-function getAgent(address token) external view returns (address);
+event AcceptCheque(address indexed payee, uint indexed id, address indexed drawer);
 ```
 
-Given a SEP20 token's address, returns its agent contract's address.
+* **MUST** trigger when a cheque is accepted. `payee` is the account who accepts this cheque, `id` is assigned by the contract to uniquely identify this cheque, and `drawer` is the account who wrote this cheque. 
 
-**5.2.1.2 createAgent**
+**5.1.2.6 RefuseCheque**
 
 ```text
-function createAgent(address token, uint unit) external returns (address);
+event RefuseCheque(address indexed payee, uint indexed id, address indexed drawer);
 ```
 
-Create a new agent. The returned values of this agent's `agentInfo()` function must be the same as the parameters for calling `createAgent`.
-
-This function is not required to run in permissionless way, which means this function can be called only by some account witth privilege.
-
-### 5.3 Address Format
-
-One can show a text string \(or a QRCode converted from this string\) to others, such that others can send her coins through pending transfer agents. Such a string must follow the format of `user_address@factory_address`. For example, if the user's address is 0xb794f5ea0ba39494ce839613fffba74279579268 and the factory contract's address is 0xdc25ef3f5b8a186998338a2ada83795fba2d695e, then the string is 0xb794f5ea0ba39494ce839613fffba74279579268@0xdc25ef3f5b8a186998338a2ada83795fba2d695e.
+* **MUST** trigger when a cheque is refused. `payee` is the account who refuses this cheque, `id` is assigned by the contract to uniquely identify this cheque, and `drawer` is the account who wrote this cheque. 
 
 ## 6. License
 
