@@ -125,6 +125,7 @@ Retrns:
 | [sbch\_getAddressCount](jsonrpc.md#sbch_getAddressCount) | N/A | N/A | v0.1.0 |
 | [sbch\_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | v0.2.0 |
 | [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt) | N/A | N/A | v0.4.0 |
+|  |  |  |  |
 
 
 
@@ -279,7 +280,7 @@ Returns: array of objects sepcified by [eth_getTransactionReceipt](https://eth.w
 
 Each object in internalTransactions array contains the following fields:
 
-* `callPath`: `string` - a string representation of call type,depth and index of internal transaction (e.g. staticcall_0_1_1).
+* `callPath`: `string` - a string representation of call type, depth and index of internal transaction (e.g. staticcall_0_1_1).
 * `from`: `DATA`, 20 Bytes - address of the sender.
 * `to`: `DATA`, 20 Bytes - address of the receiver.
 * `gas`: `QUANTITY` - gas provided by the sender.
