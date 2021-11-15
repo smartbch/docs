@@ -54,20 +54,17 @@ Second, prepare smartBCH mainnet home directory:
 
 ```bash
 cd somewhere
+mkdir smartbchd_home
+docker run \
+  -v path/to/smartbchd_home:/root/.smartbchd \
+  smartbchd:latest init mynode --chain-id 0x2710
+
 wget https://github.com/smartbch/artifacts/releases/download/v0.0.3/dot.smartbchd.tgz
 tar xvf dot.smartbchd.tgz
-
-tree dot.smartbchd
-dot.smartbchd
-├── config
-│   ├── app.toml
-│   ├── config.toml
-│   └── genesis.json
-└── data
-    └── priv_validator_state.json
+cp -rfv dot.smartbchd/* smartbchd_home/
 ```
 
-Third, edit dot.smartbchd/config/app.toml, modify the information of the bitcoincashnode's client:
+Third, edit smartbchd_home/config/app.toml, modify the information of the bitcoincashnode's client:
 
 ```toml
 ...
@@ -81,7 +78,7 @@ Last, start smartbchd using Docker like this:
 
 ```bash
 docker run \
-  -v path/to/dot.smartbchd:/root/.smartbchd \
+  -v path/to/smartbchd_home:/root/.smartbchd \
   -p 0.0.0.0:18545:8545 \
   -p 0.0.0.0:18546:8546 \
   -d smartbchd:latest start --mainnet-genesis-height=698502
