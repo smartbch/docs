@@ -219,7 +219,7 @@ Parameters:
 
 Returns:
 
-`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+`Array` - array of transaction objects, see [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt)
 
 
 
@@ -235,7 +235,7 @@ Parameters:
 
 Returns:
 
-`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+`Array` - array of transaction objects, see [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt)
 
 
 
