@@ -38,3 +38,49 @@ cd ~/build
 ./smartbchd start --mainnet-genesis-height=698502
 ```
 
+
+
+## Docker
+
+You can also run your smartBCH node using Docker. First, clone smartBCH and build Docker image for mainnet:
+
+```bash
+git clone https://github.com/smartbch/smartbch.git
+cd smartbch
+docker image build -f Dockerfile.mainnet.optimized -t smartbchd:latest .
+```
+
+Second, prepare smartBCH mainnet home directory:
+
+```bash
+cd somewhere
+mkdir smartbchd_home
+docker run \
+  -v path/to/smartbchd_home:/root/.smartbchd \
+  smartbchd:latest init mynode --chain-id 0x2710
+
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.3/dot.smartbchd.tgz
+tar xvf dot.smartbchd.tgz
+cp -rfv dot.smartbchd/* smartbchd_home/
+```
+
+Third, edit smartbchd_home/config/app.toml, modify the information of the bitcoincashnode's client:
+
+```toml
+...
+mainnet-rpc-url = "http://ip-address:8332" # BCH mainnet rpc url
+mainnet-rpc-username = "<my user name>"    # BCH mainnet rpc username
+mainnet-rpc-password = "<my password>"     # BCH mainnet rpc password
+...
+```
+
+Last, start smartbchd using Docker like this:
+
+```bash
+docker run \
+  -v path/to/smartbchd_home:/root/.smartbchd \
+  -p 0.0.0.0:18545:8545 \
+  -p 0.0.0.0:18546:8546 \
+  -d smartbchd:latest start --mainnet-genesis-height=698502
+```
+
