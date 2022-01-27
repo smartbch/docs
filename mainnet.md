@@ -21,7 +21,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 Third, open the `~/.smartbchd/config/app.toml` file to modify the information of the bitcoincashnode's client with RPC enabled.
 
 ```
-# BCH mainnet rpc url
+# BCH mainnet rpc url (Only supprot BCHN)
 mainnet-rpc-url = "http://ip-address:8332"
 
 # BCH mainnet rpc username
