@@ -95,25 +95,6 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 
 
 
-## TM
-
-| JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
-| ---------------- | ---------------- | ---------------------- | ------------ |
-| tm\_nodeInfo     | N/A              | N/A                    | ✅            |
-|                  |                  |                        |              |
-
-### tm_nodeInfo
-
-Returns the information about Tendermint node.
-
-Parameters: No
-
-Retrns: 
-
-`Object`
-
-
-
 ## SBCH
 
 | JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Since  |
