@@ -39,7 +39,9 @@
 
 * [SEP101: Store values with arbitrary length](smartbch-evolution-proposals-seps/sep-101.md)
 * [SEP102: Adjustment of Used Gas](smartbch-evolution-proposals-seps/sep-102.md)
+* [SEP109: On-chain Verification of Verifiable Random Functions](smartbch-evolution-proposals-seps/sep-109.md)
 * [SEP18: Blockchain cheques on smartBCH](smartbch-evolution-proposals-seps/sep-18.md)
 * [SEP20: Tokens on smartBCH](smartbch-evolution-proposals-seps/sep-20.md)
 * [SEP206: Manipulate Native Token as a SEP20 Token](smartbch-evolution-proposals-seps/sep-206.md)
+* [SEP201: Simple Stochastic Payment](smartbch-evolution-proposals-seps/sep-201.md)
 
