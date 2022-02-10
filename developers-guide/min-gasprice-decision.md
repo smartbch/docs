@@ -1,4 +1,4 @@
-### Decision of minimum gas price
+### Decision on minimum gas price
 
 The chain-wide minimum gas price is a consensus parameter, which is the lower bound of the minimum gas prices set by different validators. This consensus parameter is modified by the validators.
 
@@ -16,7 +16,7 @@ The minimum gas price is decided in a voting process:
 2. The other validators call `vote` to specify the target minimum gas price of each one.
 3. The voting process will last for 24 hours. When it ends, anyone can call `executeProposal` to make the decision effective. 
 
-The decided minimum gas price is the middle of the arithmetic mean value and geometric mean value of all the voted targets.
+The decided minimum gas price is the middle of the arithmetic mean value and the geometric mean value of all the voted targets.
 
 #### Psuedo code
 
