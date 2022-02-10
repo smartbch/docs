@@ -1,10 +1,10 @@
-# LeverDay: A DeFi-Friendly PoS Scheme
+# XHedge: a smart contract for a DeFi-Friendly PoS
 
 In the white paper of smartBCH, we wrote: "During an epoch, BCH owners prove their ownerships of time-locked UTXOs and use the values of these UTXO to vote for a validator; whereas mining pools use coinbase transactions to vote...At the first phase after Smart Bitcoin Cash's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork." These words describe a popular PoS scheme requiring the holders to "lock" their coins for some time. It has an obvious disadvantage: when the holders vote for a validator, they will lost their opportunities of depositing the coins in DeFi and earning some benefits.
 
 After the launching of smartBCH, we the developers have been thinking about how to implement staking without this disadvantage. And the solution is surprisingly simple: the voters must be the guys who would like to "long Bitcoin Cash and short the world".
 
-This document introduces this solution, which is named as LeverDay. It begins with a smart contract named XHedge which extends the function of AnyHedge (a famous Bitcoin Cash futures contract). Then it combines XHedge and the concept of coin-day to enable voting.
+The PoS scheme of smartBCH begins with a smart contract named XHedge which extends the function of AnyHedge (a famous Bitcoin Cash futures contract). Then it combines XHedge and the concept of coin-day to enable voting.
 
 Just like AnyHedge, XHedge needs one or more oracles to submit the price of BCH (relative to USD) onto smartBCH.
 
@@ -44,7 +44,7 @@ Who has the rights to change the supported validator? The owner of the LeverNFT.
 
 After splitting his BCH into LeverNFT and HedgeNFT, Bob can deposit the NFTs into DeFi for earning. At the same time, the LeverNFT is continuously voting for the validator he supports, as long as the DeFi application which manages the LeverNFT does not change the supported validator.
 
-To sum up, the LeverDay scheme as the following advantages:
+To sum up, smartBCH's PoS scheme as the following advantages:
 
 1. Having voters for the validators be long-positions, it creates an even stronger alignment of incentives compared to "just" locking coins
 2. The BCH involved in DeFi applications can also be used for voting
