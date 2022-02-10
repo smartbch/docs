@@ -18,6 +18,8 @@
 * [Test using MetaMask](developers-guide/test-using-metamask.md)
 * [JSON-RPC Endpoints](developers-guide/jsonrpc.md)
 * [Staking Scheme](developers-guide/staking.md)
+* [XHedge Smart Contract](developers-guide/xhedge-contract.md)
+* [Decision of the minimum gas price](developers-guide/min-gasprice-decision.md)
 
 ## In-Depth Design Documents
 
