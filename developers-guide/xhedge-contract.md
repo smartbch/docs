@@ -21,7 +21,7 @@ Suppose now BCH's price is `P0` and Bob wants to use XHedge to divide some BCH i
 And then XHedge will deduct some BCH from Bob's account and lock them. The locked Amount is `A=(1+CR0)*Vh/P0`. After that Bob get a LeverNFT and a HedgeNFT, which can be transferred to other persons. In some scenarios, these NFT can be both burnt and the BCH locked because of them will be liquidated:
 
 1. Before the mature time, if the price drops to `P1` and the locked BCH cannot meet the minimum collateral rate (`A < (1+CRmin)*Vh/P1`), then the owner of HedgeNFT can initiate liquidation.  The owner of HedgeNFT can get `min(A, (1+Pc)*Vh/P1)` and the owner of LeverNFT, `max(0, A-(1+Pc)*Vh/P1)`. 
-2. After the mature time `MT`, any owner of these two NFTs can initiate liquidation. At the liquidation moment, if BCH's price is `P2`, then the owner of HedgeNFT can get `min(A, Vh*P2)` and the owner of LeverNFT, `max(0, A-Vh*P2)`. The owner of HedgeNFT secures the value of her asset, while the owner of LeverNFT enlarges her risk and benefit.
+2. After the mature time `MT`, any owner of these two NFTs can initiate liquidation. At the liquidation moment, if BCH's price is `P2`, then the owner of HedgeNFT can get `min(A, Vh/P2)` and the owner of LeverNFT, `max(0, A-Vh/P2)`. The owner of HedgeNFT secures the value of her asset, while the owner of LeverNFT enlarges her risk and benefit.
 3. At any time, if both LeverNFT and HedgeNFT belong to the same account, then this account can get all the locked BCH by burning both NTF tokens.
 
 The owner of LeverNFT can increase or decrease the locked BCH amount `A`:
