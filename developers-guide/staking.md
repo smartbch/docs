@@ -62,7 +62,7 @@ The chain-wide minimum gas price is a consensus parameter, which is the lower bo
 
 Before the XHedge upgrade, to increase (decrease) it by a predefined percentage, a qualified EOA call the `increaseMinGasPrice` (`decreaseMinGasPrice`) function, respectively. A qualified EOA is a validator or a validator's `rewardTo` account. This method may cause chaos of meaningless rising and falling.
 
-After the XHedge upgrade, there is [a more sophisticated method](./mingas-decision.md) for the validators to vote for a final decision of the minimum gas price.
+After the XHedge upgrade, there is [a more sophisticated method](./min-gasprice-decision.md) for the validators to vote for a final decision on the minimum gas price.
 
 ### Distribute Rewards
 
