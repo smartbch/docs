@@ -1,10 +1,10 @@
-# LeverDay: A DeFi-Friendly PoS Scheme
+# XHedge: a smart contract for a DeFi-Friendly PoS
 
 In the white paper of smartBCH, we wrote: "During an epoch, BCH owners prove their ownerships of time-locked UTXOs and use the values of these UTXO to vote for a validator; whereas mining pools use coinbase transactions to vote...At the first phase after Smart Bitcoin Cash's launch, only hash power is used for electing validators. Locking BCH at mainnet for staking will be implemented later and take effect in a future hard fork." These words describe a popular PoS scheme requiring the holders to "lock" their coins for some time. It has an obvious disadvantage: when the holders vote for a validator, they will lost their opportunities of depositing the coins in DeFi and earning some benefits.
 
 After the launching of smartBCH, we the developers have been thinking about how to implement staking without this disadvantage. And the solution is surprisingly simple: the voters must be the guys who would like to "long Bitcoin Cash and short the world".
 
-This document introduces this solution, which is named as LeverDay. It begins with a smart contract named XHedge which extends the function of AnyHedge (a famous Bitcoin Cash futures contract). Then it combines XHedge and the concept of coin-day to enable voting.
+The PoS scheme of smartBCH begins with a smart contract named XHedge which extends the function of AnyHedge (a famous Bitcoin Cash futures contract). Then it combines XHedge and the concept of coin-day to enable voting.
 
 Just like AnyHedge, XHedge needs one or more oracles to submit the price of BCH (relative to USD) onto smartBCH.
 
@@ -20,7 +20,7 @@ Suppose now BCH's price is `P0` and Bob wants to use XHedge to divide some BCH i
 
 And then XHedge will deduct some BCH from Bob's account and lock them. The locked Amount is `A=(1+CR0)*Vh/P0`. After that Bob get a LeverNFT and a HedgeNFT, which can be transferred to other persons. In some scenarios, these NFT can be both burnt and the BCH locked because of them will be liquidated:
 
-1. Before the mature time, if the price drops to `P1` and the locked BCH cannot meet the minimum collateral rate (`A < (1+CRmin)*Vh/P1`), then the owner of HedgeNFT can initiate liquidation.  The owner of HedgeNFT can get `min(A, Vh*P1*(1+Pc))` and the owner of LeverNFT, `max(0, A-Vh*P1*(1+Pc))`. 
+1. Before the mature time, if the price drops to `P1` and the locked BCH cannot meet the minimum collateral rate (`A < (1+CRmin)*Vh/P1`), then the owner of HedgeNFT can initiate liquidation.  The owner of HedgeNFT can get `min(A, (1+Pc)*Vh/P1)` and the owner of LeverNFT, `max(0, A-(1+Pc)*Vh/P1)`. 
 2. After the mature time `MT`, any owner of these two NFTs can initiate liquidation. At the liquidation moment, if BCH's price is `P2`, then the owner of HedgeNFT can get `min(A, Vh*P2)` and the owner of LeverNFT, `max(0, A-Vh*P2)`. The owner of HedgeNFT secures the value of her asset, while the owner of LeverNFT enlarges her risk and benefit.
 3. At any time, if both LeverNFT and HedgeNFT belong to the same account, then this account can get all the locked BCH by burning both NTF tokens.
 
@@ -44,7 +44,7 @@ Who has the rights to change the supported validator? The owner of the LeverNFT.
 
 After splitting his BCH into LeverNFT and HedgeNFT, Bob can deposit the NFTs into DeFi for earning. At the same time, the LeverNFT is continuously voting for the validator he supports, as long as the DeFi application which manages the LeverNFT does not change the supported validator.
 
-To sum up, the LeverDay scheme as the following advantages:
+To sum up, smartBCH's PoS scheme as the following advantages:
 
 1. Having voters for the validators be long-positions, it creates an even stronger alignment of incentives compared to "just" locking coins
 2. The BCH involved in DeFi applications can also be used for voting

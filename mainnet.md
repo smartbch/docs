@@ -21,7 +21,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 Third, open the `~/.smartbchd/config/app.toml` file to modify the information of the bitcoincashnode's client with RPC enabled.
 
 ```
-# BCH mainnet rpc url
+# BCH mainnet rpc url (Only BCHN & BCHD are well tested)
 mainnet-rpc-url = "http://ip-address:8332"
 
 # BCH mainnet rpc username
@@ -47,7 +47,7 @@ You can also run your smartBCH node using Docker. First, clone smartBCH and buil
 ```bash
 git clone https://github.com/smartbch/smartbch.git
 cd smartbch
-docker image build -f Dockerfile.mainnet.optimized -t smartbchd:latest .
+docker image build -f Dockerfile.optimized -t smartbchd:latest .
 ```
 
 Second, prepare smartBCH mainnet home directory:

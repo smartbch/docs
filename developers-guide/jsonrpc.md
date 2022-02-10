@@ -80,6 +80,8 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | eth\_submitWork | [https://eth.wiki/json-rpc/API\#eth\_submitwork](https://eth.wiki/json-rpc/API#eth_submitwork) | [https://infura.io/docs/ethereum/json-rpc/eth-submitWork](https://infura.io/docs/ethereum/json-rpc/eth-submitWork) | ❌ |
 | eth\_submitHashrate | [https://eth.wiki/json-rpc/API\#eth\_submithashrate](https://eth.wiki/json-rpc/API#eth_submithashrate) | [https://infura.io/docs/ethereum/json-rpc/eth-hashrate](https://infura.io/docs/ethereum/json-rpc/eth-hashrate) | ❌ |
 | eth\_chainId |  | [https://infura.io/docs/ethereum/json-rpc/eth-chainId](https://infura.io/docs/ethereum/json-rpc/eth-chainId) | ✅ |
+| eth_subscribe | | https://infura.io/docs/ethereum/wss/eth-subscribe |  |
+| eth_unsubscribe | | https://infura.io/docs/ethereum/wss/eth-unsubscribe |  |
 
 
 
@@ -93,38 +95,20 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 
 
 
-## TM
-
-| JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
-| ---------------- | ---------------- | ---------------------- | ------------ |
-| tm\_nodeInfo     | N/A              | N/A                    | ✅            |
-|                  |                  |                        |              |
-
-### tm_nodeInfo
-
-Returns the information about Tendermint node.
-
-Parameters: No
-
-Retrns: 
-
-`Object`
-
-
-
 ## SBCH
 
-| JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Implemented? |
+| JSON-RPC methods | Doc \(eth.wiki\) | Doc \(infura.io/docs\) | Since  |
 | :--- | :--- | :--- | :--- |
-| [sbch\_queryTxBySrc](jsonrpc.md#sbch_queryTxBySrc) | N/A | N/A | ✅ |
-| [sbch\_queryTxByDst](jsonrpc.md#sbch_queryTxByDst) | N/A | N/A | ✅ |
-| [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | ✅ |
-| [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | ✅ |
-| [sbch\_getTxListByHeight](jsonrpc.md#sbch_getTxListByHeight) | N/A | N/A | ✅ |
-| [sbch\_getTxListByHeightWithRange](jsonrpc.md#sbch_getTxListByHeightWithRange) | N/A | N/A | ✅ |
-| [sbch\_getAddressCount](jsonrpc.md#sbch_getAddressCount) | N/A | N/A | ✅ |
-| [sbch\_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | ✅ |
-|                                                              |                  |                        |  |
+| [sbch\_queryTxBySrc](jsonrpc.md#sbch_queryTxBySrc) | N/A | N/A | v0.1.0 |
+| [sbch\_queryTxByDst](jsonrpc.md#sbch_queryTxByDst) | N/A | N/A | v0.1.0 |
+| [sbch\_queryTxByAddr](jsonrpc.md#sbch_queryTxByAddr) | N/A | N/A | v0.1.0 |
+| [sbch\_queryLogs](jsonrpc.md#sbch_queryLogs) | N/A | N/A | v0.1.0 |
+| [sbch\_getTxListByHeight](jsonrpc.md#sbch_getTxListByHeight) | N/A | N/A | v0.1.0 |
+| [sbch\_getTxListByHeightWithRange](jsonrpc.md#sbch_getTxListByHeightWithRange) | N/A | N/A | v0.1.0 |
+| [sbch\_getAddressCount](jsonrpc.md#sbch_getAddressCount) | N/A | N/A | v0.1.0 |
+| [sbch\_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | v0.2.0 |
+| [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt) | N/A | N/A | v0.4.0 |
+|  |  |  |  |
 
 
 
@@ -218,7 +202,7 @@ Parameters:
 
 Returns:
 
-`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+`Array` - array of transaction objects, see [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt)
 
 
 
@@ -234,7 +218,7 @@ Parameters:
 
 Returns:
 
-`Array` - array of transaction objects, see [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+`Array` - array of transaction objects, see [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt)
 
 
 
@@ -266,4 +250,27 @@ Parameters:
 Returns:
 
 `QUANTITY` - integer of count
+
+
+
+### sbch_getTransactionReceipt
+
+Enhanced version of [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt), the returned array of objects contain additional information about internal transactions.
+
+Parameters: same as [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt)
+
+Returns: array of objects sepcified by [eth_getTransactionReceipt](https://eth.wiki/json-rpc/API#eth_getTransactionReceipt) plus one more field of type Array: `internalTransactions`. 
+
+Each object in internalTransactions array contains the following fields:
+
+* `callPath`: `string` - a string representation of call type, depth and index of internal transaction (e.g. staticcall_0_1_1).
+* `from`: `DATA`, 20 Bytes - address of the sender.
+* `to`: `DATA`, 20 Bytes - address of the receiver.
+* `gas`: `QUANTITY` - gas provided by the sender.
+* `value`: `QUANTITY` - value transferred in Wei.
+* `input`: `DATA` - the data send along with the internal transaction.
+* `status`: `QUANTITY` - either `1` (success) or `0` (failure).
+* `gasUsed`: `QUANTITY` - the amount of gas used by this internal transaction.
+* `output`: `DATA` - the data returned by the internal transaction.
+* `contractAddress`:  `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
 

@@ -17,8 +17,8 @@ sudo apt install make cmake g++ gcc git
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
 
 ```bash
-wget https://golang.org/dl/go1.16.5.linux-amd64.tar.gz
-tar zxvf go1.16.5.linux-amd64.tar.gz 
+wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
+tar zxvf go1.17.2.linux-amd64.tar.gz 
 ```
 
 And set some environment variables for golang:
@@ -33,10 +33,10 @@ export GOPATH=~/godata
 After installing golang, we need to patch it for larger cgo stack.
 
 ```bash
-wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.1.tar.gz
-tar zxvf v0.1.1.tar.gz 
-rm v0.1.1.tar.gz
-cd patch-cgo-for-golang-0.1.1
+wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.2.tar.gz
+tar zxvf v0.1.2.tar.gz 
+rm v0.1.2.tar.gz
+cd patch-cgo-for-golang-0.1.2
 cp *.c $GOROOT/src/runtime/cgo/
 ```
 
@@ -103,7 +103,7 @@ cd smart_bch
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.3.3 --depth 1 https://github.com/smartbch/moeingevm
+git clone -b v0.4.1 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
@@ -117,7 +117,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.3.5 --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.4.1 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
