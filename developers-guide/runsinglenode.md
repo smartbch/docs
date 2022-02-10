@@ -103,7 +103,7 @@ cd smart_bch
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.1 --depth 1 https://github.com/smartbch/moeingevm
+git clone -b v0.4.0 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
