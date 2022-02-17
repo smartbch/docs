@@ -80,12 +80,17 @@ addnode=47.115.171.70:28331
 
 ## Docker
 
-You can also run your smartBCH testnet node using Docker. First, clone smartBCH and build Docker image for testnet:
+You can also run your smartBCH testnet node using Docker. First, clone smartBCH and build Docker image for testnet (or [pull prebuilt images from DockerHub](https://hub.docker.com/r/smartbch/smartbchd/tags)):
 
 ```bash
 git clone https://github.com/smartbch/smartbch.git
 cd smartbch
-docker image build -f Dockerfile.optimized --build-arg SMARTBCH_VERSION=amber --build-arg CONFIG_VERSION=0.0.4 -t smartbchd-amber:latest .
+docker image build -f Dockerfile.optimized \
+	--build-arg SMARTBCH_BUILD_TAGS='cppbtree,params_amber' \
+	--build-arg SMARTBCH_VERSION=v0.4.2 \
+	--build-arg CONFIG_VERSION=0.0.4 \
+	--build-arg CHAIN_ID=0x2711 \
+	-t smartbchd-amber:latest .
 ```
 
 Second, prepare smartBCH testnet home directory:

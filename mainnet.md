@@ -42,7 +42,7 @@ cd ~/build
 
 ## Docker
 
-You can also run your smartBCH node using Docker. First, clone smartBCH and build Docker image for mainnet:
+You can also run your smartBCH node using Docker. First, clone smartBCH and build Docker image for mainnet (or [pull prebuilt images from DockerHub](https://hub.docker.com/r/smartbch/smartbchd/tags)):
 
 ```bash
 git clone https://github.com/smartbch/smartbch.git
