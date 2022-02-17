@@ -17,7 +17,7 @@ Test coin faucet can be found at http://34.92.246.27:8080/faucet
 
 We sincerely thank [Allen Day](https://github.com/allenday) for donating several cloud servers to bring up this testnet. 
 
-In this testnet, the gas price can be as low as 1Gwei.
+In this testnet, the gas price can be as low as 0.2Gwei.
 
 To join this testnet as a non-validator node, follow the steps below:
 
@@ -27,9 +27,9 @@ Second, clone & build smartbch from amber branch:
 
 ```bash
 cd ~/smart_bch
-git clone -b amber --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.4.2 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
-go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
+go build -tags "params_amber cppbtree" github.com/smartbch/smartbch/cmd/smartbchd
 ```
 
 Third, prepare the working directory:
