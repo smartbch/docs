@@ -88,7 +88,7 @@ cd smartbch
 docker image build -f Dockerfile.optimized \
 	--build-arg SMARTBCH_BUILD_TAGS='cppbtree,params_amber' \
 	--build-arg SMARTBCH_VERSION=v0.4.2 \
-	--build-arg CONFIG_VERSION=0.0.4 \
+	--build-arg CONFIG_VERSION=v0.0.4 \
 	--build-arg CHAIN_ID=0x2711 \
 	-t smartbchd-amber:latest .
 ```
