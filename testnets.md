@@ -39,7 +39,7 @@ cp ~/smart_bch/smartbch/smartbchd ~/build/smartbchd
 cd ~
 rm -rf .smartbchd
 ~/build/smartbchd init mynode --chain-id 0x2711
-wget https://github.com/smartbch/artifacts/releases/download/v0.0.4/dot.smartbchd.tgz
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.5/dot.smartbchd.tgz
 tar zxvf dot.smartbchd.tgz
 cp -rf dot.smartbchd/* .smartbchd/
 ```
