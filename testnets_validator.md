@@ -1,4 +1,4 @@
-# Join the Amber As a validator
+# Join the Amber as a validator
 
 This document introduces how to join the amber as a validator node.
 
