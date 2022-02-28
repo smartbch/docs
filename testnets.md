@@ -23,7 +23,7 @@ To join this testnet as a non-validator node, follow the steps below:
 
 First, build the latest binary by running the step 0, 1, 2, 3 of [this document](developers-guide/runsinglenode.md).
 
-Second, clone & build smartbch from amber branch:
+Second, clone & build smartbch:
 
 ```bash
 cd ~/smart_bch
