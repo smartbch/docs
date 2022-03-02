@@ -88,7 +88,7 @@ cd smartbch
 docker image build -f Dockerfile.optimized \
 	--build-arg SMARTBCH_BUILD_TAGS='cppbtree,params_amber' \
 	--build-arg SMARTBCH_VERSION=v0.4.2 \
-	--build-arg CONFIG_VERSION=v0.0.4 \
+	--build-arg CONFIG_VERSION=v0.0.5 \
 	--build-arg CHAIN_ID=0x2711 \
 	-t smartbchd-amber:latest .
 ```
@@ -102,7 +102,7 @@ docker run \
   -v path/to/smartbchd_home:/root/.smartbchd \
   smartbchd:latest init mynode --chain-id 0x2711
 
-wget https://github.com/smartbch/artifacts/releases/download/v0.0.4/dot.smartbchd.tgz
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.5/dot.smartbchd.tgz
 tar xvf dot.smartbchd.tgz
 cp -rfv dot.smartbchd/* smartbchd_home/
 ```
