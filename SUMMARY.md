@@ -5,6 +5,7 @@
 * [FAQ](faq.md)
 * [Mainnet](mainnet.md)
 * [Testnets](testnets.md)
+* [Join Amber as a Validator](testnets_validator.md)
 * [Decentralized Cross-Chain Bridge](sha-gate.md)
 
 ## Developer's Guide
