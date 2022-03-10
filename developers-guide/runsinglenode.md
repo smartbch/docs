@@ -61,7 +61,7 @@ tar zxvf 1.1.8.tar.gz
 cd snappy-1.1.8
 mkdir build
 cd build
-cmake -DBUILD_SHARED_LIBS=On ../
+cmake ../
 make
 sudo make install
 ```
@@ -73,7 +73,7 @@ cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
 cd rocksdb-5.18.4
-make CC=gcc-8 CXX=g++-8 shared_lib
+make CC=gcc-8 CXX=g++-8 static_lib
 ```
 
 more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
@@ -82,9 +82,6 @@ Last, export library path. You should export `ROCKSDB_PATH` with rocksdb root di
 
 ```bash
 export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
-export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
-export LD_LIBRARY_PATH=$ROCKSDB_PATH:/usr/local/lib
 ```
 
 
@@ -106,7 +103,8 @@ cd ~/smart_bch
 git clone -b v0.4.0 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
-export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
+export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
+export CGO_LDFLAGS="-L/$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
