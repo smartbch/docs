@@ -108,7 +108,7 @@ The throughput of smartBCH is very high, and no transactions will be waiting in 
 | [sbch\_getAddressCount](jsonrpc.md#sbch_getAddressCount) | N/A | N/A | v0.1.0 |
 | [sbch\_getSep20AddressCount](jsonrpc.md#sbch_getSep20AddressCount) | N/A | N/A | v0.2.0 |
 | [sbch_getTransactionReceipt](jsonrpc.md#sbch_getTransactionReceipt) | N/A | N/A | v0.4.0 |
-|  |  |  |  |
+| [sbch_validatorsInfo](jsonrpc.md#sbch_validatorsInfo) | N/A | N/A | V0.4.1 |
 
 
 
@@ -274,3 +274,31 @@ Each object in internalTransactions array contains the following fields:
 * `output`: `DATA` - the data returned by the internal transaction.
 * `contractAddress`:  `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
 
+
+
+### sbch_validatorsInfo
+
+Returns the validators info.
+
+Parameters: N/A
+
+Returns: a validator info object: 
+
+- genesisMainnetBlockHeight: `QUANTITY` -  The BCH mainnet height when smartbch chain mint genesis block.
+- currEpochNum: `QUANTITY` -  The epoch number of current epoch.
+- validators: `Array` - Array of validator object, which mean validators created by call `stakingContract.createValidator` method.
+- validatorsUpdate: `Array` - Array of validator object, which mean validators whose voting power updated when epoch switch. 
+- pendingRewards: `Array` - Array of pending rewards object, which mean validator pending rewards.
+- minGasPrice: `QUANTITY` - The minimum gas price decided in current block.
+- lastMinGasPrice: `QUANTITY` - The minimum gas price used in current block.
+- currValidators: `Array` - Array of validator object, which mean validators who on duty in current epoch. 
+
+And the `validator` object has fields:
+
+- address: `DATA`, 20 Bytes - Address of the validator.
+- pubkey: `DATA`, 32 Bytes - Consensus pubkey of the validator.
+- reward_to: `DATA`, 20 Bytes - Address to receive block mint rewards.
+- voting_power: `QUANTITY` - The minimum gas price decided in current block.
+- introduction: `String` - The introduction of validator.
+- staked_coins `DATA`, 32 Bytes - Staked coins of the validator.
+- is_retiring: `Boolean` - Indicate whether validator is retired.
