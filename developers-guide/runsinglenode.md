@@ -100,7 +100,7 @@ cd smart_bch
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.0 --depth 1 https://github.com/smartbch/moeingevm
+git clone https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
@@ -115,7 +115,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.2 --depth 1 https://github.com/smartbch/smartbch
+git clone https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
