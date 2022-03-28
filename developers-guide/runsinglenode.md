@@ -96,7 +96,7 @@ cd smart_bch
 
 
 
-#### Step 3: clone the moeingevm repo, and build dynamically linked library.
+#### Step 3: clone the moeingevm repo, and build static linked library.
 
 ```bash
 cd ~/smart_bch
@@ -107,7 +107,7 @@ export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
 export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
 ```
 
-After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
+After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
 
 
 
