@@ -17,8 +17,8 @@ sudo apt install make cmake g++ gcc git
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
 
 ```bash
-wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
-tar zxvf go1.17.2.linux-amd64.tar.gz 
+wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
+tar zxvf go1.18.linux-amd64.tar.gz
 ```
 
 And set some environment variables for golang:
@@ -104,7 +104,7 @@ git clone https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a"
+export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
