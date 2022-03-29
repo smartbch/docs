@@ -53,6 +53,7 @@ sudo apt install gcc-8 g++-8
 then install rocksdb
 
 ```bash
+mkdir $HOME/build
 cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
@@ -88,7 +89,7 @@ git clone https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
+export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm"
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
