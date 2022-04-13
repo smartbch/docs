@@ -17,8 +17,8 @@ sudo apt install make cmake g++ gcc git
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
 
 ```bash
-wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz
-tar zxvf go1.17.2.linux-amd64.tar.gz 
+wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
+tar zxvf go1.18.linux-amd64.tar.gz
 ```
 
 And set some environment variables for golang:
@@ -61,7 +61,7 @@ tar zxvf 1.1.8.tar.gz
 cd snappy-1.1.8
 mkdir build
 cd build
-cmake -DBUILD_SHARED_LIBS=On ../
+cmake ../
 make
 sudo make install
 ```
@@ -73,7 +73,7 @@ cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
 cd rocksdb-5.18.4
-make CC=gcc-8 CXX=g++-8 shared_lib
+make CC=gcc-8 CXX=g++-8 static_lib
 ```
 
 more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
@@ -82,9 +82,6 @@ Last, export library path. You should export `ROCKSDB_PATH` with rocksdb root di
 
 ```bash
 export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
-export CGO_CFLAGS="-I/$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L/$ROCKSDB_PATH -lrocksdb -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
-export LD_LIBRARY_PATH=$ROCKSDB_PATH:/usr/local/lib
 ```
 
 
@@ -99,17 +96,18 @@ cd smart_bch
 
 
 
-#### Step 3: clone the moeingevm repo, and build dynamically linked library.
+#### Step 3: clone the moeingevm repo, and build static linked library.
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.0 --depth 1 https://github.com/smartbch/moeingevm
+git clone -b v0.4.2 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
-export EVMWRAP=~/smart_bch/moeingevm/evmwrap/host_bridge/libevmwrap.so
+export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
+export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
 ```
 
-After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.so file.
+After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
 
 
 
@@ -117,7 +115,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.2 --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.4.4 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
