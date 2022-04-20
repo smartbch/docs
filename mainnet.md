@@ -59,7 +59,7 @@ docker run \
   -v path/to/smartbchd_home:/root/.smartbchd \
   smartbchd:latest init mynode --chain-id 0x2710
 
-wget https://github.com/smartbch/artifacts/releases/download/v0.0.3/dot.smartbchd.tgz
+wget https://github.com/smartbch/artifacts/releases/download/v0.0.6/dot.smartbchd.tgz
 tar xvf dot.smartbchd.tgz
 cp -rfv dot.smartbchd/* smartbchd_home/
 ```
