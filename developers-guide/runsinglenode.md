@@ -104,7 +104,7 @@ git clone -b v0.4.2 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
+export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lsnappy "
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
