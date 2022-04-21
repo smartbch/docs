@@ -48,7 +48,7 @@ firsrt, install rocksdb dependencies.
 
 ```bash
 sudo apt install gcc-8 g++-8
-sudo apt install libgflags-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
+sudo apt install libgflags-dev 
 ```
 
 For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
@@ -61,7 +61,7 @@ tar zxvf 1.1.8.tar.gz
 cd snappy-1.1.8
 mkdir build
 cd build
-cmake ../
+cmake -DBUILD_STATIC_LIBS=On ../
 make
 sudo make install
 ```
@@ -104,7 +104,7 @@ git clone -b v0.4.2 --depth 1 https://github.com/smartbch/moeingevm
 cd moeingevm/evmwrap
 make
 export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lz -lbz2 -lsnappy -llz4 -lzstd"
+export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lsnappy "
 ```
 
 After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
