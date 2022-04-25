@@ -74,12 +74,14 @@ When switching epochs, the voting information of the XHedge contract is read out
 
 #### The price oracle for XHedge
 
-There have been several DEX markets on smartBCH and the accumulated  BCH reserve in pools is more than 130,000 now. This liquidity is enough to make a trustable price oracle.
+There have been several DEX markets on smartBCH and the total  BCH reserve in these pools is more than 130,000 now. This liquidity is enough to make a trustable price oracle.
 
-All these DEX markets use UniswapV2-style pools, which means we can get their cumulative `price ✖ duration` products through the `price0CumulativeLast` and `price1CumulativeLast` functions, and the pool's reserve token amounts through the `getReserves` function. 
+All these DEX markets use UniswapV2-style pools, which means we can get their cumulative `price ✖ duration` products through the `price0CumulativeLast` and `price1CumulativeLast` functions, and the pool's token reserve through the `getReserves` function. 
 
-Based on these data, we develop [xhedge-price-oracle](https://github.com/smartbch/xhedge-price-oracle). It traces the DEX prices in the last 12 hours, with 24 half-an-hour time slots. During each time slot, the `price ✖ duration` products are sampled once, while the reserve token amounts can be sampled multiple times and the smallest value will be kept at last.
+Based on these data, we develop [xhedge-price-oracle](https://github.com/smartbch/xhedge-price-oracle). It traces the DEX prices in half-an-hour time slots. During each time slot, the `price ✖ duration` product is sampled once at each pool, while the token reserve can be sampled multiple times and the smallest value will be kept at last.
 
-It outputs the weight-averaged and time-averaged price from the data collected in the past 12 hours. A pool's weight equals the minimum BCH reserve it had during the past 24 time slots.
+It outputs the weight-averaged and time-averaged price from the data collected in the past 12 hours.
+
+At each pool, a time-average price is calculated from the data collected in the last 12 hours. From these prices from pools, the oracle contract outputs a weight-averaged price. A pool's weight equals the minimum BCH reserve it had during the past 24 time slots.
 
 Any EOA (externally owned account) can trigger xhedge-price-oracle to sample DEX pools, but smart contracts are forbidden to do so, because they can use flashloans to manipulate the sampled data.
