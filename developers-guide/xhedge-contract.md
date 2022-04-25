@@ -20,7 +20,7 @@ To prevent SPAM, when a new validator is voted for the first time, at least 500 
 
 #### A thorough description of XHedge
 
-Just like AnyHedge, XHedge needs one or more oracles to submit the price of BCH (relative to USD) onto smartBCH.
+Just like AnyHedge, XHedge needs one or more oracles to provide the price of BCH (relative to USD).
 
 Suppose now BCH's price is `P0` and Bob wants to use XHedge to divide some BCH into a pair of LeverNFT/HedgeNFT.  He must provide the following arguments:
 
@@ -72,6 +72,14 @@ XHedge is just a plain smart contract implemented in EVM bytecode. It can affect
 
 When switching epochs, the voting information of the XHedge contract is read out and used to elect new validators, together with the PoW information in 50-50 weights.  After that, the voting information is cleared from the XHedge contract's storage.
 
+#### The price oracle for XHedge
 
+There have been several DEX markets on smartBCH and the accumulated  BCH reserve in pools is more than 130,000 now. This liquidity is enough to make a trustable price oracle.
 
+All these DEX markets use UniswapV2-style pools, which means we can get their cumulative `price ✖ duration` products through the `price0CumulativeLast` and `price1CumulativeLast` functions, and the pool's reserve token amounts through the `getReserves` function. 
 
+Based on these data, we develop [xhedge-price-oracle](https://github.com/smartbch/xhedge-price-oracle). It traces the DEX prices in the last 12 hours, with 24 half-an-hour time slots. During each time slot, the `price ✖ duration` products are sampled once, while the reserve token amounts can be sampled multiple times and the smallest value will be kept at last.
+
+It outputs the weight-averaged and time-averaged price from the data collected in the past 12 hours. A pool's weight equals the minimum BCH reserve it had during the past 24 time slots.
+
+Any EOA (externally owned account) can trigger xhedge-price-oracle to sample DEX pools, but smart contracts are forbidden to do so, because they can use flashloans to manipulate the sampled data.
