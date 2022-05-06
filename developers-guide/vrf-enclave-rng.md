@@ -4,7 +4,7 @@ The dev team of smartBCH implements and maintains the service of a manipulation-
 
 On the RPC server, two processes are running: an enclaved process keeping the VRF private key and a non-enclave proxy process. The proxy process inputs block hashes to the enclaved process and then caches its outputs. The proxy process can access larger DRAM space, so it interacts with the clients. And the attestation requests sent to the enclaved process are forwarded by the proxy process.
 
-Now there are two RPC servers, enclave0.vrf.cash and enclave1.vrf.cash, are serving random numbers. They have identical functionality. You can access their following RPC endpoints:
+Now there are two RPC servers, enclave0.vrf.cash and enclave1.vrf.cash, are serving random numbers at port 8081. They have identical functionality. You can access their following RPC endpoints:
 
 #### `/vrf?b=<blockhash>`
 
