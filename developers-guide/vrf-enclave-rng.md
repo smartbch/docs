@@ -31,7 +31,7 @@ A JWT token issued by Azure which endorses the enclave's attestation report.
 On smartBCH mainnet, the governance contract is deployed at 0x18C51aa3d1F018814716eC2c7C41A20d4FAf023C. It provides two functions for DApp developers:
 
 ```solidity
-function pubKey() public returns (bytes);
+function pubKey() public view returns (bytes);
 function verify(uint blockHash, uint beta, bytes calldata pi) public view returns (bool);
 ```
 
