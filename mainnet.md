@@ -81,6 +81,7 @@ docker run \
   -v path/to/smartbchd_home:/root/.smartbchd \
   -p 0.0.0.0:18545:8545 \
   -p 0.0.0.0:18546:8546 \
+  --ulimit nofile=65535:65535 \
   -d smartbchd:latest start --mainnet-genesis-height=698502
 ```
 
