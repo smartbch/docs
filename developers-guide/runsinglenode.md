@@ -1,6 +1,6 @@
 # Single Node Private Testnet
 
-This document shows how to start a private testnet of smartBCH with only one node. 
+This document shows how to start a private testnet of smartBCH with only one node.
 
 We suggest to use ubuntu 20.04.
 
@@ -8,10 +8,13 @@ We suggest to use ubuntu 20.04.
 
 #### Step 0: install the basic tools.
 
+We suggest to use GCC-9 because it's the default compiler of ubuntu 20.04. But you call as well use GCC-10 and GCC-11. Just replace the following g++ and gcc with your desired compilers (such as g++-10/gcc-10/g++-11/gcc-11).
+
 ```bash
 sudo sed -i -e '$a* soft nofile 65536\n* hard nofile 65536' /etc/security/limits.conf ;# enlarge count of open files
 sudo apt update
-sudo apt install make cmake g++ gcc git 
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo apt install make cmake g++ gcc git
 ```
 
 Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
@@ -34,12 +37,11 @@ After installing golang, we need to patch it for larger cgo stack.
 
 ```bash
 wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.2.tar.gz
-tar zxvf v0.1.2.tar.gz 
+tar zxvf v0.1.2.tar.gz
 rm v0.1.2.tar.gz
 cd patch-cgo-for-golang-0.1.2
 cp *.c $GOROOT/src/runtime/cgo/
 ```
-
 
 
 #### Step 1: install dependencies
@@ -47,8 +49,7 @@ cp *.c $GOROOT/src/runtime/cgo/
 firsrt, install rocksdb dependencies.
 
 ```bash
-sudo apt install gcc-8 g++-8
-sudo apt install libgflags-dev 
+sudo apt install libgflags-dev
 ```
 
 For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
@@ -61,8 +62,8 @@ tar zxvf 1.1.8.tar.gz
 cd snappy-1.1.8
 mkdir build
 cd build
-cmake -DBUILD_STATIC_LIBS=On ../
-make
+CXX=g++ cmake -DBUILD_STATIC_LIBS=On ../
+make CC=gcc CXX=g++
 sudo make install
 ```
 
@@ -73,7 +74,8 @@ cd $HOME/build
 wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
 tar zxvf v5.18.4.tar.gz
 cd rocksdb-5.18.4
-make CC=gcc-8 CXX=g++-8 static_lib
+curl https://raw.githubusercontent.com/smartbch/artifacts/main/patches/rocksdb.gcc11.patch | git apply -v
+CXXFLAGS=-Wno-range-loop-construct make CC=gcc CXX=g++ static_lib
 ```
 
 more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)

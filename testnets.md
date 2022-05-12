@@ -13,7 +13,7 @@ This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitco
 1. http://35.220.203.194:8545
 2. https://moeing.tech:9545
 
-Test coin faucet can be found at http://34.92.246.27:8080/faucet
+Test coin faucet can be found at http://54.169.31.93:8080/faucet
 
 We sincerely thank [Allen Day](https://github.com/allenday) for donating several cloud servers to bring up this testnet. 
 
@@ -114,5 +114,6 @@ docker run \
   -v path/to/smartbchd_home:/root/.smartbchd \
   -p 0.0.0.0:18545:8545 \
   -p 0.0.0.0:18546:8546 \
+  --ulimit nofile=65535:65535 \
   -d smartbchd-amber:latest start --mainnet-genesis-height=602983
 ```
