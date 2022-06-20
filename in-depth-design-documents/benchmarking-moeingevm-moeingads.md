@@ -64,7 +64,7 @@ We selected four instances on AWS for the benchmark:
 
 Now let's run this benchmark. The whole process takes more than 20 hours, so please be patient.
 
-Step 0: please follow [this document](../developers-guide/runsinglenode.md) and finish the step 1, 2, 3 and 4.
+Step 0: please follow [this document](../developers-guide/build-smartbchd.md) and finish all the steps.
 
 Step 1: generate some random private keys into the file "keys60M.txt":
 

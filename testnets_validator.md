@@ -6,7 +6,7 @@ Before you start, you must have a trusted server running bitcoincashnode's clien
 
 #### 1. build the binary
 
-Running the step 0, 1, 2, 3 of [this document](developers-guide/runsinglenode.md).
+Running the steps of [this document](developers-guide/build-smartbchd.md).
 
 Then clone the source code of smartBCH and build the executable of `smartbchd`.
 

@@ -6,127 +6,13 @@ We suggest to use ubuntu 20.04.
 
 
 
-#### Step 0: install the basic tools.
+#### Step 0: build smartbchd
 
-We suggest to use GCC-9 because it's the default compiler of ubuntu 20.04. But you call as well use GCC-10 and GCC-11. Just replace the following g++ and gcc with your desired compilers (such as g++-10/gcc-10/g++-11/gcc-11).
-
-```bash
-sudo sed -i -e '$a* soft nofile 65536\n* hard nofile 65536' /etc/security/limits.conf ;# enlarge count of open files
-sudo apt update
-sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-sudo apt install make cmake g++ gcc git
-```
-
-Then download and unpack golang (If you are using ARM Linux, please replace "amd64" with "arm64"):
-
-```bash
-wget https://go.dev/dl/go1.18.linux-amd64.tar.gz
-tar zxvf go1.18.linux-amd64.tar.gz
-```
-
-And set some environment variables for golang:
-
-```bash
-export GOROOT=~/go
-export PATH=$PATH:$GOROOT/bin
-mkdir ~/godata
-export GOPATH=~/godata
-```
-
-After installing golang, we need to patch it for larger cgo stack.
-
-```bash
-wget https://github.com/smartbch/patch-cgo-for-golang/archive/refs/tags/v0.1.2.tar.gz
-tar zxvf v0.1.2.tar.gz
-rm v0.1.2.tar.gz
-cd patch-cgo-for-golang-0.1.2
-cp *.c $GOROOT/src/runtime/cgo/
-```
-
-
-#### Step 1: install dependencies
-
-firsrt, install rocksdb dependencies.
-
-```bash
-sudo apt install libgflags-dev
-```
-
-For some unknown reason, on some machines with ubuntu 20.04, the default libsnappy does not work well. So we suggest to build libsnappy from source:
-
-```bash
-mkdir $HOME/build
-cd $HOME/build
-wget https://github.com/google/snappy/archive/refs/tags/1.1.8.tar.gz
-tar zxvf 1.1.8.tar.gz
-cd snappy-1.1.8
-mkdir build
-cd build
-CXX=g++ cmake -DBUILD_STATIC_LIBS=On ../
-make CC=gcc CXX=g++
-sudo make install
-```
-
-then install rocksdb
-
-```bash
-cd $HOME/build
-wget https://github.com/facebook/rocksdb/archive/refs/tags/v5.18.4.tar.gz
-tar zxvf v5.18.4.tar.gz
-cd rocksdb-5.18.4
-curl https://raw.githubusercontent.com/smartbch/artifacts/main/patches/rocksdb.gcc11.patch | git apply -v
-CXXFLAGS=-Wno-range-loop-construct make CC=gcc CXX=g++ static_lib
-```
-
-more infos can refer to [rocksdb install doc](https://github.com/facebook/rocksdb/blob/master/INSTALL.md)
-
-Last, export library path. You should export `ROCKSDB_PATH` with rocksdb root directory downloaded from above
-
-```bash
-export ROCKSDB_PATH="$HOME/build/rocksdb-5.18.4" ;#this direct to rocksdb root dir
-```
+Please follow [this doc](./build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
 
 
 
-#### Step 2: create the `smart_bch` directory.
-
-```bash
-cd ~ ;# any directory can do. Here we use home directory for example
-mkdir smart_bch
-cd smart_bch
-```
-
-
-
-#### Step 3: clone the moeingevm repo, and build static linked library.
-
-```bash
-cd ~/smart_bch
-git clone -b v0.4.2 --depth 1 https://github.com/smartbch/moeingevm
-cd moeingevm/evmwrap
-make
-export CGO_CFLAGS="-I$ROCKSDB_PATH/include"
-export CGO_LDFLAGS="-L$ROCKSDB_PATH -L$HOME/smart_bch/moeingevm/evmwrap/host_bridge/ -l:librocksdb.a -lstdc++ -lm -lsnappy "
-```
-
-After successfully executing the above commands, you'll get a ~/smart\_bch/moeingevm/evmwrap/host\_bridge/libevmwrap.a file.
-
-
-
-#### Step 4: clone the source code of smartBCH and build the executable of `smartbchd`.
-
-```bash
-cd ~/smart_bch
-git clone -b v0.4.4 --depth 1 https://github.com/smartbch/smartbch
-cd smartbch
-go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
-```
-
-After successfully executing the above commands, you'll get a ~/smart\_bch/smartbch/smartbchd file.
-
-
-
-#### Step 5: generate some private keys only used for test.
+#### Step 1: generate some private keys only used for test.
 
 ```bash
 cd ~/smart_bch/smartbch
@@ -161,7 +47,7 @@ npm install -g ethereum-private-key-to-address
 
 
 
-#### Step 6: initialize the node data using test keys generated above:
+#### Step 2: initialize the node data using test keys generated above:
 
 ```bash
 ./smartbchd init mynode --chain-id 0x2711 \
@@ -182,7 +68,7 @@ After successfully executing the above commands, you can find the initialized da
 
 
 
-#### Step 7: generate genesis validator consensus key info
+#### Step 3: generate genesis validator consensus key info
 
 Now we generate the ed25519 private key for consensus engine:
 
@@ -197,7 +83,7 @@ Since now we are just running a single node for test, the key file is not so imp
 
 
 
-#### Step 8: generate genesis validator info using pubkey generated above
+#### Step 4: generate genesis validator info using pubkey generated above
 
 ```bash
 ./smartbchd generate-genesis-validator \
@@ -209,13 +95,13 @@ Since now we are just running a single node for test, the key file is not so imp
 7b2241646472657373223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c225075626b6579223a5b3231352c362c3232372c3135392c3232302c37312c39342c36372c3235312c3230352c3139332c3233312c3231352c3232342c3130342c3132342c3232352c37352c36332c3235312c3133352c3139392c3233302c3135372c352c3138372c32362c3234352c32312c3136362c37352c36355d2c22526577617264546f223a5b3231332c3235332c34342c38372c362c3135372c3134372c3138322c3230362c34392c33382c33392c39302c34302c3134312c33332c3138342c3137302c34362c3133355d2c22566f74696e67506f776572223a312c22496e74726f64756374696f6e223a22667265656d616e222c225374616b6564436f696e73223a5b302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c302c352c3130372c3139392c39342c34352c39392c31362c302c305d2c2249735265746972696e67223a66616c73657d
 ```
 
-The `validator-address` uses the one we get at step 5, and the `consensus-pubkey` is the one we get at step 7.
+The `validator-address` uses the one we get at step 1, and the `consensus-pubkey` is the one we get at step 3.
 
 The output hex string contains the information of a validator.
 
 
 
-#### Step 9: add genesis validator info to genesis.json using hex string generated above
+#### Step 5: add genesis validator info to genesis.json using hex string generated above
 
 ```bash
 ./smartbchd add-genesis-validator \
@@ -226,7 +112,7 @@ Using the hex string outputted at the last step as the argument, we call `add-ge
 
 
 
-#### Step 10: copy priv_validator_key.json generated in Step 7
+#### Step 6: copy priv_validator_key.json generated in Step 3
 
 ```bash
 cp ./priv_validator_key.json ~/.smartbchd/config/
@@ -236,7 +122,7 @@ Thus, when this node starts up, it can use the private consensus key.
 
 
 
-#### Step 11: start the node:
+#### Step 7: start the node:
 
 ```bash
 ulimit -n 65536

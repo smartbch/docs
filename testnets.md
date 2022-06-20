@@ -21,7 +21,7 @@ In this testnet, the gas price can be as low as 0.2Gwei.
 
 To join this testnet as a non-validator node, follow the steps below:
 
-First, build the latest binary by running the step 0, 1, 2, 3 of [this document](developers-guide/runsinglenode.md).
+First, build the latest binary by running the steps of [this document](developers-guide/build-smartbchd.md).
 
 Second, clone & build smartbch:
 

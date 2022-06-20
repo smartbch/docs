@@ -7,7 +7,7 @@ This article takes [Pet-Shop](https://www.trufflesuite.com/tutorial) as an examp
 
 ## Build smartbchd and generate a test key
 
-Please flow [this document](runsinglenode.md) to clone and build `smartbchd`. We need a test account and associated private key, `smartbchd` provides a sub-command to generate them for us:
+Please flow [this document](build-smartbchd.md) to clone and build `smartbchd`. We need a test account and associated private key, `smartbchd` provides a sub-command to generate them for us:
 
 ```bash
 $ cd path/to/your/smartbch/dir # and build smartbchd following the given doc
