@@ -1,35 +1,32 @@
-# Deploy contract using Truffle
+# Deploy contract using Truffle (on testnet)
 
-This article takes [Pet-Shop](https://www.trufflesuite.com/tutorials/pet-shop) as an example to introduce how to deploy smart contract into smartBCH chain using [truffle](https://www.trufflesuite.com/truffle).
-
-Please note in the following example we assume you are using a [local single-node testnet](./runsinglenode.md). Instead, if you want to use a remote node to provide JSON-RPC, just replace "localhost" with the node's IP address.
+This article takes [Pet-Shop](https://www.trufflesuite.com/tutorial) as an example to introduce how to deploy smart contract into smartBCH testnet using [truffle](https://www.trufflesuite.com/truffle). 
 
 
-## Start smartBCH single testing node
 
-Please flow [this doc](runsinglenode.md) to start smartBCH single testing node. When the testing node is started with default options, it will serve JSON-RPC on localhost:8485. You can use the following cmd to see if node works well:
 
-```bash
-$ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}' \
-		-H "Content-Type: application/json" http://localhost:8545
+## Build smartbchd and generate a test key
 
-{"jsonrpc":"2.0","id":67,"result":"1337"}
-```
-
-You can also use this public test node (deployed by smartBCH community) if you do not want to deploy your local node:
+Please flow [this document](runsinglenode.md) to clone and build `smartbchd`. We need a test account and associated private key, `smartbchd` provides a sub-command to generate them for us:
 
 ```bash
-$ curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}' \
-		-H "Content-Type: application/json" https://smartbch.greyh.at
-
-{"jsonrpc":"2.0","id":67,"result":"1337"}
+$ cd path/to/your/smartbch/dir # and build smartbchd following the given doc
+$ ./smartbchd gen-test-keys -n 1 --show-address
 ```
+
+The output looks like this (the generated private key and address are seperated by a space):
+
+```
+09c57df30208bdc056144c32d607f0719bdb0f8ac5f0a3259720d9e4d28d999b 0xab83b691Bc12Aae947B2ca240F1732fa792dE246
+```
+
+Go to [smartBCH testnet faucet](http://54.169.31.93:8080/faucet) to fund our newly generated address some BCH.
 
 
 
 ## Install Truffle
 
-You need to install Node.js first, [here](https://nodejs.org/en/download/package-manager/) are detailed information about how to install it on various platforms. Then, run the following cmd to install truffle:
+We need to install Node.js first, [here](https://nodejs.org/en/download/package-manager/) are detailed information about how to install it on various platforms. Then, run the following cmd to install truffle:
 
 ```bash
 $ npm install -g truffle
@@ -48,7 +45,7 @@ Web3.js v1.2.9
 
 
 
-## Clone Pet-Shop
+## Clone Pet-Shop and add testnet config
 
 Using `git clone` cmd to clone pet-shop source code into you local directory:
 
@@ -58,59 +55,48 @@ $ git clone https://github.com/trufflesuite/pet-shop-tutorial.git
 $ cd pet-shop-tutorial
 ```
 
-Modify truffle-config.js, change development network port to match your local node (e.g. 8545):
+Install [truffle hdwallet-provider](https://www.npmjs.com/package/@truffle/hdwallet-provider) v1.2.6 (for some unknown reason, the latest version v1.3.x may not work with private keys, so we use v1.2.x here):
+
+```bash
+$ npm install @truffle/hdwallet-provider@1.2.6 --save-dev
+```
+
+Modify truffle-config.js, add smartBCH testnet network configuration using you test key like bellow (you can find more smartBCH testnet RPC URLs [here](../testnets.md)):
 
 ```javascript
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // for more about customizing your Truffle configuration!
   networks: {
     development: {
       host: "127.0.0.1",
-      port: 8545,
+      port: 7545,
       network_id: "*" // Match any network id
+    },
+    sbch_testnet: {
+      network_id: "10001",
+      gasPrice: 0,
+      provider: () => new HDWalletProvider({
+        providerOrUrl: "http://35.220.203.194:8545",
+        privateKeys: [
+          "09c57df30208bdc056144c32d607f0719bdb0f8ac5f0a3259720d9e4d28d999b",
+        ],
+      }),
     }
   }
 };
 ```
 
-You can modify truffle-config.js further and add a network config like this if your want to use greyh's test node too:
 
-```javascript
-const Web3 = require('web3');
 
-module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
-  // for more about customizing your Truffle configuration!
-  networks: {
-    development: {
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: "*" // Match any network id
-    },
-    greyh: {
-      provider: () => new Web3.providers.HttpProvider('https://smartbch.greyh.at'),
-      network_id: "*"
-    },
-  }
-};
-```
+## Deploy Pet-Shop to smartBCH testnet
 
-Do not forget to install web3 through `npm install` cmd if you use public test node:
+In directory pet-shop-tutorial, using `truffle migrate`  cmd to deploy Pet-Shop contract into smartBCH testnet:
 
 ```bash
-$ npm install web3
-```
-
-
-
-## Deploy to smartBCH
-
-In directory pet-shop-tutorial, using `truffle migrate`  cmd to deploy Pet-Shop contract into smartBCH local testing node:
-
-```bash
-$ truffle migrate --network development
-# truffle migrate --network greyh # deploy to greyh's testing node
+$ truffle migrate --network sbch_testnet
 ```
 
 The output looks like this:
@@ -118,71 +104,69 @@ The output looks like this:
 ```
 Compiling your contracts...
 ===========================
-> Compiling ./contracts/Adoption.sol
-> Artifacts written to /Users/zxh/bitmain/github/truffle_suite/pet-shop-tutorial/build/contracts
-> Compiled successfully using:
-   - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+> Everything is up to date, there is nothing to compile.
 
 
 
 Starting migrations...
 ======================
-> Network name:    'development'
-> Network id:      1337
+> Network name:    'sbch_testnet'
+> Network id:      10001
 > Block gas limit: 200000000 (0xbebc200)
 
 
 1_initial_migration.js
 ======================
 
-   Replacing 'Migrations'
+   Deploying 'Migrations'
    ----------------------
-   > transaction hash:    0xdd1548be1a2448b471390a309ca50a3168a8c690438329d71acd07ccfeab4736
-   > Blocks: 0            Seconds: 0
-   > contract address:    0xC7BBd3373c6D9f582102c332bE91e8dCDd087e35
-   > block number:        156
-   > block timestamp:     1618372330
-   > account:             0x09F236e4067f5FcA5872d0c09f92Ce653377aE41
-   > balance:             9.99549526
-   > gas used:            225237 (0x36fd5)
-   > gas price:           20 gwei
+   > transaction hash:    0xd03a612ec8ff3800fdaba8eab70230575cf5b6ed9c1eeecfa5595b20d7553281
+   > Blocks: 1            Seconds: 8
+   > contract address:    0x12033fAFdd217E1fF8F247D9C6E9a0606f75c813
+   > block number:        71514
+   > block timestamp:     1619962004
+   > account:             0xab83b691Bc12Aae947B2ca240F1732fa792dE246
+   > balance:             0.01
+   > gas used:            225225 (0x36fc9)
+   > gas price:           0 gwei
    > value sent:          0 ETH
-   > total cost:          0.00450474 ETH
+   > total cost:          0 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.00450474 ETH
+   > Total cost:                   0 ETH
 
 
 2_deploy_contracts.js
 =====================
 
-   Replacing 'Adoption'
+   Deploying 'Adoption'
    --------------------
-   > transaction hash:    0x5143aaff4315c7fca0e762422dcb7daedcfbbdea047668922948ede2a982e97f
-   > Blocks: 0            Seconds: 0
-   > contract address:    0x531f499C35945C83C87B5f33b56a5aFFa9CF0d05
-   > block number:        160
-   > block timestamp:     1618372334
-   > account:             0x09F236e4067f5FcA5872d0c09f92Ce653377aE41
-   > balance:             9.99057146
+   > transaction hash:    0xc5137d30a6b065bfac3b6a3b8a321ffc338366c110e56315f9e601bca56e344b
+   > Blocks: 2            Seconds: 8
+   > contract address:    0x7D268085bDa90c0F9bC1c16c5bE6632958470B89
+   > block number:        71518
+   > block timestamp:     1619962024
+   > account:             0xab83b691Bc12Aae947B2ca240F1732fa792dE246
+   > balance:             0.01
    > gas used:            203827 (0x31c33)
-   > gas price:           20 gwei
+   > gas price:           0 gwei
    > value sent:          0 ETH
-   > total cost:          0.00407654 ETH
+   > total cost:          0 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.00407654 ETH
+   > Total cost:                   0 ETH
 
 
 Summary
 =======
 > Total deployments:   2
-> Final cost:          0.00858128 ETH
+> Final cost:          0 ETH
 ```
 
+Wow! You have deployed Pet-Shop into smartBCH testnet. Thank you for testing smartBCH testnet 😊
