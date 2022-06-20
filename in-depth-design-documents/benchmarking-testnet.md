@@ -6,7 +6,7 @@ To benchmark MoeingADS and MoeingEVM, we have developed some toolkits to generat
 
 First, we follow the sames steps as [the benchmarks](benchmarking-moeingevm-moeingads.md) for MoeingADS and MoeingEVM, till the end of Step 2 (generate several blocks filled with random transactions). There will be a generated directory named `blkdata`, which contains the random transactions; and a `keys60M.txt` file, which constains some test keys.
 
-Then, we need to start [a multi-node testnet](../developers-guide/runmultinode.md) or [a single-node testnet](../developers-guide/runsinglenode.md) first. Please note that we must give enough initial balances to the first 50,000 accounts in the `keys60M.txt` file, such that they can send transactions.
+Then, we need to start [a multi-node testnet](../archives/runmultinode.md) or [a single-node testnet](../archives/runsinglenode.md) first. Please note that we must give enough initial balances to the first 50,000 accounts in the `keys60M.txt` file, such that they can send transactions.
 
 Now we can use a node's websocket to broadcast these random transactions:
 

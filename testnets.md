@@ -1,8 +1,8 @@
 # Testnets for smartBCH
 
-You can test your DApp using a [local single-node testnet](developers-guide/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
+You can test your DApp using a [local single-node testnet](archives/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
 
-You can run tests with [metamask](developers-guide/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
+You can run tests with [metamask](archives/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
 
 
 
@@ -50,7 +50,7 @@ Last, start smartbchd.
 ~/build/smartbchd start --mainnet-genesis-height=602983
 ```
 
-Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](developers-guide/runmultinode.md).
+Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](testnets_validator.md).
 
 If you want to join the underlying BCH testnet, here is the configuration file for bitcoincashnode:
 

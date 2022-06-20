@@ -10,7 +10,7 @@ Among these nodes, just pick one to generate the genesis file. And all the other
 
 #### Step 0: build smartbchd
 
-Please follow [this document](./build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
+Please follow [this document](../developers-guide/build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
 
 
 

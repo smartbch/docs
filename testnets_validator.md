@@ -37,7 +37,7 @@ cp -rf dot.smartbchd/* .smartbchd/
 
 #### 3. Prepare the validator keys
 
-Running step 1 and step 2 of [this doc](https://github.com/smartbch/docs/blob/main/developers-guide/runmultinode.md#1-on-the-nodes-which-do-not-generate-the-genesis-file) to generate validator key and consensus pubkey.
+Running step 1 and step 2 of [this doc](./archives/runmultinode.md#1-on-the-nodes-which-do-not-generate-the-genesis-file) to generate validator key and consensus pubkey.
 
 Then, copy the priv_validator_key.json to work directory by running command below:
 
@@ -105,7 +105,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["<your
 
 #### 8. Send Tx to smartBCH Amber
 
-Please follow step 1, 2 of [this doc](https://github.com/smartbch/docs/blob/main/developers-guide/runmultinode.md#step-1-send-transaction-to-register-as-a-validator).
+Please follow step 1, 2 of [this doc](./archives/runmultinode.md#step-1-send-transaction-to-register-as-a-validator).
 
 
 

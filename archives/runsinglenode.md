@@ -8,7 +8,7 @@ We suggest to use ubuntu 20.04.
 
 #### Step 0: build smartbchd
 
-Please follow [this doc](./build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
+Please follow [this document](../developers-guide/build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
 
 
 
@@ -172,4 +172,4 @@ And you can see something like:
 }
 ```
 
-You can find the documents for RPC [here](jsonrpc.md).
+You can find the documents for RPC [here](../developers-guide/jsonrpc.md).
