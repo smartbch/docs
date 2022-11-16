@@ -13,7 +13,7 @@ This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitco
 1. http://35.220.203.194:8545
 2. https://moeing.tech:9545
 
-Test coin faucet can be found at http://54.169.31.93:8080/faucet
+Test coin faucet can be found at http://13.214.162.63:8080/faucet or http://moeing.tech:8080/faucet
 
 We sincerely thank [Allen Day](https://github.com/allenday) for donating several cloud servers to bring up this testnet. 
 
