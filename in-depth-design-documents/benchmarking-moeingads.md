@@ -29,7 +29,7 @@ The benchmarks are:
 
 ## How to run the benchmarks
 
-The test machine must have 32GB DRAM and about 800GB free SSD space. Such a machine can also run an go-ethereum client smoothly. The OS must be Linux or MacOS \(Windows is not supported\) and please install [golang](https://golang.org/doc/install) and [rocksdb](https://github.com/facebook/rocksdb/blob/master/INSTALL.md) beforehand. You can follow this [guide](../developers-guide/runsinglenode.md) to install them. The machine used in this article is m6gd.4xlarge instance, with 16 vCPUs, 64GB DRAM and 900GB SSD.
+The test machine must have 32GB DRAM and about 800GB free SSD space. Such a machine can also run an go-ethereum client smoothly. The OS must be Linux or MacOS \(Windows is not supported\) and please install [golang](https://golang.org/doc/install) and [rocksdb](https://github.com/facebook/rocksdb/blob/master/INSTALL.md) beforehand. You can follow this [guide](../developers-guide/build-smartbchd.md) to install them. The machine used in this article is m6gd.4xlarge instance, with 16 vCPUs, 64GB DRAM and 900GB SSD.
 
 Step 0: check out the benchmarks' code and build executable.
 

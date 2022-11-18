@@ -4,7 +4,7 @@ This document introduces how to join the mainnet of smartBCH as a normal node (n
 
 Before you start, you must have a trusted server running bitcoincashnode's client with RPC enabled. The executable `smartbchd` will connect to it for querying staking information.
 
-First, build the latest binary by running the step 0, 1, 2, 3 and 4 of [this document](developers-guide/runsinglenode.md).
+First, build the latest binary by running the steps of [this document](developers-guide/build-smartbchd.md).
 
 Second, prepare the working directory:
 

@@ -8,9 +8,9 @@ Among these nodes, just pick one to generate the genesis file. And all the other
 
 ### 1. On the nodes which do not generate the genesis file
 
-#### Step 0: Prepare
+#### Step 0: build smartbchd
 
-Follow the instructions in [running a single-node testnet](./runsinglenode.md), and just finish the steps 0, 1, 2, 3 and 4 described in it.
+Please follow [this document](../developers-guide/build-smartbchd.md) to build `smartbchd` , the executable of smartBCH's full node client.
 
 
 
@@ -136,7 +136,7 @@ If the `status` is `0x1`, congratulations, your genesis validator is activated n
 
 #### Step 0: Prepare
 
-Just finish the steps 0-9 as [running a single-node testnet](./runsinglenode.md).
+Just finish the steps 0-5 as [running a single-node testnet](./runsinglenode.md).
 
 
 
@@ -155,7 +155,7 @@ rm ~/dot.smartbchd/config/node_key.json
 
 #### Step 2: start the node
 
-Run the step 10 and 11 as  [running a single-node testnet](./runsinglenode.md).
+Run the step 6 and 7 as  [running a single-node testnet](./runsinglenode.md).
 
 
 

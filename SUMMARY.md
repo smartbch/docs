@@ -5,18 +5,14 @@
 * [FAQ](faq.md)
 * [Mainnet](mainnet.md)
 * [Testnets](testnets.md)
-* [Join Amber as a Validator](testnets_validator.md)
+* [Join Amber testnet as a Validator](testnets_validator.md)
 * [Decentralized Cross-Chain Bridge](sha-gate.md)
 
 ## Developer's Guide
 
 * [Introduction](developers-guide/intro.md)
-* [Single Node Private Testnet](developers-guide/runsinglenode.md)
-* [Multi-Node Testnet](developers-guide/runmultinode.md)
-* [Fake RPC Server for Testing](developers-guide/runmultinodewithfakenode.md)
 * [Deploy contracts using Truffle](developers-guide/deploy-contract-using-truffle.md)
 * [Deploy contracts using Remix](developers-guide/deploy-contract-using-remix.md)
-* [Test using MetaMask](developers-guide/test-using-metamask.md)
 * [JSON-RPC Endpoints](developers-guide/jsonrpc.md)
 * [Staking Scheme](developers-guide/staking.md)
 * [XHedge Smart Contract](developers-guide/xhedge-contract.md)
@@ -45,4 +41,11 @@
 * [SEP20: Tokens on smartBCH](smartbch-evolution-proposals-seps/sep-20.md)
 * [SEP206: Manipulate Native Token as a SEP20 Token](smartbch-evolution-proposals-seps/sep-206.md)
 * [SEP201: Simple Stochastic Payment](smartbch-evolution-proposals-seps/sep-201.md)
+
+## Archives
+
+* [Single Node Private Testnet](archives/runsinglenode.md)
+* [Multi-Node Testnet](archives/runmultinode.md)
+* [Fake RPC Server for Testing](archives/runmultinodewithfakenode.md)
+* [Test using MetaMask](archives/test-using-metamask.md)
 

@@ -1,8 +1,8 @@
 # Testnets for smartBCH
 
-You can test your DApp using a [local single-node testnet](developers-guide/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
+You can test your DApp using a [local single-node testnet](archives/runsinglenode.md) if you want to set one up. In most cases, though, you might not need to set up a testnet yourself. Instead, you can using an existing testnet. Here are the running testnets you can utilize.
 
-You can run tests with [metamask](developers-guide/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
+You can run tests with [metamask](archives/test-using-metamask.md), [truffle](developers-guide/deploy-contract-using-truffle.md), or [remix](developers-guide/deploy-contract-using-remix.md).
 
 
 
@@ -13,7 +13,7 @@ This is a testnet for smartBCH with votes from a BCHN testnet, which has a bitco
 1. http://35.220.203.194:8545
 2. https://moeing.tech:9545
 
-Test coin faucet can be found at http://54.169.31.93:8080/faucet
+Test coin faucet can be found at http://13.214.162.63:8080/faucet or http://moeing.tech:8080/faucet
 
 We sincerely thank [Allen Day](https://github.com/allenday) for donating several cloud servers to bring up this testnet. 
 
@@ -21,7 +21,7 @@ In this testnet, the gas price can be as low as 0.2Gwei.
 
 To join this testnet as a non-validator node, follow the steps below:
 
-First, build the latest binary by running the step 0, 1, 2, 3 of [this document](developers-guide/runsinglenode.md).
+First, build the latest binary by running the steps of [this document](developers-guide/build-smartbchd.md).
 
 Second, clone & build smartbch:
 
@@ -50,7 +50,7 @@ Last, start smartbchd.
 ~/build/smartbchd start --mainnet-genesis-height=602983
 ```
 
-Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](developers-guide/runmultinode.md).
+Then you can join the testnet as a non-validator. If want to become a validator, please follow  [this guide](testnets_validator.md).
 
 If you want to join the underlying BCH testnet, here is the configuration file for bitcoincashnode:
 
