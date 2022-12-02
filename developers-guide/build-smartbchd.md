@@ -116,7 +116,7 @@ After successfully executing the above commands, you'll get a ~/smart\_bch/moein
 
 ```bash
 cd ~/smart_bch
-git clone -b v0.4.5 --depth 1 https://github.com/smartbch/smartbch
+git clone -b v0.4.6 --depth 1 https://github.com/smartbch/smartbch
 cd smartbch
 go build -tags cppbtree github.com/smartbch/smartbch/cmd/smartbchd
 ```
