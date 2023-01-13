@@ -1,11 +1,11 @@
 # Upgrade smartbchd to 0.4.6-p1
 
 
-Because of mis-configuration bug of v0.4.6 which incorrectly set a planning feature's enable height to 8000000 (it should be math.MaxInt64), smartbchd stoped at 7999999. We are very sorry for all the inconvenience!
+Because of a mis-configuration bug of v0.4.6 which incorrectly set a planning feature's enable height to 8000000 (it should be math.MaxInt64), smartbchd stoped at 7999999. We are very sorry for all the inconvenience!
 
 We release a new version v0.4.6-p1 to fix this. This version added some hot-fix code to the staking logic and tendermint to allow a three-day interim one-validator period for chain-restarting, and the normal validators will come back after this period.
 
-Now some of the smartbchd nodes have been updated and smartBCH has recovered from this bug.
+Now some of the smartbchd nodes have been updated and the RPC server https://rpc.smartbch.org can provide services.
 
 If you are running nodes with smartbchd-v0.4.6, please upgrade them to v0.4.6-p1.
 
