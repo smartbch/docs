@@ -6,7 +6,6 @@
 * [Mainnet](mainnet.md)
 * [Testnets](testnets.md)
 * [Join Amber testnet as a Validator](testnets_validator.md)
-* [Decentralized Cross-Chain Bridge](sha-gate.md)
 
 ## Developer's Guide
 
@@ -17,6 +16,12 @@
 * [Staking Scheme](developers-guide/staking.md)
 * [XHedge Smart Contract](developers-guide/xhedge-contract.md)
 * [Decision of the minimum gas price](developers-guide/min-gasprice-decision.md)
+
+## Sha-Gate Bridge
+
+* [Sha-Gate Specification](sha-gate/sha-gate-specification.md)
+* [Sha-Gate Risk Analysis](sha-gate/sha-gate-risk-analysis.md)
+* [Sha-Gate's Covenant](sha-gate/sha-gate-covenant.md)
 
 ## In-Depth Design Documents
 
